@@ -1,0 +1,16 @@
+.content {
+  height: 100%;
+  padding: 1em;
+}
+
+.content .icon {
+  font-size: 2em;
+}
+
+.content .icon .success {
+  color: green;
+}
+
+.content .icon .failure {
+  color: red;
+}

@@ -1,0 +1,14 @@
+.quickInput {
+  color: darkblue;
+  margin: 0 1em;
+  text-decoration: underline;
+}
+
+.total {
+  text-align: right;
+}
+
+.buttons {
+  margin: 1em 0;
+  text-align: right;
+}

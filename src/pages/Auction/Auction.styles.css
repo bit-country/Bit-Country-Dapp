@@ -1,0 +1,37 @@
+#auction {
+  height: 100%;
+  padding: 1em;
+}
+
+#auction .coming-soon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin: 0;
+  border-radius: 0.1em;
+  background-color: #62626261;
+  color: white;
+  text-shadow: 0 0 5px black
+}
+
+#auction .content {
+  margin: 4em 0;
+}
+
+.go-back {
+  margin-bottom: 1em;
+}
+
+.actions {
+  text-align: right;
+}
+
+.actions *:not(:nth-last-child(1)) {
+  margin-right: 1em;
+}

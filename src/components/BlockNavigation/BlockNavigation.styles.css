@@ -1,0 +1,45 @@
+.block-navigation-container {
+  position: relative;
+  padding-top: 100%;
+}
+
+.block-navigation {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.block-navigation .nav-block {
+  position: relative;
+  display: flex;
+  flex: 1 1 33%;
+  height: 33%;
+}
+
+.block-navigation .nav-block > * {
+  position: absolute;
+  top: 0.1em;
+  right: 0.1em;
+  bottom: 0.1em;
+  left: 0.1em;
+  display: flex;
+  overflow: hidden;
+}
+
+.block-navigation .nav-block > * > * {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0px;
+}
+
+.block-navigation .nav-block .post-count {
+  font-size: 1.2em;
+  font-weight: 500;
+}

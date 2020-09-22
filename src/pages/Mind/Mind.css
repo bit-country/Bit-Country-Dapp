@@ -1,0 +1,73 @@
+#search {
+    margin: 2em 0;
+    padding: 8px;
+  }
+
+.filters {
+    margin-top: 1em;
+  }
+  
+.filter-field {
+    margin-right: 1em;
+  }
+
+#mind-banner {
+  margin-bottom: 2rem;
+  background: url(../../assets/images/my_mind.jpg) ;
+  background-position: 70% 25%;
+  background-size: cover;
+}
+
+#mind-banner h2 {
+  color: white;
+  padding: 2rem 0;
+  font-size: xx-large;
+
+}
+
+#profile-edit {
+  float: left;
+  color: white;
+}
+
+#mind-banner a {
+  color: white;
+  text-decoration: underline;
+}
+
+#mind-banner a:hover {
+  color: #40e0d0;
+}
+
+#mind-url {
+  float: right;
+}
+
+#mind-url h3{
+  color: white;
+}
+
+#profile-photo {
+  text-align: center;
+}
+
+#blogger-profile-img {
+  width: 200px;
+  height: 200px;
+}
+
+#block-navigation {
+  margin-bottom: 20px;
+}
+
+#block-navigation .block{
+  margin-left: 1.5em;
+  margin-bottom: 0.7em;
+}
+
+/* @media (min-width: 992px) {
+  #sidebar{
+    position: sticky;
+    top: 20px;
+  }
+} */

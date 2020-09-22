@@ -1,0 +1,101 @@
+#explore .banner {
+  height: 30em;
+  padding: 0 10%;
+  background-image: url(../../assets/images/explore.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 80%;
+}
+
+#explore .banner .text {
+  height: 100%;
+  padding: 5em;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  color: white;
+}
+
+#explore .banner .text .title {
+  color: white;
+}
+
+#explore .banner .text .subtitle {
+  color: white;
+}
+
+#explore .banner .text .call-to-action {
+  margin: 0.5em 0;
+}
+
+#explore .countries {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#explore .countries > * {
+  padding: 8px;
+}
+
+#explore .country-card.create {
+  padding: 1em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: white;
+}
+
+#explore .country-card.create .title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 1em;
+  color: white;
+}
+
+#explore .country-card.create .body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+#explore .country-card.create .body > * {
+  color: white;
+  text-align: center;
+}
+
+#explore .country-card.create .call-to-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 2em;
+  color: white;
+}
+
+#explore #search {
+  margin: 2em 0;
+  padding: 8px;
+}
+
+#explore #load-more {
+  margin: 1em;
+  text-align: center;
+}
+
+#explore .empty {
+  text-align: center;
+  padding: 12em 0;
+}
+
+#explore .filters {
+  display: none;
+  margin-top: 1em;
+}
+
+#explore .filter-field {
+  margin-right: 1em;
+}

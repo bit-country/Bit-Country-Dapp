@@ -1,0 +1,71 @@
+.error-container {
+  margin-top: 2em;
+  position: relative;
+}
+
+.error-container .content {
+  position: absolute;
+  left: 25%;
+  width: 50%;
+  text-align: center;
+}
+
+.error-container.not-found::before {
+  position: absolute;
+  top: 10rem;
+  left: 55%;
+  font-size: 40em;
+  line-height: 0;
+  content: "?";
+  color: hsla(0, 0%, 50%, 0.25);
+}
+
+.error-container.logged-out::before {
+  position: absolute;
+  top: 10rem;
+  left: 55%;
+  font-size: 40em;
+  line-height: 0;
+  content: "x";
+  color: hsla(0, 0%, 50%, 0.25);
+}
+
+.error-container.no-access::before {
+  position: absolute;
+  top: 10rem;
+  left: 55%;
+  font-size: 40em;
+  line-height: 0;
+  content: "!";
+  color: hsla(0, 0%, 50%, 0.25);
+}
+
+.error-container.error::before {
+  position: absolute;
+  top: 10rem;
+  left: 55%;
+  font-size: 40em;
+  line-height: 0;
+  content: "!!";
+  color: hsla(0, 0%, 50%, 0.25);
+}
+
+.error-container h1 {
+  font-size: 6em;
+}
+
+.error-container.not-found h1 {
+  color: #dd4400;
+}
+
+.error-container.logged-out h1 {
+  color: #774400;
+}
+
+.error-container.no-access h1 {
+  color: #aa0000;
+}
+
+.error-container.error h1 {
+  color: #aa0000;
+}

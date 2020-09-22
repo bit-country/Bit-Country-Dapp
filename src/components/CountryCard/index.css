@@ -1,0 +1,55 @@
+.country-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pending-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin: 4px;
+  border-radius: 0.1em;
+  background-color: #62626261;
+  color: white;
+  text-shadow: 0 0 5px black;
+}
+
+.country-card .ant-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.country-card .ant-card-cover {
+  height: 15em;
+}
+
+.country-card .ant-card-cover > img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.country-card .ant-card-body {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+}
+
+.country-card .ant-card-body .ant-card-meta-description {
+  max-height: 14em;
+}
+
+.country-card .details {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  display: flex;
+  margin: 1em 0;
+}

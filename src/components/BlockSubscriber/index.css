@@ -1,0 +1,7 @@
+.block-subscription {
+  padding: 1em;
+}
+
+.block-subscription .ant-btn {
+  min-width: 100px;
+}

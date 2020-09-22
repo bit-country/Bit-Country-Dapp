@@ -1,0 +1,94 @@
+/* COMPOSER
+ * ----------------------------------------------- */
+.composer {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  padding: 15px;
+  margin-bottom: 20px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.composer .com-header {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e8e8e8;
+  display: -webkit-flex;
+  display: flex;
+}
+.composer .com-header .cmp-btn {
+  line-height: 4em;
+  margin-left: 4em;
+  vertical-align: middle;
+  padding: 0 0 0 25px;
+  position: relative;
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+  background-size: 20px auto;
+  color: #0a0a0a;
+  font-size: 14px;
+}
+.composer .com-header .cmp-btn.is-active:after,
+.composer .com-header .cmp-btn:hover::after {
+  content: " ";
+  height: 1px;
+  width: 100%;
+  background: #000;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+}
+
+.composer .com-header .cmp-btn:first-child {
+  margin-left: 0;
+}
+
+.composer .com-content .cmp-form-status .image-uploader .ant-upload {
+  width: 100%;
+}
+
+.composer .com-content .cmp-form-status .story {
+  margin-bottom: 0px;
+}
+
+.composer .com-content .cmp-form-status textarea {
+  width: 100%;
+  min-height: 50px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.composer .com-content .cmp-form-status .buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0px;
+  font-size: 14px;
+}
+
+.composer .com-content .cmp-form-status .buttons button {
+  margin-left: 1em;
+}
+
+.composer .com-content .cmp-form-status .buttons .privacy-settings {
+  margin-right: 15px;
+  color: #9097a1;
+}
+.composer .com-content .cmp-form-status .buttons .privacy-settings .privacy {
+  height: 25px;
+  padding: 3px 28px 3px 4px;
+  background-position: 96% 50%;
+  background-repeat: no-repeat;
+  background-size: 20px auto;
+}
+
+.composer .com-content .ql-editor {
+  min-height: 20em;
+}
+
+#advanced-options .field-label {
+  margin-right: 1em;
+}
+
+#advanced-options .form-row {
+  margin-bottom: 1em;
+}

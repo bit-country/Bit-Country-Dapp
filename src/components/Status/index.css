@@ -1,0 +1,82 @@
+.status.overlay-container {
+  width: 200px;
+}
+
+.status.overlay-container .status-dropdown {
+  padding: 1em;
+}
+
+.status.overlay-container .status-dropdown > a {
+  margin: 0.25em 0;
+}
+
+header .navigation {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+header .navigation.collapsed {
+  cursor: pointer;
+}
+
+header .navigation .separator {
+  width: 1px;
+  margin: 0 5px;
+  background: #fff;
+}
+
+header .navigation .profile {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+}
+
+header .navigation.collapsed .profile.hint:hover::after {
+  background-color: green;
+}
+
+header .navigation.collapsed .profile.hint::after {
+  content: "";
+  background-color: white;
+  height: 1px;
+  left: 0;
+  right: 0;
+  bottom: -0.2em;
+  z-index: 100;
+  position: absolute;
+}
+
+header .navigation .profile .avatar {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+header .navigation .profile .avatar img {
+  display: block;
+  width: 100%;
+}
+
+header .navigation .profile .name {
+  margin-left: 0.5em;
+  font-size: 14px;
+  color: "red";
+}
+
+header .navigation .nav-btn {
+  padding: 0 0.2em;
+  font-size: 1.2em;
+  line-height: unset;
+}
+
+header .navigation .notifications .anticon{
+  font-size: 1.4em;
+}
+
+header .navigation .notifications .ant-badge{
+  vertical-align: middle;
+}

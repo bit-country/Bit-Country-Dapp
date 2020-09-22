@@ -1,0 +1,46 @@
+/* LAYOUTS
+ * ----------------------------------------------- */
+.block-interior {
+  /* padding: 2em 1em 4em 1em; */
+  min-height: 100%;
+  background-color: rgb(244, 246, 245);
+}
+
+.block-interior .ant-breadcrumb {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.block-interior .col-push {
+  height: calc( 1500px );
+}
+
+.block-interior #block-banner {
+  margin-bottom: 1rem;
+  height: 60px;
+  background: url(../assets/images/my_mind.jpg) ;
+  background-position: 70% 25%;
+  background-size: cover;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.block-interior #block-banner a, .block-interior #block-banner span {
+  color: white;
+  font-weight: 500;
+}
+
+.block-interior #block-banner span.ant-breadcrumb-separator {
+  color: white;
+  font-weight: 500;
+}
+
+@media (min-width: 992px) {
+  .block-interior .col-left{
+    position: sticky;
+    top: calc( 100vh - 1080px);
+  }
+}
+  
+/*# sourceMappingURL=style.css.map */

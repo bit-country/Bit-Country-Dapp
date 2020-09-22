@@ -1,0 +1,19 @@
+#create-country .early-access {
+  background-color: #992222;
+  margin: 0 15%;
+  border-radius: 2em;
+  padding: 2em;
+  color: white;
+}
+
+#create-country .early-access h2 {
+  color: white;
+}
+
+#create-country .early-access > a:not(:hover) {
+  color: white;
+}
+
+#create-country .early-access > a {
+  text-decoration: underline;
+}

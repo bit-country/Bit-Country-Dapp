@@ -1,0 +1,48 @@
+#profile {
+  min-height: calc(100vh - 57px);
+  margin: 4em 0;
+}
+
+#profile .content .left-col {
+  position: sticky;
+  top: 0;
+}
+
+#profile .content {
+  height: 100%;
+  padding: 1em;
+}
+
+#profile .content .banner-uploader img {
+  width: 100%;
+  object-fit: contain;
+}
+
+#profile .content .details {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+#profile .content .details .avatar-uploader img {
+  width: 100%;
+  object-fit: contain;
+}
+
+#profile .content .details .fields {
+  flex: 1;
+}
+
+#profile .navigator {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  border-radius: 5px;
+  border: 1px #999 solid;
+  padding: 1em;
+  background-color: #efefef;
+}
+
+#profile .navigator a {
+  text-decoration: underline;
+}

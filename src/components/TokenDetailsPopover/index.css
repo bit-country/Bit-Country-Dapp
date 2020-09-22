@@ -1,0 +1,11 @@
+#TokenPopover .ant-avatar {
+  margin-right: 0.5em;
+}
+
+#TokenPopover .ant-descriptions{
+  width: 520px;
+}
+
+.token-popover-hint {
+  text-decoration: underline;
+}

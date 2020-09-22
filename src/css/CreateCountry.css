@@ -1,0 +1,65 @@
+.layout {
+  padding: 1em 0;
+}
+
+.ant-layout-content {
+  margin: 50px 10%;
+}
+
+.nav-bar-divider {
+  margin: 0;
+}
+
+.field {
+  margin: 20px 0;
+}
+
+.field label {
+  font-size: medium;
+}
+
+.field .label-explaination {
+  font-size: small;
+  white-space: pre-line;
+}
+
+.field .quickInput {
+  color: darkblue;
+  margin: 0 1em;
+  text-decoration: underline;
+}
+
+.ant-list-item {
+  transition: transform 0.1s ease-in-out;
+}
+
+.ant-card.selected {
+  transform: scale(1.1);
+  background-color: #00a973;
+  color: #fff;
+}
+
+.ant-card.selected h4 {
+  color: #fff;
+}
+
+.ant-divider-horizontal.ant-divider-with-text-left {
+  margin-top: 4rem;
+}
+
+.ant-input-number.supply {
+  width: 150px;
+}
+
+#abbr {
+  width: 150px;
+  padding-right: 0;
+  padding-left: 16px;
+  letter-spacing: 16px;
+  text-transform: uppercase;
+}
+
+#supply {
+  width: 150px;
+  padding: 10px;
+}

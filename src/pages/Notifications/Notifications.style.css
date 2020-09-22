@@ -1,0 +1,39 @@
+#notifications {
+  height: 100%;
+  padding: 1em;
+  margin: 4em 0;
+}
+
+.content {
+  position: relative;
+}
+
+#notifications .coming-soon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin: 0;
+  border-radius: 0.1em;
+  background-color: #62626261;
+  color: white;
+  text-shadow: 0 0 5px black
+}
+
+.notification .body {
+  padding: 0 2rem;
+  cursor: pointer;
+}
+
+.notification .body .time {
+  float: right;
+}
+
+.unread.notification {
+  background-color: #77d9ff20;
+}

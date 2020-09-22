@@ -1,0 +1,169 @@
+/* POSTS
+ * ----------------------------------------------- */
+.posts .ant-list-header {
+  padding: 0;
+}
+
+.posts .ant-list-item:first-child {
+  padding-top: unset;
+}
+
+.post-modal-container {
+  top: 0;
+  padding-top: var(--bar-height);
+  height: 100%;
+  max-width: unset;
+  margin: unset;
+  padding-bottom: 0;
+  display: flex;
+}
+
+.post-modal-container .ant-modal-content {
+  flex: 1;
+  border-radius: 0;
+  overflow-y: scroll;
+}
+
+.post:not(.post-modal) {
+  width: 100%;
+  cursor: pointer;
+}
+
+.post .no-cursor {
+  cursor: default;
+}
+
+.post:hover:not(.post-modal) {
+  background: #f9f9f9;
+  box-shadow: 0em 0em 0.5em rgba(0,0,0,0.3);
+}
+
+.post .post-header {
+  width: 100%;
+  display: flex;
+  color: #000;
+}
+
+.post .post-header .ant-card-meta-title {
+  white-space: normal;
+}
+
+.post .post-header .author-image {
+  flex: 0;
+  padding: 0.5em;
+}
+
+.post .post-header .post-details {
+  flex: 1;
+  padding: 0.5em;
+}
+
+.post .post-header .post-meta {
+  display: flex;
+  font-weight: normal;
+  color: #888;
+}
+
+.post .post-header .meta-details {
+  flex: 1;
+}
+
+.post .post-header .post-date {
+  flex: 1;
+  text-align: right;
+}
+
+.post:not(.post-modal) .my-links {
+  padding: 0 0.5em;
+}
+
+.post .my-links {
+  text-decoration: underline;
+  font-size: 0.9em;
+  font-weight: 400;
+}
+
+.post:not(.post-modal) .post-content {
+  max-height: 30em;
+  overflow: hidden;
+}
+
+.post .post-content {
+  width: 100%;
+  margin-bottom: 24px;
+  white-space: pre-line;
+}
+
+.post .post-content:hover {
+  cursor: pointer;
+}
+
+.post .post-content .story-post {
+  font-size: 1.2em;
+  font-weight: 100;
+}
+
+.post .post-content .image {
+  margin-top: 20px;
+}
+.post .post-content .image img {
+  display: block;
+  width: 100%;
+}
+
+.post .post-comment-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0;
+}
+
+.post .post-bottom {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #e8e8e8;
+  margin: 15px -1em -1em -1em;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #000;
+  background-color: #fafafa;
+}
+
+.post:not(.post-modal) .post-bottom {
+  width: calc(100% + 48px);
+  margin: 15px -24px -24px -24px;
+}
+
+.post .post-bottom .action-btn {
+  display: inline-block;
+  margin-left: 18px;
+  position: relative;
+}
+.post .post-bottom .action-btn:first-child {
+  margin-left: 0;
+}
+.post .post-bottom .action-btn:first-child:before {
+  display: none;
+}
+.post .post-bottom .action-btn a {
+  color: #000;
+}
+
+.post .post-comment {
+  margin: 0 -24px -14px -24px;
+}
+.post .post-comment .comments {
+  margin: 0 24px 0 24px;
+}
+
+.posts #load-more-loading {
+  text-align: center;
+}
+
+.posts #load-more-loading img {
+  width: 30px;
+  margin: 25px 0;
+}
+
+.post-modal img{
+  max-width: 100%;
+}

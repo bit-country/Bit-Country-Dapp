@@ -1,0 +1,13 @@
+.login-provider-image {
+  margin: 2em;
+  padding: 1em;
+  background-color: black;
+}
+
+.login-provider-title {
+  text-align: center;
+}
+
+.login-provider-button {
+  text-align: center;
+}

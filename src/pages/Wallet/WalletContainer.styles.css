@@ -1,0 +1,66 @@
+#wallet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+
+#wallet .body {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#wallet .body .menu {
+  display: flex;
+}
+
+#wallet .body .menu > * {
+  flex: 1;
+}
+
+#wallet .body .content {
+  height: 100%;
+  padding: 1em;
+}
+
+#wallet .body .content .ant-list .ant-list-items {
+  max-height: calc(75vh - 56px);
+  overflow-y: auto;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+#wallet .token-image,
+#wallet .asset-image,
+#wallet .function-image {
+  padding: 0.5em;
+}
+
+#wallet .token-details,
+#wallet .asset-details,
+#wallet .function-details {
+  flex: 1;
+}
+
+#wallet .token-details .symbol {
+  font-weight: bold;
+}
+
+#wallet .coming-soon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin: 0;
+  border-radius: 0.1em;
+  background-color: #62626261;
+  color: white;
+  text-shadow: 0 0 5px black;
+}

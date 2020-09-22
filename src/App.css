@@ -1,0 +1,283 @@
+@charset "UTF-8";
+/* COMPASS
+ * ----------------------------------------------- */
+
+ol,
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q,
+blockquote {
+  quotes: none;
+}
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/* BASE
+ * ----------------------------------------------- */
+/* ADDITIONAL RESET
+ * ----------------------------------------------- */
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body img {
+  max-height: none;
+}
+
+input,
+label,
+select,
+button,
+textarea {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: normal;
+  background: none;
+  line-height: 1;
+  font: inherit;
+}
+
+input:focus,
+button:focus,
+select:focus {
+  outline: 0;
+}
+
+/* Make webkit render the search input like a normal text field */
+input[type="search"] {
+  -webkit-appearance: textfield;
+}
+
+/* Turn off the recent search for webkit. It adds about 15px padding on the left */
+::-webkit-search-decoration {
+  display: none;
+}
+
+/* Turn off scroll bars in IE unless needed */
+textarea {
+  overflow: auto;
+}
+
+/* HELPERS
+ * ----------------------------------------------- */
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.block {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+  text-justify: distribute;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.center.aligned {
+  text-align: center;
+}
+
+.center.aligned.margined {
+  margin: 0 auto;
+}
+
+/* Notifications */
+
+.custom-success-toast.Toastify__toast--default {
+  background-color: #2185d0;
+  color: #fff;
+}
+
+.custom-success-toast.Toastify__toast--error {
+  background-color: #db2828;
+  color: #fff;
+}
+
+.custom-success-toast {
+  background-color: #21ba45;
+  color: #fff;
+  padding: 15px;
+}
+
+@keyframes stickySideBarMoveDown {
+  from {
+    top: auto;
+  }
+  to {
+    top: 1%;
+  }
+}
+
+@keyframes stickySideBarMoveUp {
+  from {
+    top: 1%;
+  }
+  to {
+    top: auto;
+  }
+}
+
+.search-bar-container {
+  margin-bottom: 30px;
+}
+
+.search-bar-icon {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 1.6rem;
+  flex: 0 0 1.6rem;
+}
+
+.search-bar-input {
+  -ms-flex: 1;
+  flex: 1 1;
+  width: auto;
+  min-width: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+  border: none;
+  padding: 1.5rem;
+}
+
+.search-bar-button {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #9c9c9b;
+  white-space: nowrap;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.search-bar-button .svg-inline--fa {
+  margin-left: 7px;
+  margin-top: 3px;
+}
+
+.pagination-container {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.pagination > li {
+  display: inline;
+}
+
+.pagination > .disabled > a,
+.pagination > .disabled > a:focus,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > span,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > span:hover {
+  color: #777;
+  background-color: #fff;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  line-height: 1.42857143;
+  text-decoration: none;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  margin-left: -1px;
+}
+
+.form.field {
+  text-align: left;
+  margin-top: 30px;
+}

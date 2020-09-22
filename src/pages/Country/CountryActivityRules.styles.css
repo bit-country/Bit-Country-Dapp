@@ -1,0 +1,75 @@
+#activity-rules .content {
+  margin-top: 3%;
+  font-size: 1.1em;
+}
+
+#activity-rules .content .title {
+  text-align: center;
+  margin: 1em;
+}
+
+#activity-rules .content .activity-rules-info {
+  margin-bottom: 2em;
+  border-radius: 0.1em;
+  padding: 1em;
+  box-shadow: rgba(0,0,0,0.1) 0 0 1em 0.1em;
+}
+
+#activity-rules .content .activity-rules-info h2 {
+  text-align: center;
+}
+
+#activity-rules .content .activity-rules-info .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#activity-rules .content .activity-rules-info .stat .value {
+  font-weight: bold;
+}
+
+#activity-rules .content .activity-rules-info .stat .stat-title {
+  font-weight: lighter;
+}
+
+#activity-rules .content .rule {
+  margin-bottom: 1%;
+}
+
+#activity-rules .content .rule .incentive, 
+#activity-rules .content .rule .incentive input,
+#activity-rules .content .rule .symbol {
+  text-align: right;
+}
+
+.iconbutton.plusselected {
+  color: white;
+  background-color: #00a973;
+  font-weight: 400;
+  border: 1px solid #00a973;
+}
+.iconbutton.minusselected {
+  color: white;
+  background-color: #312727;
+  font-weight: 400;
+  border: 1px solid #312727;
+}
+
+#plus:hover,
+#plus:focus {
+  color: #fff;
+  background-color: #00a973;
+  border-color: #00a973;
+}
+
+#minus:hover,
+#minus:focus {
+  color: #fff;
+  background-color: #312727;
+  border-color: #312727;
+}
+
+#activity-rules .activity-rules-message {
+  margin-top: 3em;
+}

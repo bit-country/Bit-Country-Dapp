@@ -1,0 +1,29 @@
+.block-interior .col-main.new-article-wrapper {
+  width: 850px;
+}
+
+.block-interior .col-main .editorAreaWrapper {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #d0d4e0;
+  padding: 15px;
+  margin-bottom: 20px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  min-height: 300px;
+}
+
+.block-interior .col-main .input-text {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #d0d4e0;
+  padding: 10px;
+  border-radius: 3px;
+  line-height: 1;
+}
+
+.block-interior .col-main label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}

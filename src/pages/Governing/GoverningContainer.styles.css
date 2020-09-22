@@ -1,0 +1,80 @@
+#stake {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+
+#stake .body {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#stake .body .menu {
+  display: flex;
+}
+
+#stake .body .menu > * {
+  flex: 1;
+}
+
+#stake .body .content {
+  height: 100%;
+  padding: 1em;
+  margin: 4em 0;
+}
+
+#stake .body .content .ant-list .ant-list-items {
+  max-height: calc(75vh - 56px);
+  overflow-y: auto;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+#stake .token-image, #stake .asset-image {
+  padding: 0.5em;
+}
+
+#stake .token-details, #stake .asset-details {
+  flex: 1;
+}
+
+#stake .token-details .symbol {
+  font-weight: bold;
+}
+
+#stake .coming-soon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin: 0;
+  border-radius: 0.1em;
+  background-color: #62626261;
+  color: white;
+  text-shadow: 0 0 5px black
+}
+
+#stake .stake-information {
+  margin: 1em 0;
+  white-space: pre-line;
+}
+
+#stakeholders .ant-table .index-0{
+  font-size: xx-large;
+}
+
+#stakeholders .ant-table .index-1{
+  font-size: x-large;
+}
+
+#stakeholders .ant-table .index-2{
+  font-size: large;
+}

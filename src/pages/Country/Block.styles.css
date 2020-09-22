@@ -1,0 +1,93 @@
+.block-box {
+  position: relative;
+  padding-top: 100%;
+  background-color: #f1f1f1;
+}
+
+.block-box.enabled .block-item {
+  border: 1px solid #1b1c1d;
+  transition: ease 1s;
+  cursor: pointer;
+}
+
+.block-box .block-item {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 5px;
+  padding: 0.4em;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.block-box .block-item .post-count {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.locked-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #80808045;
+}
+
+.block-box.enabled .block-item {
+  border: 1px solid #1b1c1d;
+  transition: ease 1s;
+  cursor: pointer;
+}
+
+.block-box.pending .block-item {
+  background-color: #f7dbdb;
+  border: none;
+}
+
+.block-box.disabled .block-item {
+  border: 1px dotted #cac9c9;
+  transition: ease 1s;
+  cursor: pointer;
+}
+
+.block-box .block-item:hover {
+  background-color: #e3e3e3;
+}
+
+.block-box .block-item.isOccupied {
+  background-color: #474a4c;
+}
+
+.create-topic-modal{
+  top: 30px;
+}
+
+.section-container {
+  position: relative;
+  padding-top: 100%;
+}
+
+.section-container .section-selector {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section-selector .block-section {
+  position: relative;
+  display: flex;
+  flex: 1 1 10%;
+  height: 10%;
+}

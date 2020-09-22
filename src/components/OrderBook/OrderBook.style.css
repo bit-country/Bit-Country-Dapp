@@ -1,0 +1,129 @@
+/* Market Orders */
+.market-orders .headers {
+  display: flex;
+  padding: 1em 0;
+
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.market-orders .row {
+  display: flex;
+  padding: 0.5em 0;
+}
+
+.market-orders .headers > *,
+.market-orders .row > * {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.market-orders .row:not(:nth-last-child(1)) {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.market-orders .section.title {
+  padding: 1em 0;
+  vertical-align: middle;
+}
+
+.market-orders .section.divider {
+  padding: 0;
+  height: 1px;
+  background-color: #e8e8e8;
+  vertical-align: middle;
+}
+
+.market-orders .section.buy {
+  border-top: 1px solid #e8e8e8;
+}
+
+.market-orders .section.sell {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.market-orders .section.title.buy {
+  border-top-color: #679b00;
+}
+
+.market-orders .section.buy .row {
+  background-color: #eeffeb;
+}
+
+.market-orders .section.buy .price {
+  color: #598600;
+}
+
+.market-orders .section.title.sell {
+  border-bottom-color: #c5004c;
+}
+
+.market-orders .section.sell .row {
+  background-color: #ffe7e7;
+}
+
+.market-orders .section.sell .price {
+  color: #ca0033;
+}
+
+.sellTitle {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.buyTitle {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.subTitle {
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.orderForm {
+  margin-top: 30px;
+}
+/* End Market Orders */
+
+.middleCentredButton {
+  margin-top: 4%;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
+}
+
+#orderBook {
+  min-height: calc(40vh - 57px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#orderBook .body {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#orderBook .body .menu {
+  display: flex;
+}
+
+#orderBook .body .menu > * {
+  flex: 1;
+}
+
+#orderBook .body .content {
+  height: 100%;
+  padding: 1em;
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
+.buyColumn {
+  background-color: #eeffeb;
+}
+
+.sellColumn {
+  background-color: #ffe7e7;
+}

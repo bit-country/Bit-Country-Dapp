@@ -1,0 +1,26 @@
+﻿#stake .card {
+    width: 100%;
+}
+
+#stake .row-container {
+    margin: -5px;
+}
+
+#stake .column-container {
+    padding: 5px;
+}
+
+#stake .button {
+    height: 40px;
+    width: 100%;
+}
+
+#stake .button.agree {
+    border-color: green;
+    color: green;
+}
+
+#stake .button.disagree {
+    border-color: red;
+    color: red;
+}

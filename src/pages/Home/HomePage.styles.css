@@ -1,0 +1,341 @@
+/* @font-face {
+  font-family: 'sika'; 
+  src: url(../../assets/fonts/ufonts.com_skia.ttf);
+} */
+
+@font-face {
+  font-family: 'medel'; 
+  src: url(../../assets/fonts/Medel.ttf);
+}
+
+#home .container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* scroll-snap-type: y mandatory; */
+  overflow-y: auto;
+  background-color: #191A2E;
+}
+
+/* #home .snap {
+  scroll-snap-align: center;
+} */
+
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 36em;
+  height: 100vh;
+}
+
+.hero .hero-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero .ant-row {
+  flex: 1
+}
+
+.center {
+  text-align: center;
+}
+
+.huge {
+  font-size: x-large;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.inverted {
+  color: white;
+}
+
+.gray {
+  color: #aaaaaa;
+}
+
+.top-banner {
+  position: relative;
+  /* background: url(../../assets/images/home_bg.png) no-repeat;
+  background-size: 70%;
+  background-position: 80% 10%; */
+  /* background: fixed 50% 50%/contain no-repeat; */
+  /* background-image: radial-gradient(circle at 50% 134%, #1f184b 24%, #595bb1 50%, #31328d 72%); */
+  overflow: hidden;
+}
+
+.top-banner .social-medias {
+  margin-top: 5em;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.top-banner .social-medias a {
+  margin: 0 1em 0 0;
+  color: white;
+}
+
+
+.top-banner .bit-country-grid {
+  position: absolute;
+  width: 50vw;
+  height: 50vh;
+  left: 25%;
+  bottom: 0;
+  background-image: radial-gradient(circle at bottom, transparent, black),repeating-linear-gradient(0deg, blue 0em, blue 0.1em, transparent 0.3em, transparent 1.7em, blue 1.9em), repeating-linear-gradient(90deg, blue 0em, blue 0.1em, black 0.3em, black 1.8em, blue 1.9em);
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 0, -0.005, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+
+/* Top banner css  */
+.headline-slogan {
+  display: flex;
+  flex-flow: column;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.headline-slogan img {
+  max-width: 100%;
+}
+
+.headline-slogan h2 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.headline-slogan h2, .headline-slogan h3 {
+  letter-spacing: 3px;
+  color: #40e0d0;
+}
+
+.top-banner .call-to-action {
+  margin-top: 2em;
+}
+
+.ant-btn-primary{
+  color: black;
+}
+
+.banner-logo {
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 2em;
+  text-align: center;
+}
+
+.banner-logo.ui.image img {
+  padding: 20px;
+  max-width: 140px;
+  margin: 10px auto;
+}
+
+.create.world {
+  margin: 5.5em 0;
+}
+
+
+/*Hero content*/
+.hero-content {
+  margin-top: 4em;
+}
+
+.hero-content .header h2 {
+  font-size: 2em;
+  font-weight: 500;
+}
+
+.hero-content .header .ui.description {
+  color: #9a9a9a;
+  font-weight: 300;
+}
+
+.section {
+  min-height: 50vh;
+  /* background: url(../../assets/images/hp-country.jpg) fixed;
+  background-position: 0% 40%; */
+}
+
+.feature {
+  margin: 6rem 0;
+  font-family: 'medel';
+  font-weight: 400;
+  font-size: 18px;
+  color: white;
+}
+
+.feature .description {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.feature .text {
+  padding: 3rem 3rem 1rem 3rem;
+  border-radius: 20px;
+}
+
+#country .feature .text {
+  background: linear-gradient(180deg, #393D67 10%, #191A2E 90%);
+}
+
+#block .feature .text {
+  background: linear-gradient(180deg, #262C3C 10%, #191A2E 90%);
+}
+
+#economy .feature .text {
+  background: linear-gradient(180deg, #323236 10%, #191A2E 90%);
+}
+
+#residents .feature .text {
+  background: linear-gradient(180deg, #384F65 10%, #191A2E 90%);
+}
+
+.feature .icon {
+  align-items: center;
+}
+
+
+.feature h3 {
+  font-family: 'serenity', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: 3px;
+  color: white;
+  display: inline;
+  border-bottom: 5px solid turquoise;
+}
+
+.feature p {
+  margin-top: 1rem;
+}
+
+.feature img {
+  max-width: 200px;
+  padding: 1rem;
+}
+
+.activities {
+  /* Causes large amounts of lag */
+  /*background: url(../../assets/images/Ground-01.svg) center;
+  background-position: 50% 60%;
+  background-size: cover;*/
+}
+
+.activities .mask {
+  padding: 16em 4em;
+  background-color: rgba(12, 38, 80, 0.75);
+}
+
+.activities img {
+  max-width: 80px;
+  height: 100px;
+}
+
+.activities .ant-statistic-title {
+  color: white;
+}
+
+.activities .ant-statistic-content {
+  color: white;
+}
+
+.activities .duration {
+  margin-top: 2em;
+}
+
+.top-countries {
+  background: url(../../assets/images/top_countries_bg.svg) no-repeat ;
+  background-size: 400px;
+  background-position: right bottom;
+  padding: 4em 2em;
+  background-color: black;
+}
+
+.top-countries h2 {
+  color: white;
+}
+
+.top-countries .country-cards {
+  margin: 2em 0;
+}
+
+.top-countries .country-cards .ant-card {
+  border: 1px solid gray;
+  margin: 2em;
+}
+
+.top-countries .country-card .ant-card-body {
+  color: white;
+  background-color: #323236;
+}
+
+.top-countries .country-card .ant-card-body .ant-divider {
+  background: gray;
+}
+
+.top-countries .country-card .ant-card-body .ant-card-meta-title{
+  color: turquoise;
+}
+
+.top-countries .country-card .ant-card-body .ant-card-meta-description{
+ color: white;
+}
+
+.roadmap {
+  padding: 4em 2em;
+  /* This background causes the stuttering from being too complex */
+  /*background: url(../../assets/images/roadmap_bg.svg) no-repeat ;
+  background-size: 400px;
+  background-position: left 180%;*/
+}
+
+.roadmap .timeline {
+  margin-top: 4em;
+}
+
+.roadmap .ant-timeline {
+  color: white;
+}
+
+.roadmap h2, .roadmap h3{
+  color: white;
+}
+
+.buy-now {
+  position: relative;
+}
+
+.buy-now .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(12, 38, 80, 0.75);
+}

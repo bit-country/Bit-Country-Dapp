@@ -1,0 +1,21 @@
+.footer {
+  position: relative;
+  flex: 1;
+  padding: 5em 4em;
+  background-color: black;
+}
+
+.footer .links {
+  padding-inline-start: 0;
+}
+
+.footer .copyright {
+  margin-top: 1em;
+}
+
+.footer .social a {
+  margin: 0 0.5em;
+  color: white;
+  font-size: 20px;
+  font-weight: 300;
+}

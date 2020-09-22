@@ -1,0 +1,66 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "strict": "off",
+        "indent": [
+            "warn",
+            2
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-console": "error",
+        "no-template-curly-in-string": "error",
+        "require-atomic-updates": "error",
+        "array-callback-return": "error",
+        "no-else-return": "error",
+        "no-return-await": "error",
+        "init-declarations": "warn",
+        "array-bracket-newline": ["error", "consistent"],
+        "array-bracket-spacing": ["error", "always"],
+        "block-spacing": ["error", "always"],
+        "no-unneeded-ternary": "error",
+        "object-curly-spacing": ["error", "always"],
+        "padding-line-between-statements": [
+            "error",
+            { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"}, 
+            { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
+        ],
+        "arrow-parens": ["error", "as-needed"],
+        "react/prop-types": "off",
+        "react/destructuring-assignment": ["warn", "always"],
+        "react/no-access-state-in-setstate": "error",
+        "react/no-direct-mutation-state": "error",
+        "react/prefer-stateless-function": "warn",
+        "react/jsx-indent": ["warn", 2, { "checkAttributes": true, "indentLogicalExpressions": true }],
+        "react/jsx-indent-props": ["error", 2],
+        "react/jsx-first-prop-new-line": ["error", "multiline"]
+    }
+}
