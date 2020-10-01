@@ -11,7 +11,7 @@ export default function OptionalLink(props) {
 
   if (enabled) {
     return (
-      <div {...restProps}>
+      <div {...restProps} className="optional-link">
         <Link
           to={to}
         >
@@ -22,7 +22,7 @@ export default function OptionalLink(props) {
   }
 
   return (
-    <div {...restProps}>
+    <div {...restProps} className="optional-link">
       {children}
     </div>
   );

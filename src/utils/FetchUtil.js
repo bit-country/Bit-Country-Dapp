@@ -19,7 +19,7 @@ export async function fetchAPI(endpoint, method = "get", body = null) {
   return fetchManual(endpoint, method, newBody, headers);
 }
 
-export async function fetchManual(endpoint, method = "get", body = null, headers = {}) {
+export async function fetchManual(endpoint, method = "get", body = null, headers = {}, signal = null) {
   try {
     const url = BASE_URL + endpoint;
     const bitToken = Cookies.get("bitToken");
@@ -30,7 +30,8 @@ export async function fetchManual(endpoint, method = "get", body = null, headers
         authorization: `Bearer ${bitToken}`,
         ...customHeaders,
         ...headers
-      }
+      },
+      signal
     };
 
     if (body) {

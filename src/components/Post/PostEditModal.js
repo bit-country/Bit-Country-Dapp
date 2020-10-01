@@ -134,9 +134,9 @@ export default class PostEditModal extends Component {
         if (!post.url) {
           formData.set("url", post.metadata.url);
         }
-
+        
         formData.delete("summary");
-        formData.set("content", post.summary);
+        formData.set("content", post.summary || post.content);
       }
 
       const response = await editPost(this.props.post.id, formData);

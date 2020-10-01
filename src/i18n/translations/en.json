@@ -461,6 +461,7 @@
   "errors.pages.401.message": "You need to be logged in to access this feature",
   "errors.pages.403.title": "Restricted",
   "errors.pages.403.message": "You do not have the required access permissions",
+  "errors.pages.403.message.residentOnly": "This content is restricted to residents of the following country",
   "errors.pages.404.title": "Not Found",
   "errors.pages.404.message.page": "Glad you're excited to explore but there's nothing to see here, maybe you can suggest a feature for here?",
   "errors.pages.404.message.country": "Sorry, we couldn't find the country you were after... sounds like you found a great place to get started!",
@@ -477,5 +478,6 @@
   "errors.auth.invalidCredentials": "Please check your credentials and try again",
   "errors.signinProvider.invalidLevel": "You must be IC Level 1.5 and above",
   "errors.auth.topicUniqueInvalid": "Invalid unique identifier must only contain alphanumerics or hyphens -",
+  "errors.auth.blockCreateSectionsInvalid": "Sections buildability selection data is invalid",
   "errors.country.create.descriptionLength": "Country description length is less than 100 or greater than 400"
 }

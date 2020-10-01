@@ -102,6 +102,7 @@ export default {
   GET_OWN_PROFILE: "/profile/profile/getMyProfile",
   GET_USER_PROFILE: "/profile/profile/getProfile",
   GET_USER_PROFILE_BY_BLOGUID: "/profile/profile/getProfileByBlogUid",
+  CHECK_MINDUID_AVAILABILITY: "/profile/profile/checkMindUidAvailability",
   UPDATE_PROFILE: "/profile/profile/updateMyProfile",
   UPDATE_PROFILE_IMAGE: "/profile/profile/updateProfileImage",
 

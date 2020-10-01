@@ -1,6 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { Col, Divider, Input, Row, Button, Checkbox, Spin, Upload, Select } from "antd";
+import { Col, Divider, Input, Row, Button, Checkbox, Spin, Upload, Select, Form } from "antd";
 import { AuthConnect } from "../../components/HOC/Auth/AuthContext";
 import "./Profile.styles.css";
 import { fetchAPI, fetchManual } from "../../utils/FetchUtil";
@@ -41,7 +41,8 @@ class Profile extends React.Component {
       imageUrl: null,
       loading: true,
       countries: [],
-      promotedUrlPrefix: "http://"
+      promotedUrlPrefix: "http://",
+      uidIsAvailable: true
     };
   }
 
@@ -75,6 +76,22 @@ class Profile extends React.Component {
     }
   }
 
+  checkMindUidAvailability = async blogUid => {
+    try {
+      const response = await fetchAPI(
+        `${ENDPOINTS.CHECK_MINDUID_AVAILABILITY}?blogUid=${blogUid}`
+      );
+
+      if (response.isSuccess) {
+        this.setState({
+          uidIsAvailable: response.isAvailable
+        });
+      }
+    } catch (error) {
+      Logging.Error(error);
+    }
+  }
+
   loadCountries = async () => {
     const { userId } = this.state.profile;
 
@@ -102,11 +119,17 @@ class Profile extends React.Component {
   }
 
   handleChange = ({ target: { name, value } }) => {
+    if (name == "blogUID") {
+      window.clearTimeout(this.state.TimeoutId);
+      var TimeoutId = window.setTimeout(() => this.checkMindUidAvailability(value), 500);
+    }
+
     this.setState(state => ({
       profile: {
         ...state.profile,
         [name]: value
-      }
+      },
+      TimeoutId
     }));
   }
 
@@ -542,12 +565,18 @@ class Profile extends React.Component {
                     />
                   }
                   input={
-                    <Input
-                      disabled={!!blogUID}
-                      name="blogUID"
-                      value={profile.blogUID}
-                      onChange={this.handleChange}
-                    />
+                    <Form.Item
+                      validateStatus={this.state.uidIsAvailable? "success" : "error"}
+                      help={this.state.uidIsAvailable? null : "This uid is taken, please use another one"}
+                    >
+                      <Input
+                        disabled={!!blogUID}
+                        name="blogUID"
+                        value={profile.blogUID}
+                        onChange={this.handleChange}
+                      />
+                    </Form.Item>
+
                   }
                 />
                 <ProfileField

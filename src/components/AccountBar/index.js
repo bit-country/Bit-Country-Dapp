@@ -7,7 +7,7 @@ import "./index.css";
 import Menus from "./Menus";
 import { Link } from "@reach/router";
 
-function AccountBar({ visible = false, drawerContent, user, sendLogout, children, notificationCount }) {
+function AccountBar({ visible = false, drawerContent, user, sendLogout, children, notificationCount, clearNotificationCount }) {
   const [ showDrawer, setShowDrawer ] = useState(visible);
   const handleToggle = useCallback(() => {
     setShowDrawer(!showDrawer);
@@ -57,6 +57,7 @@ function AccountBar({ visible = false, drawerContent, user, sendLogout, children
               toggleDrawer={handleToggle} 
               drawerOpen={showDrawer} 
               notificationCount={notificationCount}
+              clearNotificationCount={clearNotificationCount}
             />
           </Col>
         </Row>

@@ -10,7 +10,7 @@ import { Link } from "@reach/router";
 import { FormattedMessage } from "react-intl";
 import "./index.css";
 
-export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, notificationCount }) {
+export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, notificationCount, clearNotificationCount }) {
   const [ collapsed, setCollapsed ] = useState(false);
   const containerRef = useRef();
 
@@ -62,6 +62,7 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
         <>
           <Link
             to="/notifications"
+            onClick={clearNotificationCount}
           >
             <div className="notifications">
               <FormattedMessage 
@@ -134,6 +135,8 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
         <>
           <Link
             to="/notifications"
+            onClick={clearNotificationCount}
+
           >
             <div className="notifications">
               <Badge dot count={notificationCount}>
