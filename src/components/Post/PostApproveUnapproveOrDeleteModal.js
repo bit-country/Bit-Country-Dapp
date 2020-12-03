@@ -53,6 +53,8 @@ export default class PostApproveUnapproveOrDeleteModal extends Component {
   }
 
   submitPostModeration = async () => {
+    let deletedId = null;
+    
     try {
       let response = "";
       let errorMessage = "";
@@ -70,6 +72,7 @@ export default class PostApproveUnapproveOrDeleteModal extends Component {
           successMessage = <FormattedMessage id="post.unapprovePost.notification.success" />;
           break;
         case "delete":
+          deletedId = this.props.post.id;
           response = await deletePost(this.props.post.id);
           errorMessage = <FormattedMessage id="post.deletePost.notification.error" />;
           successMessage = <FormattedMessage id="post.deletePost.notification.success" />;
@@ -89,7 +92,7 @@ export default class PostApproveUnapproveOrDeleteModal extends Component {
     } finally {
       this.props.refreshComponentAfterPostModeration == null ?
         window.location.reload() :
-        this.props.refreshComponentAfterPostModeration();
+        this.props.refreshComponentAfterPostModeration(deletedId);
     }
   }
 

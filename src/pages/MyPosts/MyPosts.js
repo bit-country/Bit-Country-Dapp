@@ -34,11 +34,11 @@ class MyPosts extends Component {
     componentDidMount() {
       this.refreshPosts();
       this.loadCountries();
-      document.getElementById("auth-content").addEventListener("scroll", this.handleScroll);
+      window.addEventListener("scroll", this.handleScroll);
     }
 
     componentWillUnmount() {
-      document.getElementById("auth-content").removeEventListener("scroll", this.handleScroll);
+      window.removeEventListener("scroll", this.handleScroll);
     }
 
     refreshPosts = () => {
@@ -129,7 +129,7 @@ class MyPosts extends Component {
 
     handleScroll = () => {
       const { allLoaded } = this.state;
-      const objDiv = document.getElementById("auth-content");
+      const objDiv = document.scrollingElement;
 
       if (
         Math.abs((objDiv.scrollTop + objDiv.clientHeight) - objDiv.scrollHeight) <= 5
@@ -295,12 +295,6 @@ class MyPosts extends Component {
                   <Option value="Public">
                     <FormattedMessage id="post.visibility.public" />
                   </Option>
-                  {/* <Option value="Restricted">
-                    <FormattedMessage id="post.visibility.restricted" />
-                  </Option>
-                  <Option value="Unlisted">
-                    <FormattedMessage id="post.visibility.unlisted" />
-                  </Option> */}
                   <Option value="Private">
                     <FormattedMessage id="post.visibility.private" />
                   </Option>

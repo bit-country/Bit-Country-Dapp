@@ -2,7 +2,13 @@ import React, { useCallback } from "react";
 import { Row, Col, Input, InputNumber } from "antd";
 import { FormattedMessage } from "react-intl";
 
-export default function CurrencySection({ name, symbol, totalSupply, backingBCG, onInputChange }) {
+export default function CurrencySection({
+  name,
+  symbol,
+  totalSupply,
+  backingBCG,
+  onInputChange,
+}) {
   const handleSupplyChange = useCallback(value => {
     onInputChange({ target: { name: "totalSupply", value } });
   });
@@ -14,9 +20,10 @@ export default function CurrencySection({ name, symbol, totalSupply, backingBCG,
   return (
     <>
       <div className="field">
-        <label>Name your currency</label>
+        <label>Name</label>
         <p className="label-explaination">
-          The currency name of your new country
+          Give a name to your currency. This is the friendly name of your
+          currency.
         </p>
         <Input
           placeholder="e.g MyCountryToken"
@@ -28,9 +35,10 @@ export default function CurrencySection({ name, symbol, totalSupply, backingBCG,
         />
       </div>
       <div className="field">
-        <label>Currency symbol</label>
+        <label>Symbol/Ticker</label>
         <p className="label-explaination">
-          Choose 3-4 letters to represent your currency
+          3-4 character ticker. The ticker is the trading name for your currency
+          on the Whenua exchange.
         </p>
         <div>
           <Input
@@ -45,9 +53,11 @@ export default function CurrencySection({ name, symbol, totalSupply, backingBCG,
           />
         </div>
         <div className="field">
-          <label>Total supply</label>
+          <label>Total Supply</label>
           <p className="label-explaination">
-            You can mint up to 1 billion units of your currency
+            This is the total amount of your currency put into circulation. Once
+            you set the amount, it can’t be changed. You can create up to 1
+            million and as little as 1k.
           </p>
           <Row type="flex" align="middle">
             <Col>
@@ -94,10 +104,10 @@ export default function CurrencySection({ name, symbol, totalSupply, backingBCG,
           </Row>
         </div>
         <div className="field">
-          <label>BCG Backing</label>
+          <label>Backing</label>
           <p className="label-explaination">
-            Your currency should be backed by Bit Country Gold to ensure
-            its initial value.
+            You must use BCG to back your currency, must have a minimum value of
+            BCG equivalent to $1 USD.
           </p>
           <Row type="flex" align="middle">
             <Col span={21}>
@@ -137,9 +147,6 @@ export default function CurrencySection({ name, symbol, totalSupply, backingBCG,
                 Strong
               </a>
             </Col>
-            <Col span={3} align="right">
-              <h3>{backingBCG} BCG</h3>
-            </Col>
           </Row>
         </div>
         <div className="field">
@@ -152,21 +159,17 @@ export default function CurrencySection({ name, symbol, totalSupply, backingBCG,
               {totalSupply / backingBCG >= 10000
                 ? "WEAK"
                 : totalSupply / backingBCG > 100
-                  ? "MODERATE"
-                  : totalSupply / backingBCG > 1
-                    ? "STRONG"
-                    : "EXTREMELY STRONG"}{": "}
-              
+                ? "MODERATE"
+                : totalSupply / backingBCG > 1
+                ? "STRONG"
+                : "EXTREMELY STRONG"}
+              {": "}
+
               <FormattedMessage
                 id="createCountry.bcgValue"
-                values={{ 
-                  symbol: 
-                    (
-                      symbol
-                        ? symbol.toUpperCase()
-                        : "Your Token"
-                    ),
-                  bcg: parseFloat((backingBCG / totalSupply).toExponential(2))
+                values={{
+                  symbol: symbol ? symbol.toUpperCase() : "Your Token",
+                  bcg: parseFloat((backingBCG / totalSupply).toExponential(2)),
                 }}
               />
             </Col>

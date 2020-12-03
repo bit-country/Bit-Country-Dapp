@@ -10,9 +10,6 @@ import SocialLinks from "../../components/SocialLinks";
 function TopBanner() {
   return (
     <div className="top-banner hero snap">
-      {/* <div className="bit-country-grid">
-
-      </div> */}
       <video src={background} muted={true} autoPlay loop className="hero-background" />
       <Row>
         <Col xs={0} md={1} lg={2} xl={3}></Col>
@@ -34,7 +31,7 @@ function TopBanner() {
             className="call-to-action"
             type="primary"
             size="large"
-            onClick={() => navigate("/request-access")}
+            onClick={() => navigate("/create-country")}
           >
             <FormattedMessage id="app.createYourCountry" />
           </Button>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { 
+import {
   List,
   Card,
   Divider,
@@ -39,15 +39,15 @@ class Post extends Component {
     }
 
     window.onpopstate = this.handleBack;
-    
+
     const { post } = this.props;
-    const state = { postId: post.id }; 
+    const state = { postId: post.id };
     const title = "Post Detail";
     const shortCode = shortCodes(post.id + post.owner.id)[0];
     const postSlug = slugify(post.title);
-    
+
     let url;
-    
+
     if (this.props.path == "/my-mind") {
       url = window.location;
     }
@@ -57,9 +57,11 @@ class Post extends Component {
     else {
       url = `${window.location}/${shortCode}/${postSlug}`;
     }
-    
-    window.history.pushState(state, title, url); 
-    
+
+    window.history.pushState(state, title, url);
+
+    window.dispatchEvent(new CustomEvent("postopen"));
+
     this.setState({
       showModal: true
     });
@@ -93,12 +95,12 @@ class Post extends Component {
   }
 
   render() {
-    const { 
-      user, 
+    const {
+      user,
       post,
-      isOwner, 
-      isModerator, 
-      refreshComponentAfterPostModeration, 
+      isOwner,
+      isModerator,
+      refreshComponentAfterPostModeration,
       showAllPostMeta
     } = this.props;
     const { showComments, showModal } = this.state;
@@ -174,16 +176,16 @@ class Post extends Component {
             </div>
           )}
           <div className="comments">
-            <CommentSection post={post} visible={showComments} isOwner={isOwner} isModerator={isModerator}/>
-          </div>   
-        </div>    
+            <CommentSection post={post} visible={showComments} isOwner={isOwner} isModerator={isModerator} />
+          </div>
+        </div>
       </Card>
     );
 
     return (
       <List.Item>
         {postContent}
-        <PostDetailModal 
+        <PostDetailModal
           post={post}
           showModal={showModal}
           handleModalClose={this.handleModalClose}
@@ -195,7 +197,7 @@ class Post extends Component {
 
 function PostHeader({ user, post, isOwner, isModerator, refreshComponentAfterPostModeration, showAllPostMeta }) {
   const isStory = post?.postType != null && post?.postType == postTypes.STORY;
-  const titleStyles = [ "post-title" ];
+  const titleStyles = ["post-title"];
 
   if (isStory) {
     titleStyles.push("empty");
@@ -203,12 +205,12 @@ function PostHeader({ user, post, isOwner, isModerator, refreshComponentAfterPos
 
   let promotedLinkName;
   let promotedLink;
-  
+
   if (post.owner.promoLinks?.length > 0) {
     promotedLinkName = post.owner.promoLinks[0].name;
     promotedLink = post.owner.promoLinks[0].value;
   }
-  
+
   return (
     <>
       <div className="post-header">
@@ -239,10 +241,10 @@ function PostHeader({ user, post, isOwner, isModerator, refreshComponentAfterPos
             {promotedLinkName ? (
               promotedLinkName
             ) : (
-              <FormattedMessage
-                id="post.my-links"
-              />
-            )}
+                <FormattedMessage
+                  id="post.my-links"
+                />
+              )}
           </a>
         )}
       </div>

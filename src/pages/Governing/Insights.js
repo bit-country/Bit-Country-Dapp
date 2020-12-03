@@ -51,6 +51,7 @@ export default function Insights(props) {
     <Col
       push={4}
       span={16}
+      className="insightsContainer"
     >
       <h2>
         <FormattedMessage

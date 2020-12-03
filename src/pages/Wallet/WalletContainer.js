@@ -19,17 +19,11 @@ function WalletContainer({ "*": selected = "balance" }) {
                 <FormattedMessage id="wallet.menu.balance" />
               </Link>
             </Menu.Item>
-            {/* <Menu.Item key="buy">
-              <Link to="buy">
-                <FormattedMessage id="wallet.menu.buy" />
-              </Link>
-            </Menu.Item> */}
           </Menu>
         </Col>
         <Col xs={24} md={16} lg={18} xl={20} className="content">
           <Router>
             <Wallet path="/balance" />
-            {/* <BuyBCG path="/buy" /> */}
             <NotFound 
               default
               message={(

@@ -10,11 +10,11 @@ import { BlockConnect } from "../../components/HOC/Block/BlockWrapper";
 
 class NewsFeed extends Component {
   componentDidMount() {
-    document.getElementsByClassName("scroller")[0].addEventListener("scroll", this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   }
 
   componentWillUnmount() {
-    document.getElementsByClassName("scroller")[0].removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   handleScroll = () => {
@@ -22,7 +22,7 @@ class NewsFeed extends Component {
       loadMorePosts, allLoaded
     } = this.props;
 
-    const objDiv = document.getElementsByClassName("scroller")[0];
+    const objDiv = document.scrollingElement;
 
     if (
       Math.abs((objDiv.scrollTop + objDiv.clientHeight) - objDiv.scrollHeight) <= 5

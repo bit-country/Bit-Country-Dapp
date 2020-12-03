@@ -65,6 +65,10 @@ class Login extends Component {
       return;
     }
 
+    if (state?.isRedirectBack) {
+      navigate(-1);
+    }
+
     navigate("/my-countries");
   };
 
@@ -83,7 +87,7 @@ class Login extends Component {
     }
 
     navigate(
-      "/setting",
+      "/register",
       {
         state: {
           referrerId,
@@ -182,10 +186,6 @@ class Login extends Component {
               name="password"
             />
           </div>
-          {/* <div className="ui big message error-warning">
-            Make sure to save your MetaMask login information and account
-            recovery details! We can’t help you regain access if you lose it.
-          </div> */}
           <div>
             <Button
               loading={loggingIn}
@@ -200,9 +200,13 @@ class Login extends Component {
               </span>
             </Button>
           </div>
-          {/* <div>
-            <a onClick={this.redirectToSetting}>Create an account</a>
-          </div> */}
+          <div>
+            <a onClick={this.redirectToSetting}>
+              <FormattedMessage
+                id="account.login.goToRegister"
+              />
+            </a>
+          </div>
         </Col>
         <Col span={5} />
       </Row>

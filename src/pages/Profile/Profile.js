@@ -82,12 +82,20 @@ class Profile extends React.Component {
         `${ENDPOINTS.CHECK_MINDUID_AVAILABILITY}?blogUid=${blogUid}`
       );
 
-      if (response.isSuccess) {
-        this.setState({
-          uidIsAvailable: response.isAvailable
-        });
+      if (!response?.isSuccess) {
+        throw new Error("Error while checking mind UID availability");
       }
+
+      this.setState({
+        uidIsAvailable: response.isAvailable
+      });
     } catch (error) {
+      Notification.displayErrorMessage(
+        <FormattedMessage
+          id="user.profile.notification.mindUIDUnavailable"
+        />
+      );
+
       Logging.Error(error);
     }
   }
@@ -96,13 +104,17 @@ class Profile extends React.Component {
     const { userId } = this.state.profile;
 
     try {
-      const responseCountry = await fetchAPI(
+      const response = await fetchAPI(
         `${ENDPOINTS.GET_COUNTRIES_BY_USER}?userId=${userId}&isOwner=false`
       );
 
+      if (!response?.isSuccess) {
+        throw new Error("Error while retrieving countries for the user");
+      }
+
       this.setState(state => ({
         countries:
-          state.countries.concat(responseCountry.countries || [])
+          state.countries.concat(response.countries || [])
       }));
     } catch (error) {
       Logging.Error(error);
@@ -121,6 +133,7 @@ class Profile extends React.Component {
   handleChange = ({ target: { name, value } }) => {
     if (name == "blogUID") {
       window.clearTimeout(this.state.TimeoutId);
+
       var TimeoutId = window.setTimeout(() => this.checkMindUidAvailability(value), 500);
     }
 
@@ -214,7 +227,7 @@ class Profile extends React.Component {
       );
 
       if (!response?.isSuccess) {
-        throw Error("Error while updating profile");
+        throw Error(response?.message);
       }
 
       if (image) {
@@ -229,7 +242,7 @@ class Profile extends React.Component {
         );
 
         if (!imageResponse?.isSuccess) {
-          throw Error("Error while updating profile image");
+          throw Error(imageResponse?.message);
         }
 
         this.setState({
@@ -248,6 +261,16 @@ class Profile extends React.Component {
       }, this.props.reloadProfile);
     } catch (error) {
       Logging.Error(error);
+
+      if (error.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage
+            id={error.message}
+          />
+        );
+
+        return;
+      }
 
       Notification.displayErrorMessage(
         <FormattedMessage
@@ -437,7 +460,6 @@ class Profile extends React.Component {
                   input={
                     <Input
                       name="emailAddress"
-                      disabled={true}
                       value={profile.emailAddress}
                       onChange={this.handleChange}
                     />
@@ -678,12 +700,11 @@ class Profile extends React.Component {
                           ({ target: { checked } }) => 
                             this.handleChange({ target: { name: "consentToBeContacted", value: checked } })
                         }
-                      />
-                      <label>
+                      >
                         <FormattedMessage
                           id="user.profile.field.consentToContact"
                         />
-                      </label>
+                      </Checkbox>
                     </>
                   )}
                 />
@@ -696,12 +717,11 @@ class Profile extends React.Component {
                           ({ target: { checked } }) => 
                             this.handleChange({ target: { name: "consentToBeNotifiedAboutComments", value: checked } })
                         }
-                      />
-                      <label>
+                      >
                         <FormattedMessage
                           id="user.profile.field.consentToBeNotifiedAboutComments"
                         />
-                      </label>
+                      </Checkbox>
                     </>
                   )}
                 />
@@ -714,12 +734,11 @@ class Profile extends React.Component {
                           ({ target: { checked } }) => 
                             this.handleChange({ target: { name: "consentToBeNotifiedAboutLikes", value: checked } })
                         }
-                      />
-                      <label>
+                      >
                         <FormattedMessage
                           id="user.profile.field.consentToBeNotifiedAboutLikes"
                         />
-                      </label>
+                      </Checkbox>
                     </>
                   )}
                 />

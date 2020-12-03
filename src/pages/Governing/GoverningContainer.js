@@ -7,6 +7,8 @@ import Stakeholders from "./Stakeholders";
 import "./GoverningContainer.styles.css";
 import OptionalLink from "../../components/OptionalLink";
 import NotFound from "../Errors/NotFound";
+import MyStake from "./MyStake";
+import Residency from "./Residency";
 
 export default function StakeContainer({ "*": selected }) {
   if (selected == "") {
@@ -30,61 +32,32 @@ export default function StakeContainer({ "*": selected }) {
                 <FormattedMessage id="country.stake.menu.overview" />
               </OptionalLink>
             </Menu.Item>
-            {/* <Menu.Item key="policymaker">
-              <OptionalLink enabled={true} to="./policymaker">
-                <FormattedMessage id="country.stake.menu.policymaker" />
-              </OptionalLink>
-            </Menu.Item> */}
             <Menu.Item key="insights">
               <OptionalLink enabled={true} to="./insights">
                 <FormattedMessage id="country.stake.menu.insights" />
               </OptionalLink>
             </Menu.Item>
-            {/* <Menu.Item key="history">
-              <OptionalLink enabled={true} to="./history">
-                <FormattedMessage id="country.stake.menu.history" />
-              </OptionalLink>
-            </Menu.Item> */}
-            {/* <Menu.Item key="settings">
-              <OptionalLink enabled={false} to="./settings">
-                <FormattedMessage id="country.stake.menu.settings" />
-              </OptionalLink>
-            </Menu.Item>
             <Menu.Item key="mystake">
-              <OptionalLink enabled={false} to="./mystake">
+              <OptionalLink enabled={true} to="./mystake">
                 <FormattedMessage id="country.stake.menu.myStake" />
               </OptionalLink>
-            </Menu.Item> */}
-            {/* <Menu.Item key="stakeholders">
-              <OptionalLink enabled={true} to="./stakeholders">
-                <FormattedMessage id="country.stake.menu.stakeholders" />
+            </Menu.Item>
+            <Menu.Item key="residency">
+              <OptionalLink enabled={true} to="./residency">
+                <FormattedMessage id="country.stake.menu.residency" />
               </OptionalLink>
-            </Menu.Item> */}
-            {/* <Menu.Item key="enact">
-              <OptionalLink enabled={false} to="./enact">
-                <FormattedMessage id="country.stake.menu.enact" />
-              </OptionalLink>
-            </Menu.Item> */}
+            </Menu.Item>
           </Menu>
         </Col>
         <Col xs={24} md={16} lg={18} xl={20} className="content">
           <Router>
             <Stakeholders path="/" />
-            {/* <Overview path="/" /> */}
-            {/* <PolicyMaker path="/policymaker" /> */}
+            <MyStake path="/mystake" />
             <Insights path="/insights" />
-            {/* <History path="/history" /> */}
-            {/* <Settings path="/settings" />
-            <MyStake path="/mystake" /> */}
-            {/* <Stakeholders path="/stakeholders" /> */}
-            {/* <Enact path="/enact" /> */}
-            <NotFound 
+            <Residency path="/residency" />
+            <NotFound
               default
-              message={(
-                <FormattedMessage
-                  id="errors.pages.404.message.page"
-                />
-              )} 
+              message={<FormattedMessage id="errors.pages.404.message.page" />}
             />
           </Router>
         </Col>

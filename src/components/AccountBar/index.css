@@ -1,6 +1,6 @@
 :root {
-  --bar-height: 3.3rem;
-  --drawer-height: calc(100vh - 3.3rem);
+  --bar-height: 3.6rem;
+  --drawer-height: calc(100vh - var(--bar-height));
 }
 
 @media screen and (min-height: 400px) {
@@ -31,20 +31,21 @@
   left: 0;
   z-index: 100;
   width: 100%;
+  height: var(--bar-height);
   margin-bottom: 1px;
+  background-color: white;
 }
 
 #account-bar header a, #account-bar header i {
   color: #fff;
 }
 
-#account-bar header + * {
+#account-bar header+* {
   padding-top: 56px;
 }
 
 #account-bar header .drawer {
   display: block;
-  background-color: #dedede;
   position: relative;
 }
 
@@ -52,7 +53,7 @@
   color: black;
 }
 
-#account-bar header .drawer, #account-bar header .drawer > * {
+#account-bar header .drawer, #account-bar header .drawer>* {
   transition: all 100ms ease-in-out;
 }
 
@@ -60,7 +61,7 @@
   height: 0
 }
 
-#account-bar header .drawer.hidden > * {
+#account-bar header .drawer.hidden>* {
   transform: translateY(calc(-5 * var(--drawer-height)));
 }
 
@@ -68,7 +69,7 @@
   height: var(--drawer-height);
 }
 
-#account-bar header .drawer.active > * {
+#account-bar header .drawer.active>* {
   transform: translateY(0);
 }
 
@@ -82,14 +83,14 @@
   flex: 1;
 }
 
-#account-bar header .drawer .container .ant-col, 
-#account-bar header .drawer .container .ant-col .ant-menu.ant-menu-vertical {
+#account-bar header .drawer .container .ant-col, #account-bar header .drawer .container .ant-col .ant-menu.ant-menu-vertical {
   height: 100%;
 }
 
 #account-bar header .main.ant-row.wrapper {
-  background-color:  #191D2F;
+  background-color: #191D2F;
   display: flex;
+  flex: 1;
   min-width: min-content;
   border-bottom: 1px solid #0a0a0a;
   padding: 12px 0;
@@ -97,34 +98,35 @@
 
 #account-bar header .header-col-left {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 #account-bar header .header-col-middle {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 #account-bar header .header-col-right {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
 }
 
-#account-bar header .header-col-left > * {
+#account-bar header .header-col-left>* {
   padding: 0 1em;
 }
 
-#account-bar header .header-col-middle > * {
+#account-bar header .header-col-middle>* {
   padding: 0 1em;
   display: flex;
   align-items: center;
 }
 
-#account-bar header .header-col-right > * {
+#account-bar header .header-col-right>* {
   padding: 0 1em;
+}
+
+.bit-logo {
+  align-self: center;
 }
 
 .bit-logo.nav img {
@@ -136,18 +138,18 @@
   height: 1em;
 }
 
-#account-bar header .header-col-middle .primary-menu {
+#account-bar header .header-col-left .primary-menu {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
-#account-bar header .header-col-middle .primary-menu.collapsed {
+#account-bar header .header-col-left .primary-menu.collapsed {
   justify-content: flex-start;
 }
 
-#account-bar header .header-col-middle .primary-menu > * {
+#account-bar header .header-col-left .primary-menu > * {
   padding: 0 1em;
   display: flex;
   align-items: center;

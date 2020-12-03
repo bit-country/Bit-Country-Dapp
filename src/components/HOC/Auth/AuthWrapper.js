@@ -223,13 +223,11 @@ class AuthWrapper extends PureComponent {
           }}
         >
           <PrimaryBar />
-          <div id="auth-content">
-            {authLoading ? (
-              <Spinner />
-            ) : (
-              this.props.children
-            )}
-          </div>
+          {authLoading ? (
+            <Spinner />
+          ) : (
+            this.props.children
+          )}
         </AuthContext.Provider>
       </>
     );

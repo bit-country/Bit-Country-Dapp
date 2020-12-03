@@ -1,0 +1,13 @@
+#wallet .assets {
+  padding: 8px;
+}
+
+.CardBody {
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  min-height: 380px;
+}
+
+.CardBody img.thumbnail {
+  height: 170px;
+}

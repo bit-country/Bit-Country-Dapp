@@ -1,6 +1,6 @@
 #stake {
   position: absolute;
-  top: 0;
+  top: var(--bar-height);
   left: 0;
   right: 0;
   bottom: 0;
@@ -22,9 +22,7 @@
 }
 
 #stake .body .content {
-  height: 100%;
   padding: 1em;
-  margin: 4em 0;
 }
 
 #stake .body .content .ant-list .ant-list-items {
@@ -77,4 +75,13 @@
 
 #stakeholders .ant-table .index-2{
   font-size: large;
+}
+
+#stakeholders .stakeholder .name {
+  margin-left: 0.25em;
+}
+
+#stakeholders .optional-link {
+  display: inline;
+  padding-right: 0.5em;
 }

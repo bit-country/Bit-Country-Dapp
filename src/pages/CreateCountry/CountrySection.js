@@ -1,74 +1,87 @@
 import React from "react";
-import { Input, List, Card } from "antd";
+import { Input, List, Card, Modal, Tooltip, Icon } from "antd";
+import { FormattedMessage, injectIntl } from "react-intl";
+import DataDrivenTable from "../../components/DataDrivenTable";
 const { TextArea } = Input;
 
-const dummyData = [
-  {
-    index: 1,
-    theme: "Forest",
-    discription: "Some description about this theme",
-    src:
-      "https://cdn.dribbble.com/users/329207/screenshots/4232597/2001_bemocs_sp_lunar_woods_dribbble_1x.jpg"
-  },
-  {
-    index: 2,
-    theme: "Mountain",
-    discription: "Some description about this theme",
-    src:
-      "https://cdn.dribbble.com/users/329207/screenshots/3364859/bemocs_rei_end_of_season_dribbble_1x.jpg"
-  },
-  {
-    index: 3,
-    theme: "Snow Mountain",
-    discription: "Some description about this theme",
-    src:
-      "https://cdn.dribbble.com/users/329207/screenshots/3222707/bemocs_rei_january_clearance_dribbble_1x.jpg"
-  },
-  {
-    index: 4,
-    theme: "Space",
-    discription: "Some description about this theme",
-    src:
-      "https://cdn.dribbble.com/users/329207/screenshots/1805103/bemocs_space_dribbble_1x.jpg"
-  },
-  {
-    index: 5,
-    theme: "Ocean",
-    discription: "Some description about this theme",
-    src:
-      "https://cdn.dribbble.com/users/329207/screenshots/1928498/bemocs_nhm_seamobile_dribbble_1x.jpg"
-  },
-  {
-    index: 6,
-    theme: "Jungle Kingdom",
-    discription: "Some description about this theme",
-    src:
-      "https://cdn.dribbble.com/users/5031/screenshots/3232835/owl-mikael-gustafsson-dribbble.gif"
-  }
-];
-
-export default function CountrySection({ uniqueId, name, description, theme, onInputChange, onThemeChange }) {
+function CountrySection({ 
+  uniqueNames, 
+  handleCreate, 
+  handleUpdateData, 
+  loadingNames, 
+  name, 
+  description, 
+  theme, 
+  onInputChange, 
+  onThemeChange, 
+  intl }) {
   const data = dummyData;
 
   return (
     <>
       <div className="field">
-        <label>Country unique identifier</label>
+        <label>Unique URL</label>
         <p className="label-explaination">
-          This unique name use to distingush your country
+          You must set a Unique URL to allow users to find your country.
         </p>
-        <Input
-          placeholder="e.g liberworld"
-          name="countryUniqueId"
-          onChange={onInputChange}
-          value={uniqueId}
-          type="text"
-          size="large"
+        <DataDrivenTable
+          dataSource={uniqueNames}
+          containerClassName="unique-name"
+          keyGenerator={item => item.name}
+          render={item => {
+            let classNames = ["item"];
+
+            if (item.selected) {
+              classNames.push("selected");
+            }
+          
+            return (
+              <div className={classNames.join(" ")}>
+                {item.name}
+              </div>
+            );
+          }}
+          onItemClick={(e, item) => {
+            const items = uniqueNames.map(x => {
+              if (x.name == item.name) {
+                return { ...x, selected: true };
+              } else if (x.selected) {
+                return { ...x, selected: false} ;
+              } else {
+                return x;
+              }
+            });
+
+            const content = intl.formatMessage({ id: "createCountry.uniqueName.confirm", defaultMessage: "Are you sure you want to use this name?" });
+
+            Modal.confirm({ 
+              content,
+              onOk: () => {
+                handleUpdateData(items);
+
+                onInputChange({ target: { name: "countryUniqueId", value: item.id }});
+              }
+            });
+          }}
+          renderAddOne={() => (
+            <div className="item add">
+              <Icon type="plus" />
+              &nbsp;
+              <FormattedMessage 
+                id="createCountry.uniqueName.createButton" 
+                defaultMessage="Create" 
+              />
+            </div>
+          )}
+          onAddClick={handleCreate}
+          loading={loadingNames}
         />
       </div>
       <div className="field">
-        <label>Country display name</label>
-        <p className="label-explaination">This country display name</p>
+        <label>Display Name</label>
+        <p className="label-explaination">
+          A friendly name for your bit country.
+        </p>
         <Input
           placeholder="e.g Liberland"
           type="text"
@@ -79,12 +92,11 @@ export default function CountrySection({ uniqueId, name, description, theme, onI
         />
       </div>
       <div className="field">
-        <label>Country description</label>
-        <p className="label-explaination">
-          Write some words about your country and attract new residents
-        </p>
+        <label>Description</label>
+        <p className="label-explaination">Introduce your bit country.</p>
         <TextArea
-          placeholder="Country description"
+          placeholder="What is it about and why would people want
+          to join your country?"
           rows="3"
           name="countryDescription"
           type="textarea"
@@ -93,9 +105,18 @@ export default function CountrySection({ uniqueId, name, description, theme, onI
         />
       </div>
       <div className="field">
-        <label>Choose your theme</label>
+        <label>Theme</label>
         <p className="label-explaination">
-          Add the favour to your country
+          <Tooltip
+            title="This’ll change the display picture and later affect the 
+                color scheme of elements while inside your bit country’s 
+                timeline view."
+          >
+            Select from one of the existing themes for your country.
+            <sup>
+              <Icon type="question-circle-o" />
+            </sup>
+          </Tooltip>
         </p>
         <List
           grid={{
@@ -105,15 +126,13 @@ export default function CountrySection({ uniqueId, name, description, theme, onI
             md: 3,
             lg: 3,
             xl: 6,
-            xxl: 6
+            xxl: 6,
           }}
           dataSource={data}
           renderItem={item => (
             <List.Item>
               <Card
-                className={
-                  theme == item.index ? "selected" : ""
-                }
+                className={theme == item.index ? "selected" : ""}
                 cover={<img src={item.src} />}
                 hoverable
                 onClick={() => onThemeChange(item.index)}
@@ -128,3 +147,5 @@ export default function CountrySection({ uniqueId, name, description, theme, onI
     </>
   );
 }
+
+export default injectIntl(CountrySection);

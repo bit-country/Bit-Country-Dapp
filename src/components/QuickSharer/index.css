@@ -1,0 +1,11 @@
+#quick-sharer {
+  position: fixed;
+  display: flex; 
+  flex-flow: column;
+  z-index: 10;
+  top: 10em;
+}
+
+#quick-sharer button.react-share__ShareButton {
+  line-height: 0 !important;
+}

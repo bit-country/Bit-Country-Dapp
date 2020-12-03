@@ -1,12 +1,21 @@
+
+/* eslint-disable no-debugger */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable arrow-parens */
+
+
 import React from "react";
 import IncorrectNetwork from "../../../pages/Errors/IncorrectNetwork";
 import AccountLocked from "../../../pages/Errors/AccountLocked";
 import UnsupportedBrowser from "../../../pages/Errors/UnsupportedBrowser";
 import Spinner from "../../Spinner";
+import { ApiPromise } from "@polkadot/api";
+import { WsProvider } from "@polkadot/rpc-provider";
 
 const defaultState = {
   address: "",
-  loadingDApp: true,
+  loadingDApp: false,
   incorrectNetwork: false,
   accountLocked: false,
   unsupportedBrowser: false,
@@ -15,6 +24,9 @@ const defaultState = {
 const DAppContext = React.createContext(defaultState);
 
 export default class DApp extends React.PureComponent {
+
+  /* eslint-disable no-console */
+
   state = defaultState;
 
   render() {
@@ -25,10 +37,10 @@ export default class DApp extends React.PureComponent {
     return loadingDApp ? (
       <Spinner />
     ) : (
-      <DAppContext.Provider value={this.state}>
-        {this.props.children}
-      </DAppContext.Provider>
-    );
+        <DAppContext.Provider value={this.state}>
+          {this.props.children}
+        </DAppContext.Provider>
+      );
   }
 }
 
@@ -50,8 +62,8 @@ const componentRenderer = (Component, requiresWallet, props, value) => {
   ) : incorrectNetwork ? (
     <IncorrectNetwork />
   ) : (
-    <Component {...value} {...props} />
-  );
+          <Component {...value} {...props} />
+        );
 };
 
 // eslint-disable-next-line react/display-name

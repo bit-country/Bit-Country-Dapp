@@ -11,6 +11,7 @@ import CountryDetail from "../../components/CountryDetail";
 import { CountryConnect } from "../../components/HOC/Country/CountryWrapper";
 import Spinner from "../../components/Spinner";
 import { Link } from "@reach/router";
+import residencyTypes from "../../config/residencyTypes";
 
 class Country extends Component {
   state = {
@@ -91,17 +92,18 @@ class Country extends Component {
       country,
       signInProvider,
       blockDetails,
+      refreshBlocks,
       isResident,
       isOwner,
+      hasBlockPurchasePermission,
       navigate,
       joinCountry,
       leaveCountry,
       loggedIn,
       loadingResidency,
-      openSignInWithProviderModal
+      openSignInWithProviderModal,
+      residencyType
     } = this.props;
-
-    const isPublic = (country?.uniqueId == "community" || country?.uniqueId == "mvp");
 
     return (
       <>
@@ -149,15 +151,21 @@ class Country extends Component {
                     {!isResident ? (
                       <Button 
                         onClick={joinCountry} 
-                        disabled={!loggedIn || !isPublic}
+                        disabled={!loggedIn || residencyType == residencyTypes.CLOSED}
                         loading={loadingResidency}
                         type="primary"
                       >
-                        { isPublic ? (
-                          <FormattedMessage id="country.becomeResident" />
-                        ) : (
-                          "Invitation Only"
-                        )}
+                        <span>
+                          { residencyType == residencyTypes.PUBLIC ? (
+                            <FormattedMessage id="country.becomeResident" />
+                          ) : residencyType == residencyTypes.INVITATION_ONLY ? (
+                            <FormattedMessage id="country.invitationOnly" />
+                          ) : residencyType == residencyTypes.APPLICATION ? (
+                            <FormattedMessage id="country.applicationOnly" />
+                          ) : (
+                            <FormattedMessage id="country.residencyClosed" />
+                          )}
+                        </span>
                       </Button>
                     ) : (
                       <Button
@@ -173,7 +181,7 @@ class Country extends Component {
                 <Menu
                   onClick={this.handleClick}
                   mode="inline"
-                  selectedKeys={this.state.drawer.key}
+                  selectedKeys={drawer.key}
                 >
                   <Menu.Item key="map" onClick={this.onClose}>
                     <FormattedMessage id="country.map" />
@@ -218,8 +226,9 @@ class Country extends Component {
                   blockDetails={blockDetails}
                   isOwner={isOwner}
                   isResident={isResident}
+                  hasPurchasePermission={hasBlockPurchasePermission}
                   navigate={navigate}
-                  onBlockUpdate={this.props.refreshBlocks}
+                  onBlockUpdate={refreshBlocks}
                 />
               </Col>
             </Row>

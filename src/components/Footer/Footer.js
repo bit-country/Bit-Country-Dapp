@@ -3,6 +3,7 @@ import { Row, Col, } from "antd";
 import { FormattedMessage } from "react-intl";
 import "./index.css";
 import BCImage from "../../assets/images/BG1png.png";
+import web3Foundation from "../../assets/images/web3foundation.png";
 import SocialLinks from "../SocialLinks";
 
 export default function Footer() {
@@ -12,8 +13,11 @@ export default function Footer() {
         <Col xs={0} md={1} lg={2} xl={3}></Col>
         <Col xs={24} md={22} lg={20} xl={18}>
           <Row>
-            <Col span={24} className="center">
-              <img src={BCImage} style={{ width: "10em" }} />
+            <Col span={12} className="center">
+              <img src={BCImage} style={{ height: "8em" }} />
+            </Col>
+            <Col span={12} className="center">
+              <img src={web3Foundation} style={{ height: "8em" }} />
             </Col>
           </Row>
           <h4 className="copyright inverted bold center">

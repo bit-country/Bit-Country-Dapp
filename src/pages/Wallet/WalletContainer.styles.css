@@ -1,6 +1,6 @@
 #wallet {
   position: absolute;
-  top: 0;
+  top: var(--bar-height);
   left: 0;
   right: 0;
   bottom: 0;
@@ -17,7 +17,7 @@
   display: flex;
 }
 
-#wallet .body .menu > * {
+#wallet .body .menu>* {
   flex: 1;
 }
 
@@ -32,15 +32,11 @@
   border-bottom: 1px solid #e8e8e8;
 }
 
-#wallet .token-image,
-#wallet .asset-image,
-#wallet .function-image {
+#wallet .asset-image, #wallet .function-image {
   padding: 0.5em;
 }
 
-#wallet .token-details,
-#wallet .asset-details,
-#wallet .function-details {
+#wallet .token-details, #wallet .asset-details, #wallet .function-details {
   flex: 1;
 }
 
@@ -63,4 +59,134 @@
   background-color: #62626261;
   color: white;
   text-shadow: 0 0 5px black;
+}
+
+.balance-record {
+  display: flex;
+}
+
+.balance-record .ant-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.balance-record .ant-card-body .currency-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.balance-record .ant-card-body .currency-header .token-balance, .balance-record .ant-card-body .currency-header .token-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.balance-record .ant-card-body .currency-header .token-balance {
+  text-align: right;
+  flex: 1
+}
+
+.balance-record .ant-card-body .currency-header .token-description {
+  display: flex;
+  flex-direction: row;
+  flex: 2
+}
+
+.balance-record .token-image .ant-avatar {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #000;
+  font-size: 19px;
+}
+
+.main-balance h3 {
+  font-size: 2em;
+  text-align: center;
+  color: #fff;
+}
+
+#wallet .token-image {
+  padding-right: 1em;
+  padding-bottom: 1em;
+}
+
+#wallet .token-name, #wallet .token-balance h4 {
+  font-size: 1.2em;
+  font-size: 800;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.wallet-info .wallet-detail {
+  height: 100px;
+}
+
+.balance-list .ant-card {
+  height: 140px;
+}
+
+#wallet .ant-card {
+  border-radius: 12px;
+  border: 1px solid #ebeef5;
+  background: #fff;
+  box-shadow: 0 1px 20px rgba(23, 65, 212, .02);
+  overflow: hidden;
+  transition: all .2s;
+  margin-bottom: 1.5em
+}
+
+.balance-list .ant-card:hover {
+  box-shadow: 0 1px 20px rgba(23, 65, 212, .2);
+}
+
+.wallet-address {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+}
+
+.wallet-address .wallet-name {
+  font-size: 1.3em;
+  font-weight: 800;
+}
+
+.wallet-setting {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.wallet-detail .ant-card-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.main-balance .ant-card-body {
+  background-color: #000;
+  color: #fff;
+}
+
+.account-list .check-mark {
+  opacity: 0;
+}
+
+.account-list .check-mark.active, .account-list .ant-list-item:hover .check-mark {
+  color: #0b9c32;
+  font-size: 1.2em;
+  opacity: 1;
+}
+
+.account-list .ant-list-item {
+  cursor: pointer;
+}
+
+.account-list .ant-list-item:hover h4 {
+  color: #1890ff;
 }

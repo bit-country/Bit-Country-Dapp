@@ -8,7 +8,10 @@ import { AuthConnect } from "../../components/HOC/Auth/AuthContext";
 import "./Mind.css";
 import Logging from "../../utils/Logging";
 import { navigate, Link } from "@reach/router";
+import QuickSharer from "../../components/QuickSharer";
 
+import PageBanner from "../../components/PageBanner";
+import BannerImage from "../../assets/images/my_mind.jpg";
 const { Panel } = Collapse;
 
 let currentRequestId = 0;
@@ -41,11 +44,11 @@ class Mind extends Component {
     await this.loadProfile();
     await this.loadCountries();
     this.refreshPosts();
-    document.getElementById("auth-content").addEventListener("scroll", this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   }
 
   componentWillUnmount() {
-    document.getElementById("auth-content").removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   refreshPosts = ()=> {
@@ -134,7 +137,7 @@ class Mind extends Component {
   };
 
   handleScroll = () => {
-    const objDiv = document.getElementById("auth-content");
+    const objDiv = document.scrollingElement;
 
     if (
       Math.abs((objDiv.scrollTop + objDiv.clientHeight) - objDiv.scrollHeight) <= 5
@@ -242,7 +245,7 @@ class Mind extends Component {
 
   loadBlocks = async countryId => {
     if (!countryId) {
-        return;
+      return;
     }
 
     this.setState({
@@ -279,10 +282,44 @@ class Mind extends Component {
     );
 
     return (
-      <div id="mind">
-        <div id="mind-banner">
-          <Row>
-            <Col                   
+      <>
+        <PageBanner 
+          style={{ backgroundPosition: "50% 20%" }}
+          background={BannerImage}
+          pageTitle="Your Mind"
+          title={profile.blogTitle ? profile.blogTitle : "Your Mind"}
+          subTitle={personal && (
+            <>
+              <div >
+                <span>Edit mind configuration in </span>
+                <b> 
+                  <Link style={{ color: "#9cf1f4" }} to="/profile">
+                    your profile
+                  </Link>
+                </b>
+              </div>
+              {profile.blogUID ? (
+                <h3>
+                  Your public URL:&nbsp;
+                  
+                  <Link to={`/m/${profile.blogUID}`}>
+                    {`${location.origin}/m/${profile.blogUID}`}
+                  </Link>
+                </h3>
+              ) : (
+                <p>
+                  Set your mind unique name in your profile to get a public url
+                </p>
+              )}
+            </>
+          )}
+        />
+
+        <QuickSharer />
+        <div id="mind" className={personal? "personal" : "public"}>
+          <Row type="flex" style={{ flexWrap: "wrap-reverse", marginLeft: 0, marginRight: 0 }} gutter={[ 16, 0 ]}>
+            <Col
+              className="col-push"
               xs={1}
               sm={2}
               md={3}
@@ -290,162 +327,89 @@ class Mind extends Component {
               xl={3}
               xxl={4}
             />
-            <Col 
+            <Col
               xs={22}
               sm={20}
               md={18}
-              lg={22}
-              xl={18}
-              xxl={16}
+              lg={14}
+              xl={12}
+              xxl={11}
             >
-              <h2>{profile.blogTitle ? profile.blogTitle : "Your Mind"}</h2>
-              {personal && (
-                <>
-                  <div id="profile-edit">
-                    <span>Edit mind configuration in </span>
-                    <Link to="/profile">
-                      your profile
-                    </Link>
-                  </div>
-                  {profile.blogUID ? (
-                    <div id="mind-url">
-                      <h3>
-                        Your public URL:&nbsp;
-                        <Link to={`/m/${profile.blogUID}`}>
-                          {`${location.origin}/m/${profile.blogUID}`}
-                        </Link>
-                      </h3>
-                    </div>
-                  ) : (
-                    <div id="mind-url">
-                      Set your mind unique name in your profile to get a public url
-                    </div>
+              <div className="posts">
+                <List
+                  dataSource={posts}
+                  split={false}
+                  renderItem={item => (
+                    <Post
+                      key={item.id}
+                      post={item}
+                      blockDetail={blockDetail}
+                      country={country}
+                      onUpdate={this.handlePostUpdate}
+                      navigate={this.props.navigate}
+                      path={this.props.path}
+                    />
                   )}
-                </>
-              )}
+                />
+              </div>
+            </Col>
+            <Col
+              xs={1}
+              sm={2}
+              md={3}
+              lg={0}
+            />
+            <Col
+              xs={1}
+              sm={2}
+              md={3}
+              lg={0}
+            />
+            <Col 
+              id="sidebar"
+              xs={22}
+              sm={20}
+              md={18}
+              lg={8}
+              xl={6}
+              xxl={5}
+            >
+              <div id="mind-title">
+                <h3>{profile.nickname || ""}</h3>
+              </div>
+              <div id="profile-photo">
+                {authorAvatar}
+              </div>
+              <div id="mind-author-details">
+                <p>{profile.firstName} {profile.lastName}</p>
+              </div>
+              <div id="mind-author-introduction">
+                <p>{profile.introduction ? profile.introduction : "Please set the self-intro in your profile settings"}</p>
+              </div>
+              <div id="block-navigation">
+                <Collapse 
+                  accordion
+                  bordered={false} 
+                  onChange={this.loadBlocks}
+                >
+                  {countries.map(country => (
+                    <Panel 
+                      header={country.name} 
+                      key={country.uniqueId} 
+                    >
+                      {blocks && blocks.map(block => (
+                        <div className="block" key={block.id}>
+                          <a  onClick={()=>this.handleBlockChange(block.id)}>{block.name}</a>
+                        </div>
+                      ))}
+                    </Panel>
+                  ))}
+                </Collapse>
+              </div>
             </Col>
           </Row>
         </div>
-        {/* <Row>
-          <Col span={24}>
-            {personal && (
-              <>
-                <div id="profile-edit">
-                  <span>Edit mind configuration in </span>
-                  <Link to="/profile">
-                    your profile
-                  </Link>
-                </div>
-                {profile.blogUID ? (
-                  <div id="mind-url">
-                    <h3>
-                      Your public URL:&nbsp;
-                      <Link to={`/m/${profile.blogUID}`}>
-                        {`${location.origin}/m/${profile.blogUID}`}
-                      </Link>
-                    </h3>
-                  </div>
-                ) : (
-                  <div id="mind-url">
-                    Set your mind unique name in your profile to get a public url
-                  </div>
-                )}
-              </>
-            )}
-          </Col>
-        </Row> */}
-        <Row type="flex" style={{ flexWrap: "wrap-reverse" }} gutter={[ 16, 0 ]}>
-          <Col
-            className="col-push"
-            xs={1}
-            sm={2}
-            md={3}
-            lg={1}
-            xl={3}
-            xxl={4}
-          />
-          <Col
-            xs={22}
-            sm={20}
-            md={18}
-            lg={14}
-            xl={12}
-            xxl={11}
-          >
-            <div className="posts">
-              <List
-                dataSource={posts}
-                split={false}
-                renderItem={item => (
-                  <Post
-                    key={item.id}
-                    post={item}
-                    blockDetail={blockDetail}
-                    country={country}
-                    onUpdate={this.handlePostUpdate}
-                    navigate={this.props.navigate}
-                    path={this.props.path}
-                  />
-                )}
-              />
-            </div>
-          </Col>
-          <Col
-            xs={1}
-            sm={2}
-            md={3}
-            lg={0}
-          />
-          <Col
-            xs={1}
-            sm={2}
-            md={3}
-            lg={0}
-          />
-          <Col 
-            id="sidebar"
-            xs={22}
-            sm={20}
-            md={18}
-            lg={8}
-            xl={6}
-            xxl={5}
-          >
-            <div id="mind-title">
-              <h3>{profile.nickname || ""}</h3>
-            </div>
-            <div id="profile-photo">
-              {authorAvatar}
-            </div>
-            <div id="mind-author-details">
-              <p>{profile.firstName} {profile.lastName}</p>
-            </div>
-            <div id="mind-author-introduction">
-              <p>{profile.introduction ? profile.introduction : "Please set the self-intro in your profile settings"}</p>
-            </div>
-            <div id="block-navigation">
-              <Collapse 
-                accordion
-                bordered={false} 
-                onChange={this.loadBlocks}
-              >
-                {countries.map(country => (
-                  <Panel 
-                    header={country.name} 
-                    key={country.uniqueId} 
-                  >
-                    {blocks && blocks.map(block => (
-                      <div className="block" key={block.id}>
-                        <a  onClick={()=>this.handleBlockChange(block.id)}>{block.name}</a>
-                      </div>
-                    ))}
-                  </Panel>
-                ))}
-              </Collapse>
-            </div>
-          </Col>
-        </Row>
-      </div>
+      </>
     );
   }
 }

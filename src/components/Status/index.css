@@ -6,15 +6,42 @@
   padding: 1em;
 }
 
-.status.overlay-container .status-dropdown > a {
+.status.overlay-container .status-dropdown>a {
   margin: 0.25em 0;
 }
 
 header .navigation {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: center;
   vertical-align: middle;
+}
+
+header .navigation .connect-wallet {
+  padding: 0 0.2em;
+  font-size: 1.2em;
+  line-height: unset;
+  margin-right: 1em;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+
+header .navigation .connect-wallet i {
+  margin-right: .4em;
+}
+
+.connect-wallet .ant-select-selection.ant-select-selection--single {
+  background-color: transparent;
+  color: #fff;
+  margin-left: 2em;
+}
+
+.connect-wallet .ant-select-selection .ant-select-arrow {
+  color: #fff;
 }
 
 header .navigation.collapsed {
@@ -23,6 +50,7 @@ header .navigation.collapsed {
 
 header .navigation .separator {
   width: 1px;
+  height: 100%;
   margin: 0 5px;
   background: #fff;
 }
@@ -33,6 +61,7 @@ header .navigation .profile {
   margin-left: 10px;
   margin-right: 10px;
   position: relative;
+  white-space: nowrap;
 }
 
 header .navigation.collapsed .profile.hint:hover::after {
@@ -73,10 +102,10 @@ header .navigation .nav-btn {
   line-height: unset;
 }
 
-header .navigation .notifications .anticon{
+header .navigation .notifications .anticon {
   font-size: 1.4em;
 }
 
-header .navigation .notifications .ant-badge{
+header .navigation .notifications .ant-badge {
   vertical-align: middle;
 }

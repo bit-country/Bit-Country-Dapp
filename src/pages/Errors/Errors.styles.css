@@ -69,3 +69,8 @@
 .error-container.error h1 {
   color: #aa0000;
 }
+
+.error-container .ant-card {
+  max-width: 400px;
+  margin: auto;
+}
