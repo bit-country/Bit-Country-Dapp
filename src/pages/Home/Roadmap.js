@@ -26,11 +26,23 @@ export default class Roadmap extends Component {
                   </h3>
                   <FormattedMessage id="home.roadmap.stage2.details" />
                 </Timeline.Item>
-                <Timeline.Item color="gray">
+                <Timeline.Item color="orange">
                   <h3>
                     <FormattedMessage id="home.roadmap.stage3" />
                   </h3>
                   <FormattedMessage id="home.roadmap.stage3.details" />
+                </Timeline.Item>
+                <Timeline.Item color="orange">
+                  <h3>
+                    <FormattedMessage id="home.roadmap.stage4" />
+                  </h3>
+                  <FormattedMessage id="home.roadmap.stage4.details" />
+                </Timeline.Item>
+                <Timeline.Item color="orange">
+                  <h3>
+                    <FormattedMessage id="home.roadmap.stage5" />
+                  </h3>
+                  <FormattedMessage id="home.roadmap.stage5.details" />
                 </Timeline.Item>
                 {/* <Timeline.Item color="gray">
                   <h3>

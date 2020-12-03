@@ -1,0 +1,86 @@
+#asset {
+  position: absolute;
+  top: var(--bar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+
+#asset .body {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#asset .body .menu {
+  display: flex;
+}
+
+#asset .body .menu>* {
+  flex: 1;
+}
+
+#asset .body .content {
+  height: 100%;
+  padding: 1em;
+}
+
+#asset .body .content .ant-list .ant-list-items {
+  max-height: calc(75vh - 56px);
+  overflow-y: auto;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+#asset .token-image, #asset .asset-image, #asset .function-image {
+  padding: 0.5em;
+}
+
+#asset .token-details, #asset .asset-details, #asset .function-details {
+  flex: 1;
+}
+
+#asset .token-details .symbol {
+  font-weight: bold;
+}
+
+#asset .coming-soon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin: 0;
+  border-radius: 0.1em;
+  background-color: #62626261;
+  color: white;
+  text-shadow: 0 0 5px black;
+}
+
+.CardImage {
+  text-align: center;
+}
+
+.CardBody {
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.CardBody:hover {
+  /* margin-top: -15px;  */
+  transform: scale(1.02);
+}
+
+.itemRow::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.itemRow::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 8px;
+}

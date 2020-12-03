@@ -23,7 +23,7 @@ export default function BuyNow() {
             <Button
               type="primary"
               size="large"
-              onClick={() => navigate("/request-access")}
+              onClick={() => navigate("/create-country")}
             >
               <FormattedMessage id="app.createYourCountry" />
             </Button>

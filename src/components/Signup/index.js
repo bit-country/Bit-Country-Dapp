@@ -133,19 +133,6 @@ class SignupForm extends Component {
         <div className="form field">
           <label>
             <FormattedMessage
-              id="account.form.walletAddress.label"
-            />
-          </label>
-          <Input
-            disabled
-            value={this.props.address}
-            placeholder="Wallet address"
-            type="text"
-          />
-        </div>
-        <div className="form field">
-          <label>
-            <FormattedMessage
               id="account.form.emailAddress.label"
             />
           </label>
@@ -188,13 +175,21 @@ class SignupForm extends Component {
             type="primary"
             className="form field button"
           >
-            Create Account
+            <FormattedMessage
+              id="account.create.form.submit"
+            />
           </Button>
         </div>
 
         <div>
-          Already had an account?{" "}
-          <a onClick={this.redirectToLogin.bind(this)}>Login</a>
+          <FormattedMessage
+            id="account.create.goToLogin"
+          />{" "}
+          <a onClick={this.redirectToLogin.bind(this)}>
+            <FormattedMessage
+              id="account.create.goToLoginButton"
+            />
+          </a>
         </div>
       </>
     );

@@ -214,40 +214,6 @@ class CountryActivityRules extends Component {
           </div>
           <div>
             {content}
-            {/* <Row type="flex" justify="center" key="rewards-cap" className="rule">
-              <Col 
-                span={16}
-                className="name"
-              >
-                <FormattedMessage
-                  id="country.activity.rules.rewardCap"
-                  defaultMessage="Incentives cap"
-                />
-              </Col>
-              <Col 
-                span={6} 
-                className="incentive"
-              >
-                <Tooltip
-                  trigger={[ "focus" ]}
-                  placement="center"
-                  overlayClassName="numeric-input"
-                >
-                  <Input
-                    disabled={!(isOwner || isModerator)}
-                    style={{ width: 120 }}
-                    value={rulesObject["rewardCap"]}
-                    onChange={e => this.onChange(e, "rewardCap")}
-                    onBlur={e => this.onBlur(e, "rewardCap")}
-                    placeholder="Input a value"
-                    maxLength={25}
-                  />
-                </Tooltip>
-              </Col>
-              <Col span={2} className="symbol">
-                {this.props.country?.token?.symbol}
-              </Col>
-            </Row> */}
           </div>
           <div className="activity-rules-message">
             <List

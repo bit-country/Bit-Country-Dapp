@@ -1,0 +1,8 @@
+#wallet .assets {
+  padding: 8px;
+}
+
+.avatar {
+  max-width: 100px;
+  border-radius: 25px;
+}

@@ -5,23 +5,30 @@ import { AuthConnect } from "../Auth/AuthContext";
 import Notification from "../../../utils/Notification";
 import Logging from "../../../utils/Logging";
 import { wrappedComponentRenderer } from "../WrappedComponentRenderer";
-import { FormattedMessage } from "react-intl";
-import { Modal } from "antd";
+import { FormattedMessage, injectIntl } from "react-intl";
+import { Button, Form, Input, Modal, Spin } from "antd";
 import LoginForm from "../../LoginForm";
 import { navigate } from "@reach/router";
+import residencyTypes from "../../../config/residencyTypes";
+import residencyAcceptanceTypes from "../../../config/residencyAcceptanceTypes";
+import "./CountryWrapper.css";
 
 
 const defaultState = {
   country: null,
   signInWithProviderModal: false,
   signInProvider: null,
+  applyForResidencyModal: false,
   blockDetails: null,
   themeUrl: "",
   isOwner: false,
   isModerator: false,
   isResident: false,
+  hasBlockPurchasePermission: false,
   loadingCountry: true,
-  loadingResidency: false
+  loadingResidency: false,
+  residencyType: residencyTypes.CLOSED,
+  processingApplication: false,
 };
 
 const CountryContext = React.createContext(defaultState);
@@ -46,9 +53,10 @@ class CountryWrapper extends React.PureComponent {
 
     const countryById = this.loadCountryById();
     const countryRole = this.loadUserCountryRole();
+    const countryBlockPurchasePermission = this.loadUserBlockPurchasePermission();
     const countryBlockDetails = this.loadCountryBlockDetails();
 
-    await Promise.all([ countryById, countryRole, countryBlockDetails ]);
+    await Promise.all([ countryById, countryRole, countryBlockPurchasePermission, countryBlockDetails ]);
 
     this.setState({
       loadingCountry: false
@@ -72,6 +80,7 @@ class CountryWrapper extends React.PureComponent {
       this.setState({
         country: response.country,
         signInProvider: response.signInProvider ?? null,
+        residencyType: response.country?.residencyType ?? residencyTypes.CLOSED
       });
 
       setCustomHeader("countryId", response.country.uniqueId);
@@ -141,8 +150,40 @@ class CountryWrapper extends React.PureComponent {
       Logging.Error(error);
     }
   }
+
+  loadUserBlockPurchasePermission = async() => {
+    const { 
+      loggedIn,
+      id: countryId,
+      user
+    } = this.props;
+
+    if (!loggedIn) {
+      return;
+    }
+
+    const {
+      id: userId
+    } = user;
+
+    try {
+      const response = await fetchAPI(
+        `${ENDPOINTS.GET_USER_BLOCKPURCHASE_PERMISSION}?countryId=${countryId}&userId=${userId}`
+      );
+
+      if (!response?.isSuccess) {
+        throw Error("Error while getting block purchase permission for user");
+      }
+
+      this.setState({
+        hasBlockPurchasePermission: response.hasBlockPurchasePermission
+      });
+    } catch (error) {
+      Logging.Error(error);
+    }    
+  }
   
-  joinCountry = async () => {
+  joinCountry = async data => {
     const {
       location: { state },
     } = this.props;
@@ -150,6 +191,10 @@ class CountryWrapper extends React.PureComponent {
     let requestData = {
       countryId: this.props.id,
     };
+
+    if (data) {
+      requestData.message = data.message;
+    }
     
     if (state) {
       requestData.referrerId = state.referredId;
@@ -165,28 +210,70 @@ class CountryWrapper extends React.PureComponent {
       );
 
       if (!response?.isSuccess) {
-        throw Error("Error becoming a resident");
+        Notification.displayErrorMessage(
+          <FormattedMessage
+            id={response.message}
+          />
+        );
+
+        this.setState({
+          loadingResidency: false
+        });
+
+        return;
       }
 
-      Notification.displaySuccessMessage(
-        <FormattedMessage
-          id="country.resident.notifications.joined"
-          values={{
-            country: this.state.country.name
-          }}
-        />
-      );
+      switch (response.status) {
+        case residencyAcceptanceTypes.Rejected:
+          Notification.displayErrorMessage(
+            <FormattedMessage
+              id="country.resident.notifications.rejected"
+            />
+          );
 
-      this.setState({
-        isResident: true,
-        loadingResidency: false
-      });
+          break;
+
+        case residencyAcceptanceTypes.Submitted:
+          Notification.displaySuccessMessage(
+            <FormattedMessage
+              id="country.resident.notifications.submitted"
+            />
+          );
+
+          break;
+        
+        case residencyAcceptanceTypes.Approved:
+          Notification.displaySuccessMessage(
+            <FormattedMessage
+              id="country.resident.notifications.joined"
+              values={{
+                country: this.state.country.name
+              }}
+            />
+          );
+
+          this.setState({
+            isResident: true,
+          });
+          break;
+
+        default:
+          Notification.displayErrorMessage(
+            "Application has uncertain status, please contact development team"
+          );
+
+          break;
+      }
     } catch (error) {
       Logging.Error(error);
 
       Notification.displayErrorMessage(
         "Error becoming a resident, please try again later"
       );
+    } finally {
+      this.setState({
+        loadingResidency: false
+      });
     }
   }
 
@@ -267,13 +354,76 @@ class CountryWrapper extends React.PureComponent {
     }
   }
 
+  applyForResidence = async () => {
+    const {
+      residencyType
+    } = this.state.country;
+
+    switch(residencyType) {
+      case residencyTypes.PUBLIC:
+        this.setState({
+          processingApplication: true
+        }, this.openApplyForResidencyModal);
+
+        await this.joinCountry();
+
+        this.setState({
+          processingApplication: false
+        }, this.closeApplyForResidencyModal);
+
+        return;
+
+      case residencyTypes.APPLICATION:
+      case residencyTypes.INVITATION_ONLY:
+        this.openApplyForResidencyModal();
+
+        return;
+
+      case residencyTypes.CLOSED:
+        Notification.displayErrorMessage(
+          <FormattedMessage
+            id="country.residencyClosed"
+          />
+        );
+
+        return;
+    }
+  }
+
+  openApplyForResidencyModal = () => {
+    this.setState({ applyForResidencyModal: true });
+  }
+
+  closeApplyForResidencyModal = () => {
+    this.setState({ applyForResidencyModal: false });
+  }
+
+  handleResidencyApplication = async e => {
+    e.preventDefault();
+
+    this.setState({
+      processingApplication: true
+    });
+
+    const form = new FormData(e.target);
+
+    await this.joinCountry({ message: form.get("message") });
+
+    this.closeApplyForResidencyModal();
+
+    this.setState({ processingApplication: false });
+  }
+
   render() {
     const { 
-      children
+      children,
+      intl
     } = this.props;
     const {
       signInWithProviderModal,
-      signInProvider
+      signInProvider,
+      applyForResidencyModal,
+      processingApplication
     } = this.state;
 
     return (
@@ -281,10 +431,13 @@ class CountryWrapper extends React.PureComponent {
         value={{ 
           ...this.state, 
           countryId: this.props.id,
-          joinCountry: this.joinCountry, 
+          loggedIn: this.props.loggedIn,
+          joinCountry: this.applyForResidence, 
           leaveCountry: this.leaveCountry,
           openSignInWithProviderModal: this.openSignInWithProviderModal,
           closeSignInWithProviderModal: this.closeSignInWithProviderModal,
+          openApplyForResidencyModal: this.openApplyForResidencyModal,
+          closeApplyForResidencyModal: this.closeApplyForResidencyModal,
           refreshBlocks: this.refreshBlocks,
         }}
       >
@@ -302,6 +455,64 @@ class CountryWrapper extends React.PureComponent {
             providerName={signInProvider?.name}
           />
         </Modal>
+        <Modal
+          visible={applyForResidencyModal}
+          onCancel={this.closeApplyForResidencyModal}
+          closable
+          maskClosable
+          footer={null}
+        >
+          {processingApplication ? (
+            <>
+              <h2>
+                <FormattedMessage
+                  id="testtest"
+                  defaultMessage="Your application has been submitted"
+                />
+              </h2>
+              <div className="processing-application">
+                <Spin size="large" tip="Processing..." />
+              </div>
+            </>
+          ) : (
+            <Form onSubmit={this.handleResidencyApplication}>
+              <h2>
+                <FormattedMessage
+                  id="country.residencyModal.title"
+                  defaultMessage="Submit your residency application"
+                />
+              </h2>
+              <Form.Item
+                label={
+                  <FormattedMessage
+                    id="country.residencyModal.message"
+                    defaultMessage="Message"
+                  />
+                }
+              >
+                <Input.TextArea
+                  name="message"
+                  autoSize={{ minRows: 2, maxRows: 6 }}
+                  allowClear
+                  placeholder={intl.formatMessage({
+                    id: "country.residencyModal.messagePlaceholder",
+                    defaultMessage: "Why should this country owner accept your application?"
+                  })}
+                />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                >
+                  <FormattedMessage
+                    id="form.submit"
+                  />
+                </Button>
+              </Form.Item>
+            </Form>
+          )}
+        </Modal>
       </CountryContext.Provider>
     );
   }
@@ -314,4 +525,4 @@ export const CountryConnect = (WrappedComponent, requiresCountry) => props => (
   </CountryContext.Consumer>
 );
 
-export default AuthConnect(CountryWrapper);
+export default injectIntl((AuthConnect(CountryWrapper)));

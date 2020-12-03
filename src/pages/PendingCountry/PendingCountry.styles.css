@@ -1,16 +1,16 @@
-.content {
+#pending-country.content {
   height: 100%;
   padding: 1em;
 }
 
-.content .icon {
+#pending-country.content .icon {
   font-size: 2em;
 }
 
-.content .icon .success {
+#pending-country.content .icon .success {
   color: green;
 }
 
-.content .icon .failure {
+#pending-country.content .icon .failure {
   color: red;
 }

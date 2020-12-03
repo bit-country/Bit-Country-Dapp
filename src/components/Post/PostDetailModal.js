@@ -74,7 +74,7 @@ export default function PostDetailModal(props) {
                 </>
               )}
             />
-            <CopyToClipboard />
+            {!window.location.pathname.startsWith("/my-posts") && !window.location.pathname.startsWith("/my-mind") &&<CopyToClipboard />}
           </div>
           <Divider />
           {post.featuredImage && (

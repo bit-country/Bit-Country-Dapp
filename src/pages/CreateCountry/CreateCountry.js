@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { navigate } from "@reach/router";
 import { DAppConnect } from "../../components/HOC/DApp/DAppWrapper";
-import {
-  Layout,
-  Divider,
-} from "antd";
+import { Layout, Divider, Row, Col } from "antd";
 import Notification from "../../utils/Notification";
 import { fetchAPI } from "../../utils/FetchUtil";
 import ENDPOINTS from "../../config/endpoints";
@@ -16,10 +13,12 @@ import CountrySection from "./CountrySection";
 import BlockSection from "./BlockSection";
 import CurrencySection from "./CurrencySection";
 import BlockchainSection from "./BlockchainSection";
-import TotalsSection from "./TotalsSection";
+import Summary from "./Summary";
 import Logging from "../../utils/Logging";
 import { CHAINTYPES } from "../../config/chainTypes";
 import "./CreateCountry.styles.css";
+import UniqueNameModal from "./UniqueNameModal";
+import TotalsSection from "./TotalsSection";
 
 const { Content } = Layout;
 
@@ -32,19 +31,67 @@ class CreateCountry extends Component {
     currencyName: "",
     currencySymbol: "",
     theme: 1,
-    user: this.props.user,
     totalBlockNumber: 9,
     totalSupply: 1000,
     backingBCG: 10,
     blockPrice: 1,
     createOnPolkadot: false,
+    data: [],
+    loadingNames: false,
+    paymentCurrency: "BCG",
+    bcgToUsdRate: 0.705813,
   };
+
+  componentDidMount() {
+    this.loadUniqueNames();
+  }
+
+  loadUniqueNames = async () => {
+    this.setState({
+      loadingNames: true
+    });
+
+    try {
+      const response = await fetchAPI(ENDPOINTS.GET_COUNTRY_NAMES);
+
+      if (!response?.isSuccess) {
+        if (response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage
+              id={response.json.message}
+            />
+          );
+    
+          throw Error(response.json.message);
+        }
+
+        Notification.displayErrorMessage(
+          <FormattedMessage
+            id="createCountry.uniqueName.notification.error"
+            defaultMessage="Error while retrieving your country names, please try again later"
+          />
+        );
+
+        throw Error("Error while retrieving country names");
+      }
+      
+      this.setState({
+        data: response.names
+      });
+    } catch (error) {
+      Logging.Error(error);
+    } finally {
+      this.setState({
+        loadingNames: false
+      });
+    }
+  }
 
   handleInputChange = e => {
     const { value, name } = e.target;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -97,7 +144,7 @@ class CreateCountry extends Component {
     if (createOnPolkadot) {
       hostChain = CHAINTYPES.Polkadot;
     }
-    
+
     let newCountry = {
       countryName,
       countryUniqueId,
@@ -108,7 +155,7 @@ class CreateCountry extends Component {
         name: currencyName,
         symbol: currencySymbol,
         totalSupply: totalSupply,
-        backing: backingBCG
+        backing: backingBCG,
       },
       hostChain,
     };
@@ -123,92 +170,154 @@ class CreateCountry extends Component {
         break;
 
       default:
-        Logging.Error(new Error("Unsupported chain type selected for country"), hostChain);
-        
-        Notification.displayErrorMessage(<FormattedMessage id="createCountry.errors.notification.unsupportedChain" />);
+        Logging.Error(
+          new Error("Unsupported chain type selected for country"),
+          hostChain
+        );
+
+        Notification.displayErrorMessage(
+          <FormattedMessage id="createCountry.errors.notification.unsupportedChain" />
+        );
 
         break;
     }
   };
 
-  createCountryOnChain = () => {
-    
-  }
+  createCountryOnChain = () => {};
 
   createCountryOffChain = async (newCountry, hash) => {
     try {
       newCountry.txTran = hash;
       newCountry.status = "Pending";
-  
+
       const response = await fetchAPI(
         ENDPOINTS.CREATE_COUNTRY,
         "POST",
         newCountry
       );
-  
+
       if (!response?.isSuccess) {
         Notification.displayErrorMessage(
-          <FormattedMessage
-            id="createCountry.notification.failure"
-          />
+          <FormattedMessage id="createCountry.notification.failure" />
         );
-  
+
         throw Error("Error while sending request to API");
       }
-  
+
       Notification.displaySuccessMessage(
         "Creating country transaction is pending..."
       );
-  
+
       navigate(`/c/${response.country.id}/pending`);
     } catch (error) {
       Logging.Error(error);
     } finally {
       this.setState({
-        loading: false
+        loading: false,
       });
     }
-  }
+  };
 
   chooseTheme = theme => {
     this.setState({ theme });
   };
 
   getTotalCostIn = unit => {
-    let {
-      totalBlockNumber,
-      blockPrice,
-      backingBCG,
-    } = this.state;
+    let { totalBlockNumber, blockPrice, backingBCG } = this.state;
 
-    const totalBcg = totalBlockNumber * blockPrice + backingBCG; 
+    const totalBcg = totalBlockNumber * blockPrice + backingBCG;
 
     switch (unit) {
       case "bcg":
         return totalBcg;
-        
+
       default:
         Logging.Error(new Error("Invalid unit"));
         break;
     }
   };
 
+  convertToPaymentCurrency = amount => {
+    const { paymentCurrency, bcgToUsdRate } = this.state;
+
+    if (paymentCurrency === "BCG") return amount;
+    if (paymentCurrency === "USD") return amount * bcgToUsdRate;
+
+    Logging.Error(new Error("Invalid unit"));
+  };
+
+  getTotalCostInBCG = () => {
+    const { backingBCG } = this.state;
+
+    return this.getBlockTotalInBCG() + backingBCG;
+  };
+
+  getBlockTotalInBCG = () => {
+    const { totalBlockNumber, blockPrice } = this.state;
+
+    return totalBlockNumber * blockPrice;
+  };
+
+  getGasEstimate = () => {
+    const { createOnEthereum, smartContractGasEstimation } = this.state;
+
+    return createOnEthereum ? smartContractGasEstimation : 0;
+  };
+
   handleBlockChange = value => {
     this.setState({
-      totalBlockNumber: value
+      totalBlockNumber: value,
+    });
+  };
+
+  handlePaymentCurrencyChange = value => {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    this.setState({
+      paymentCurrency: value,
+    });
+  };
+
+  handleHostPolkadot = checked => {
+    const { polkadotAvailable } = this.props;
+
+    if (polkadotAvailable) {
+      this.setState({ createOnPolkadot: checked });
+    }
+  };
+
+  handleShowUniqueNameModal = () => {
+    this.setState({
+      showUniqueNameModal: true
     });
   }
 
-  handleHostPolkadot = checked => {
-    if (this.props.polkadotAvailable) {
-      this.setState({ createOnPolkadot: checked });
-    }
+  handleHideUniqueNameModal = () => {
+    this.setState({
+      showUniqueNameModal: false
+    });
+  }
+
+  handleUpdateNames = names => {
+    this.setState({
+      data: names
+    });
+  }
+
+  handleNewUniqueName = name => {
+    const newNames = [
+      ...this.state.data,
+      name
+    ];
+
+    this.setState({
+      data: newNames
+    }, this.handleHideUniqueNameModal);
   }
 
   render() {
     const {
       loading,
-      countryUniqueId,
       countryName,
       countryDescription,
       theme,
@@ -219,111 +328,91 @@ class CreateCountry extends Component {
       backingBCG,
       totalSupply,
       createOnPolkadot,
-      user
+      data,
+      loadingNames,
+      showUniqueNameModal,
+      paymentCurrency,
+      bcgToUsdRate,
     } = this.state;
 
     const {
       polkadotAvailable,
+      rates: { tokenRate },
+      user,
     } = this.props;
-
-    const {
-      tokenRate
-    } = this.props.rates;
-
-    const masterAccounts = [ "5f20b4fb831dc00338813b7b", "5f10d60bd88e6122d88f75cc", "5f10043cc85d3d2d58996167", "5f2b5a9cae86b00a0465a8d4", "5f111f2ad88e6122d88f75ce" ];
 
     if (user == null) {
       navigate("/401");
 
       return null;
     }
-    
-    if (masterAccounts.includes(user.id)) {
-      return (
-        <div className="layout">
-          <Content>
-            <div>
-              <h1 className="center aligned">Create your country</h1>
-              <h3 className="center aligned">
-                  The only limit is your imagination
-              </h3>
-            </div>
-            <Divider orientation="left">Country Profile</Divider>
-            <CountrySection 
-              uniqueId={countryUniqueId}
-              name={countryName}
-              description={countryDescription}
-              theme={theme}
-              onInputChange={this.handleInputChange}
-              onThemeChange={this.chooseTheme}
-            />
-            <Divider orientation="left">Blocks</Divider>
-            <BlockSection 
-              blocks={totalBlockNumber}
-              blockPrice={blockPrice}
-              onBlockChange={this.handleBlockChange}
-            />
-            <Divider orientation="left">Currency</Divider>
-            <CurrencySection
-              name={currencyName}
-              symbol={currencySymbol}
-              totalSupply={totalSupply}
-              backingBCG={backingBCG}
-              tokenRate={tokenRate}
-              onInputChange={this.handleInputChange}
-            />
-            <Divider orientation="left">Host blockchain</Divider>
-            <BlockchainSection
-              polkadotAvailable={polkadotAvailable}
-              polkadot={createOnPolkadot}
-              onPolkadotChange={this.handleHostPolkadot}
-              polkadotDotEstimation={0}
-            />
-            <Divider />
-            <TotalsSection
-              getTotalCostIn={this.getTotalCostIn}
-              onConfirm={this.createCountry}
-              loading={loading}
-            />
-          </Content>
-        </div>
-      );    
-    }
 
     return (
-      <div className="layout" id="create-country">
-        <Content>
+      <div className="layout">
+        <Content id="create-country">
           <div>
-            <h1 className="center aligned">
-              <FormattedMessage
-                id="createCountry.title"
-              />
-            </h1>
+            <h1 className="center aligned">Create a bit country</h1>
             <h3 className="center aligned">
-              <FormattedMessage
-                id="createCountry.slogan"
-              />
+              Your real economy in a virtual world
             </h3>
           </div>
+
+          <Divider orientation="left">Bit Country</Divider>
+          <CountrySection
+            uniqueNames={data}
+            loadingNames={loadingNames}
+            handleCreate={this.handleShowUniqueNameModal}
+            handleUpdateData={this.handleUpdateNames}
+            name={countryName}
+            description={countryDescription}
+            theme={theme}
+            onInputChange={this.handleInputChange}
+            onThemeChange={this.chooseTheme}
+          />
+          <Divider orientation="left">Blocks</Divider>
+          <BlockSection
+            blocks={totalBlockNumber}
+            onBlockChange={this.handleBlockChange}
+          />
+          <Divider orientation="left">Currency</Divider>
+          <CurrencySection
+            name={currencyName}
+            symbol={currencySymbol}
+            totalSupply={totalSupply}
+            backingBCG={backingBCG}
+            tokenRate={tokenRate}
+            onInputChange={this.handleInputChange}
+          />
+          <Divider orientation="left">Host Blockchain</Divider>
+          This bit country and its currency will be deployed on Whenua,
+          Bit.Country’s Polkadot Parachain. See the Bit.Country Whenua
+          Explorer
+          <a
+            href="http://explorer.bit.country/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" here "}
+          </a>
+          to see blockchain transactions and more.
+          <BlockchainSection
+            polkadotAvailable={polkadotAvailable}
+            polkadot={createOnPolkadot}
+            onPolkadotChange={this.handleHostPolkadot}
+            polkadotDotEstimation={0}
+          />
           <Divider />
-          <div className="early-access">
-            <h2>
-              <FormattedMessage
-                id="createCountry.limitedAvailability.title"
-              />
-            </h2>
-            <p>
-              <FormattedMessage
-                id="createCountry.limitedAvailability.description"
-              />
-            </p>
-            <a href="mailto://genesis@bit.country">
-              <FormattedMessage
-                id="createCountry.limitedAvailability.action"
-              />
-            </a>
-          </div>
+          <TotalsSection
+            getTotalCostIn={this.getTotalCostIn}
+            onConfirm={this.createCountry}
+            loading={loading}
+          />
         </Content>
+        <UniqueNameModal
+          visible={showUniqueNameModal}
+          onCancel={this.handleHideUniqueNameModal}
+          onSuccess={this.handleNewUniqueName}
+        />
       </div>
     );
   }

@@ -1,0 +1,79 @@
+.banner_container {
+  height: 10em;
+  position: relative;
+}
+
+.banner {
+  filter: brightness(0.5);
+  height: inherit;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 80%;
+}
+
+.banner_container .overlay-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.banner_container .overlay-container > *,
+.banner_container .overlay-container > * > * {
+  height: 100%;
+}
+
+.banner_container  .overlay-container .overlay {
+  display: flex;
+  align-items: center;
+}
+
+.banner_text {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  height: 100%;
+  text-align: end;
+  color: white;
+}
+
+.banner_text h1, 
+.banner_text h2, 
+.banner_text h3, 
+.banner_text h4, 
+.banner_text h5, 
+.banner_text h6,
+.banner_text a:not(:hover) {
+  color: white;
+}
+
+.explore_title {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  color: white;
+  font-size: 2em;
+  font-weight: 200;
+}
+
+.banner_title {
+  color: #ffffffd9;
+  font-size: 3em;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin: 0;
+  filter: drop-shadow(0 0mm 7mm rgb(255, 255, 255));
+}
+
+.banner_subtitle {
+  color: #ffffffd9;
+  filter: drop-shadow(0 0mm 7mm rgb(255, 255, 255));
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+}
+
+#explore .countries {
+  display: flex;
+  flex-flow: row wrap;
+}

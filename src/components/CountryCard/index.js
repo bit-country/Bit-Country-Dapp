@@ -82,7 +82,7 @@ export default function CountryCard({ country }) {
           </div>
         </Card>
       </Link>
-      {isPending && (
+      {false && isPending && (
         <h3 className="pending-card">
           <FormattedMessage
             id="country.card.pending"

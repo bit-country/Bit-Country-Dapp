@@ -9,6 +9,7 @@ import { navigate } from "@reach/router";
 
 const defaultState = {
   blockDetail: {},
+  surroundingBlocks: [],
   loadingBlock: true,
   loadingPosts: true,
   offset: 0,
@@ -37,17 +38,25 @@ class BlockWrapper extends React.Component {
 
   loadData = async () => {
     try {
-      await this.loadCountryBlockDetails(this.refreshPosts);
+      this.setState({
+        loadingBlock: true
+      });
+
+      const loadCountryTask = this.loadCountryBlockDetails(this.refreshPosts);
+      const loadSurroundingBlocksTask = this.loadSurroundingBlocks();
+
+      await Promise.all([ loadCountryTask, loadSurroundingBlocksTask ]);
+      
     } catch (error) {
       Logging.Error(error);
-    }
+    } finally {
+      this.setState({
+        loadingBlock: false
+      });
+    }   
   }
 
   loadCountryBlockDetails = async callback => {
-    this.setState({
-      loadingBlock: true
-    });
-
     try {
       const response = await fetchAPI(
         `${ENDPOINTS.GET_BLOCK_BY_ID}?countryId=${this.props.countryId}&blockId=${this.props.id}`
@@ -66,11 +75,25 @@ class BlockWrapper extends React.Component {
       }, callback);
     } catch (error) {
       Logging.Error(error);
-    } finally {
+    } 
+  }
+
+  loadSurroundingBlocks = async () => {
+    try {
+      const response = await fetchAPI(
+        `${ENDPOINTS.GET_SURROUNDING_BLOCKS_BY_BLOCK}?countryId=${this.props.countryId}&blockId=${this.props.id}`
+      );
+
+      if (!response?.isSuccess) {
+        throw Error("Error while retrieving block navigation data");
+      }
+
       this.setState({
-        loadingBlock: false
+        surroundingBlocks: response.blocks
       });
-    }    
+    } catch (error) {
+      Logging.Error(error);
+    }
   }
 
   refreshPosts = () => {
@@ -161,8 +184,12 @@ class BlockWrapper extends React.Component {
     }
   };
 
-  refreshComponentAfterPostModeration = () => {
-    this.refreshPosts();
+  refreshComponentAfterPostModeration = id => {
+    if(!id){
+      this.refreshPosts();
+    } else {
+      this.setState(prevState => ({ posts: prevState.posts.filter(post => post.id !== id) }));
+    }
   }
 
   render() {

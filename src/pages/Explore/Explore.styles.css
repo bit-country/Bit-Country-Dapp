@@ -1,29 +1,13 @@
 #explore .banner {
-  height: 30em;
+  height: 10em;
   padding: 0 10%;
-  background-image: url(../../assets/images/explore.jpg);
+  filter: brightness(0.5);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 80%;
 }
-
-#explore .banner .text {
-  height: 100%;
-  padding: 5em;
-  float: right;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: right;
-  color: white;
-}
-
-#explore .banner .text .title {
-  color: white;
-}
-
-#explore .banner .text .subtitle {
-  color: white;
+#search {
+  margin: 1% 0 !important;
 }
 
 #explore .banner .text .call-to-action {
@@ -76,11 +60,6 @@
   color: white;
 }
 
-#explore #search {
-  margin: 2em 0;
-  padding: 8px;
-}
-
 #explore #load-more {
   margin: 1em;
   text-align: center;
@@ -92,10 +71,39 @@
 }
 
 #explore .filters {
-  display: none;
   margin-top: 1em;
 }
 
 #explore .filter-field {
   margin-right: 1em;
+}
+
+.search-filter-label {
+  padding: 2%;
+}
+
+.fade-in {
+  -webkit-animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+.fade-in > .ant-col {
+  display: grid;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

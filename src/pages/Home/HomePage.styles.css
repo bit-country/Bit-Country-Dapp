@@ -9,14 +9,12 @@
 }
 
 #home .container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* scroll-snap-type: y mandatory; */
-  overflow-y: auto;
   background-color: #191A2E;
+}
+
+#home .container > * > .ant-row, #home .container > * > * > .ant-row {
+  max-width: 1300px;
+  margin: auto;
 }
 
 /* #home .snap {
@@ -279,6 +277,7 @@
 
 .top-countries .country-cards {
   margin: 2em 0;
+  display: flex;
 }
 
 .top-countries .country-cards .ant-card {

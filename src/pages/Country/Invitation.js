@@ -91,7 +91,7 @@ class Invitation extends Component {
 
     try {
       const response = await fetchAPI(
-        ENDPOINTS.SEND_INVITATION_EMAIL,
+        `${ENDPOINTS.SEND_INVITATION_EMAIL}?countryUid=${this.props.id}`,
         "POST",
         data
       );

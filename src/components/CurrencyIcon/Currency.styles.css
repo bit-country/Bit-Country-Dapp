@@ -1,0 +1,19 @@
+.currencyContainer {
+  display: inline;
+}
+
+.mini {
+  width: 22px;
+  font-size: 20px;
+}
+.regular {
+  width: 32px;
+}
+
+.mini-text {
+  font-size: 18px;
+}
+
+.mini-text:hover {
+  color: unset;
+}

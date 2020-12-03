@@ -131,8 +131,10 @@ function EditorArticle({
               }
             >
               <Option value="Public"><FormattedMessage id="post.visibility.public" /></Option>
-              {/* <Option value="Restricted"><FormattedMessage id="post.visibility.restricted" /></Option>
-              <Option value="Unlisted"><FormattedMessage id="post.visibility.unlisted" /></Option> */}
+              <Option value="Country"><FormattedMessage id="post.visibility.country" /></Option>
+              <Option value="Block"><FormattedMessage id="post.visibility.block" /></Option>
+              <Option value="Restricted"><FormattedMessage id="post.visibility.restricted" /></Option>
+              <Option value="Unlisted"><FormattedMessage id="post.visibility.unlisted" /></Option>
               <Option value="Private"><FormattedMessage id="post.visibility.private" /></Option>
             </Select>
           </Row>

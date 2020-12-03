@@ -1,51 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { Col, Divider, Table } from "antd";
+import { Col, Divider, Table, Avatar, Row } from "antd";
 import { fetchAPI } from "../../utils/FetchUtil";
 import ENDPOINTS from "../../config/endpoints";
+import OptionalLink from "../../components/OptionalLink";
+import { CountryConnect } from "../../components/HOC/Country/CountryWrapper";
+import { Link } from "@reach/router";
 
-export default function Stakeholders(props) {
-  const [ stakeholders, setStakeholders ] = useState([]);
-  const [ isLoading, setIsLoading ] = useState(true);
-  const { id } = props;
+function Stakeholders(props) {
+  const [stakeholders, setStakeholders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { country } = props;
 
   useEffect(() => {
-    (async function() {
-      const response = await fetchAPI(`${ENDPOINTS.GET_COUNTRY_STAKEHOLDERS}?countryUid=${id}`);
-  
+    if (!country) {
+      return;
+    }
+
+    (async function () {
+      const response = await fetchAPI(`${ENDPOINTS.GET_COUNTRY_STAKEHOLDERS}?countryId=${country.id}`);
+
       if (response?.isSuccess) {
         setIsLoading(false);
-        setStakeholders(response.stakeholders);
+        setStakeholders(response.countryStakeShare);
       }
     })();
-  }, []);
+  }, [country]);
 
-  // const insightsData = [
-  //   { title: "Residents", new: insights.newResidents, total: insights.population },
-  //   { title: "Blocks", new: insights.newBlocks, total: insights.totalBlocks },
-  //   { title: "Posts", new: insights.newPosts, total: insights.totalPosts },
-  //   { title: "Comments", new: insights.newComments, total: insights.totalComments },
-  //   { title: "Available Tokens",  total: `${insights.availableTokens} ${insights.tokenSymbol}` },
-  //   { title: "Total Token Supply",  total: `${insights.tokenTotalSupply} ${insights.tokenSymbol}` },
-  // ];
-
-  const columns = [ {
+  const columns = [{
     title: "Name",
     dataIndex: "user",
     key: "name",
-    render: user => user.nickName
+    // eslint-disable-next-line react/display-name
+    render: user => (
+      <div className="stakeholder">
+        <OptionalLink
+          to={`/m/${user?.mind}`}
+          enabled={user?.mind}
+        >
+          <Avatar
+            shape="circle"
+            src={user.profileImageUrl}
+            alt={user.nickName}
+          />
+          <span className="name">{user.nickName}</span>
+        </OptionalLink>
+      </div>
+    )
   },
   {
-    title: "Quantity",
-    dataIndex: "quantity",
-    key: "quantity"
+    title: "Amount",
+    dataIndex: "amount",
+    key: "amount"
   },
   {
     title: "Percent",
     dataIndex: "percent",
     key: "percent",
     render: text => text + "%"
-  } ];
+  }];
 
   return (
     <Col
@@ -53,11 +66,24 @@ export default function Stakeholders(props) {
       push={4}
       span={16}
     >
-      <h2>
-        <FormattedMessage
-          id="country.stake.overview.title"
-        />
-      </h2>
+      <Row>
+        <Col span={18}>
+          <h2>
+            <FormattedMessage
+              id="country.stake.overview.title"
+            />
+          </h2>
+        </Col>
+        <Col span={6} style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Link to="./mystake" className="ant-btn ant-btn-primary">
+            <span>
+              <FormattedMessage
+                id="country.stake.stakeholders.takeMeToMyStake"
+              />
+            </span>
+          </Link>
+        </Col>
+      </Row>
       <Divider />
       <Table
         loading={isLoading}
@@ -69,3 +95,5 @@ export default function Stakeholders(props) {
     </Col>
   );
 }
+
+export default CountryConnect(Stakeholders);

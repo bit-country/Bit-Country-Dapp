@@ -1,19 +1,27 @@
 #search {
     margin: 2em 0;
     padding: 8px;
-  }
+}
 
 .filters {
     margin-top: 1em;
-  }
+}
   
 .filter-field {
     margin-right: 1em;
-  }
+}
+
+#mind {
+  margin: 50px 0;
+}
+
+#mind.public {
+  background-color: rgb(244, 246, 245);
+}
 
 #mind-banner {
   margin-bottom: 2rem;
-  background: url(../../assets/images/my_mind.jpg) ;
+  background: url(../../assets/images/my_mind.jpg);
   background-position: 70% 25%;
   background-size: cover;
 }

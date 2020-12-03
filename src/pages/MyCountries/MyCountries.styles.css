@@ -1,34 +1,4 @@
-#my-countries .banner {
-  height: 30em;
-  padding: 0 10%;
-  background-image: url(../../assets/images/my_countries.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
 
-#my-countries .banner .text {
-  height: 100%;
-  padding: 5em;
-  float: right;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: right;
-  color: white;
-}
-
-#my-countries .banner .text .title {
-  color: white;
-}
-
-#my-countries .banner .text .subtitle {
-  color: white;
-}
-
-#my-countries .banner .text .call-to-action {
-  margin: 0.5em 0;
-}
 
 #my-countries .countries {
   display: flex;
@@ -68,11 +38,11 @@
   text-align: center;
 }
 
-#my-countries .country-card.create .call-to-action {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  font-size: 2em;
+#my-countries .call-to-action {
+  text-align: right;
+}
+
+#my-countries .call-to-action .ant-btn {
   color: white;
 }
 

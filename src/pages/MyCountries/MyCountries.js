@@ -4,12 +4,14 @@ import CountryCard from "../../components/CountryCard";
 import ENDPOINTS from "../../config/endpoints";
 import { fetchAPI } from "../../utils/FetchUtil";
 import { AuthConnect } from "../../components/HOC/Auth/AuthContext";
-import { Layout, Divider, Spin } from "antd";
+import { Button, Layout, Spin } from "antd";
 import { FormattedMessage } from "react-intl";
 import "./MyCountries.styles.css";
 import CardColumn from "../../components/CardColumn/CardColumn";
 import Logging from "../../utils/Logging";
 import Notification from "../../utils/Notification";
+import PageBanner from "../../components/PageBanner";
+import BannerImage from "../../assets/images/my_countries.jpg";
 
 class MyCountries extends Component {
   state = {
@@ -78,56 +80,33 @@ class MyCountries extends Component {
 
     return (
       <div id="my-countries">
-        <div className="banner">
-          <div className="text">
-            <h2 className="title">
-              <FormattedMessage
-                id="myCountries.banner.mvp.title"
-              />
-            </h2>
-            <h3 className="subtitle">
-              <FormattedMessage
-                id="myCountries.banner.mvp.subtitle"
-              />
-            </h3>
-            {/* <div className="call-to-action">
-              <Link to="/c/mvp">
-                <FormattedMessage
-                  id="myCountries.banner.mvp.callToAction"
-                />
-              </Link>
-            </div> */}
-          </div>
-        </div>
-        {/* <div className="banner">
-          <div className="text">
-            <h2 className="title">
-              <FormattedMessage
-                id="myCountries.banner.title"
-              />
-            </h2>
-            <h3 className="subtitle">
-              <FormattedMessage
-                id="myCountries.banner.subtitle"
-              />
-            </h3>
-            <div className="call-to-action">
-              <Button
-                onClick={this.handleCreateCountry}
-              >
+        <PageBanner
+          title={ <FormattedMessage
+            id="myCountries.banner.mvp.title"
+          />}   
+          subTitle={<FormattedMessage
+            id="myCountries.banner.mvp.subtitle"
+          />}
+          pageTitle={<FormattedMessage
+            id="myCountries.section.myCountries"
+          />}
+          background={BannerImage}  
+        />
+     
+        <Layout.Content>
+          <div className="call-to-action">
+            <Button
+              onClick={this.handleCreateCountry}
+              type="primary"
+              icon="plus"
+            >
+              <span>
                 <FormattedMessage
                   id="myCountries.banner.callToAction"
                 />
-              </Button>
-            </div>
+              </span>
+            </Button>
           </div>
-        </div> */}
-        <Layout.Content>
-          <Divider orientation="left">
-            <FormattedMessage
-              id="myCountries.section.myCountries"
-            />
-          </Divider>
           <Spin spinning={!hasCountry}>
             <div className="countries">
               {countries}

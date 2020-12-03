@@ -1,9 +1,89 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 import { DAppConnect } from "../../components/HOC/DApp/DAppWrapper";
+import endpoints from "../../config/endpoints";
+import { UseRatesWrapper } from "../../hooks/useRates";
+import { fetchAPI } from "../../utils/FetchUtil";
+import Logging from "../../utils/Logging";
+import Notification from "../../utils/Notification";
 import { Block } from "./Block";
 import "./BlockGrid.styles.css";
 
 class BlockGrid extends Component {
+  state = {
+    loading: false,
+  }
+
+  componentDidMount() {
+    this.loadThemesAndTemplates();
+  }
+
+  loadThemesAndTemplates = async () => {
+    try {
+      this.setState({
+        loading: true
+      });
+
+      const themesPromise = fetchAPI(endpoints.GET_BLOCK_THEMES);
+      const templatesPromise = fetchAPI(endpoints.GET_BLOCK_TEMPLATES);
+
+      const [ themes, templates ] = await Promise.all([ themesPromise, templatesPromise ]);
+
+      if (!themes?.isSuccess) {
+        if (themes?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage
+              id={themes.json.message}
+            />
+          );
+
+          throw Error(themes.json.message);
+        }
+
+        Notification.displayErrorMessage(
+          <FormattedMessage
+            id="country.blockGrid.notification.errorThemes"
+            defaultMessage="Error while retrieving block themes"
+          />
+        );
+
+        throw Error("Error while retrieving block themes");
+      }
+
+      if (!templates?.isSuccess) {
+        if (templates?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage
+              id={templates.json.message}
+            />
+          );
+
+          throw Error(templates.json.message);
+        }
+
+        Notification.displayErrorMessage(
+          <FormattedMessage
+            id="country.blockGrid.notification.errorThemes"
+            defaultMessage="Error while retrieving block templates"
+          />
+        );
+
+        throw Error("Error while retrieving block templates");
+      }
+
+      this.setState({
+        themes: themes.themes,
+        templates: templates.templates
+      });
+    } catch (error) {
+      Logging.Error(error);
+    } finally {
+      this.setState({
+        loading: false
+      });
+    }
+  }
+
   blockInTopic(obj, list) {
     for (let i = 0; i < list.length; i++) {
       if (list[i].blockAxis === obj.x && list[i].blockYxis == obj.y) {
@@ -15,13 +95,24 @@ class BlockGrid extends Component {
   }
 
   render() {
-    const { isResident } = this.props;
+    const {
+      isResident,
+      isOwner,
+      hasPurchasePermission,
+      country,
+      navigate,
+      onBlockUpdate,
+      rates
+    } = this.props;
+
+    const {
+      templates,
+      themes
+    } = this.state;
 
     let blockDetails = this.props.blockDetails || [];
 
-    let blocks = this.props.country?.blocks || [];
-
-    let isOwner = this.props.isOwner;
+    let blocks = country?.blocks || [];
 
     let rows = [];
 
@@ -47,7 +138,7 @@ class BlockGrid extends Component {
           enabled = true;
           status = block.status;
         }
-        
+
         let blockDetail = blockDetails.find(block => block.blockAxis === j && block.blockYxis === i);
 
         if (blockDetail) {
@@ -60,14 +151,14 @@ class BlockGrid extends Component {
         }
 
         rows.push(
-          <div 
-            className="block-col" 
-            key={Math.random()}
+          <div
+            className="block-col"
+            key={`${j}${i}`}
           >
             <Block
               axis={j}
               yxis={i}
-              country={this.props.country}
+              country={country}
               numberOfResidents={numberOfResidents}
               hasTopic={hasTopic}
               topicName={topicName}
@@ -78,11 +169,15 @@ class BlockGrid extends Component {
               blockOwner={blockOwner}
               blockNumber={blockNumber}
               isOwner={isOwner}
+              canPurchase={hasPurchasePermission}
               status={status}
-              navigate={this.props.navigate}
-              onUpdate={this.props.onBlockUpdate}
+              rates={rates}
+              navigate={navigate}
+              onUpdate={onBlockUpdate}
+              templates={templates}
+              themes={themes}
             />
-          </div>        
+          </div>
         );
       }
     }
@@ -97,4 +192,4 @@ class BlockGrid extends Component {
   }
 }
 
-export default DAppConnect(BlockGrid);
+export default DAppConnect(UseRatesWrapper(BlockGrid));

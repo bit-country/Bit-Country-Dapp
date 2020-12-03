@@ -2,8 +2,10 @@ import React from "react";
 import { Col, Row, Menu, Icon, Button } from "antd";
 import { Link } from "@reach/router";
 import "./OrderBook.style.css";
-import OrderPageTable from "./OrderPageTable";
+import OrderPageTable from "./OrderBookPageTable";
 import { FormattedMessage } from "react-intl";
+import { useCountryToken } from "../../hooks/useOrders";
+import { CountryConnect } from "../../pages/CountryWrapper";
 
 function OrderBookPage(props) {
   const {
@@ -13,8 +15,10 @@ function OrderBookPage(props) {
     standardCurrency,
     showPlaceOrder,
     updateFlag,
-    countryToken,
+    country,
   } = props;
+
+  const countryToken = useCountryToken(country.id);
 
   const buyprops = {
     type: "Buy",
@@ -24,6 +28,7 @@ function OrderBookPage(props) {
     user,
     updateFlag,
     countryToken,
+    country
   };
   const sellprops = {
     type: "Sell",
@@ -33,6 +38,7 @@ function OrderBookPage(props) {
     user,
     updateFlag,
     countryToken,
+    country
   };
 
   return (
@@ -60,7 +66,7 @@ function OrderBookPage(props) {
               <Button
                 type="primary"
                 className="middleCentredButton"
-                onClick={showPlaceOrder}
+                onClick={()=>showPlaceOrder(false)}
               >
                 <FormattedMessage id="market.order.table.place" />
               </Button>
@@ -80,4 +86,4 @@ function OrderBookPage(props) {
   );
 }
 
-export default OrderBookPage;
+export default CountryConnect(OrderBookPage);

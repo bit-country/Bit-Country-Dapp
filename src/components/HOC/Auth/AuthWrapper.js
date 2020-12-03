@@ -67,6 +67,12 @@ class AuthWrapper extends PureComponent {
     } 
   }
 
+  clearNotificationCount = () => {
+    this.setState({
+      notificationCount: 0,
+    });
+  }
+
   reloadProfile = async () => {
     try {
       const response = await fetchAPI(ENDPOINTS.GET_USER);
@@ -212,17 +218,16 @@ class AuthWrapper extends PureComponent {
             sendLogin: this.sendLogin,
             sendLoginWithProvider: this.sendLoginWithProvider,
             sendLogout: this.sendLogout,
-            reloadProfile: this.reloadProfile
+            reloadProfile: this.reloadProfile,
+            clearNotificationCount: this.clearNotificationCount
           }}
         >
           <PrimaryBar />
-          <div id="auth-content">
-            {authLoading ? (
-              <Spinner />
-            ) : (
-              this.props.children
-            )}
-          </div>
+          {authLoading ? (
+            <Spinner />
+          ) : (
+            this.props.children
+          )}
         </AuthContext.Provider>
       </>
     );

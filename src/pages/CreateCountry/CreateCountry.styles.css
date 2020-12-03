@@ -17,3 +17,79 @@
 #create-country .early-access > a {
   text-decoration: underline;
 }
+
+#create-country .unique-name {
+  max-height: 10em;
+  overflow-y: auto;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  background-color: white;
+  padding: 1em;
+  border-radius: 0.2em;
+  border: #d9d9d9 1px solid;
+  box-shadow: #d9d9d9 inset 0 0em 0.5em 0;
+}
+
+#create-country .unique-name:hover {
+  border: #6beddc 1px solid;
+}
+
+#create-country .unique-name .item {
+  width: calc(25% - 1em);
+  height: 5em;
+  background-color: white;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  padding: 1em;
+  border-radius: 0.5em;
+  border: #d9d9d9 1px solid;
+  box-shadow: #d9d9d9 0 0.2em 0.5em 0em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s ease-in-out;
+  font-weight: 600;
+}
+
+#create-country .unique-name .item.selected {
+  color: white;
+  background-color: #4ca398;
+  box-shadow: #bdefe9 0 0.2em 0.6em 0.1em;
+  transform: scale(1.01);
+}
+
+#create-country .unique-name .item.selected:hover {
+  color: inherit;
+  transform: scale(1.03);
+}
+
+#create-country .unique-name .item:hover {
+  background-color: #6beddc;
+  box-shadow: #bdefe9 0 0.2em 0.8em 0.2em;
+  transform: scale(1.02);
+}
+
+#create-country .unique-name .item:last-child {
+  margin-right: 0;
+}
+
+#create-country .unique-name .item.add {
+  background-color: #6beddc;
+}
+
+.side-bar {
+  position: sticky;
+  top: 6em;
+}
+
+
+.themeRow::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.themeRow::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 8px;
+}

@@ -70,6 +70,22 @@
   top: 30px;
 }
 
+.create-topic-modal .legend .slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-topic-modal .legend .slot::before {
+  width: 0.5em;
+  height: 0.5em;
+  background: rgb(0, 255, 255);
+  content: "";
+  position: relative;
+  display: block;
+  margin-right: 1em;
+}
+
 .section-container {
   position: relative;
   padding-top: 100%;

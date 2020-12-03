@@ -10,7 +10,6 @@ function Menus() {
       <Col span={6}>
         <Menu
           selectable={false}
-          style={{ backgroundColor: "#dedede" }}
         >
           <Menu.ItemGroup title="Countries">
             <Menu.Item key="explore">
@@ -20,10 +19,10 @@ function Menus() {
                 />
               </Link>
             </Menu.Item>
-            <Menu.Item key="my-countries">
-              <Link to="/my-countries">
+            <Menu.Item key="marketplace">
+              <Link to="/marketplace">
                 <FormattedMessage
-                  id="app.myCountries"
+                  id="app.marketplace"
                 />
               </Link>
             </Menu.Item>
@@ -33,10 +32,16 @@ function Menus() {
       <Col span={6}>
         <Menu
           selectable={false}
-          style={{ backgroundColor: "#dedede" }}
         >
           <Menu.ItemGroup title="Economy">
-            <Menu.Item key="my-wallet">
+                  <Menu.Item key="marketplace">
+              <Link to="/marketplace">
+                <FormattedMessage
+                  id="app.marketplace"
+                />
+              </Link>
+            </Menu.Item>
+             <Menu.Item key="my-wallet">
               <Link to="/wallet/balance">
                 <FormattedMessage
                   id="app.myCurrencies"
@@ -49,7 +54,6 @@ function Menus() {
       <Col span={6}>
         <Menu
           selectable={false}
-          style={{ backgroundColor: "#dedede" }}
         >
           <Menu.ItemGroup title="Content">
             <Menu.Item key="my-posts">
@@ -72,7 +76,6 @@ function Menus() {
       <Col span={6}>
         <Menu
           selectable={false}
-          style={{ backgroundColor: "#dedede" }}
         >
           <Menu.ItemGroup title="Account">
             <Menu.Item key="profile">

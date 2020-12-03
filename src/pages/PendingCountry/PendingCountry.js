@@ -126,6 +126,7 @@ class PendingCountry extends React.Component {
           push={4}
           span={16}
           className="content"
+          id="pending-country"
         >
           <Divider orientation="left">
             <h3>

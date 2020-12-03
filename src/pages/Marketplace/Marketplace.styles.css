@@ -17,7 +17,7 @@
   border-radius: 0.1em;
   background-color: #62626261;
   color: white;
-  text-shadow: 0 0 5px black
+  text-shadow: 0 0 5px black;
 }
 
 #marketplace .title {
@@ -26,4 +26,87 @@
 
 #marketplace .pagination-container {
   margin-top: 1em;
+}
+
+.CardImage {
+  text-align: center;
+}
+
+.CardBody {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.CardBody:hover {
+  /* margin-top: -15px;  */
+  transform: scale(1.02);
+}
+
+.itemRow::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.itemRow::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 8px;
+}
+
+/* .ant-modal[role="document"] {
+  width: unset;
+} */
+
+.modal {
+  width: unset !important;
+  height: 100vh;
+}
+
+#marketplace .ant-modal-footer {
+  position: absolute;
+  top: 0;
+}
+
+#marketplace .ant-drawer-open {
+  top: 0 !important;
+  height: 100% !important;
+}
+
+.itemToSell {
+  padding-top: 5%;
+  display: flex;
+}
+
+.itemToSell>div {
+  color: #191d2f;
+  cursor: pointer;
+  width: 300px;
+  margin: auto;
+  padding: 5%;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 800;
+  letter-spacing: 1px;
+  box-shadow: rgb(234, 234, 234) 0px 2px 12px, rgba(0, 0, 0, 0.22) 0px 10px 10px 0px;
+}
+
+.itemToSell>div:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.02);
+}
+
+.site-collapse-custom-panel .insightsContainer {
+  width: 100%;
+  left: 0;
+}
+
+.site-collapse-custom-panel .insightsContainer>h2, .site-collapse-custom-panel .ant-divider {
+  display: none;
+}
+#marketplace .ant-modal-footer {
+  border: none;
+}
+
+.CardLink:hover {
+  color: unset !important;
 }
