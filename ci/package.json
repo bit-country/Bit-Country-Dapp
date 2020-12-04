@@ -1,0 +1,33 @@
+{
+  "name": "bit.cypress",
+  "version": "1.0.0",
+  "description": "Cypress project for Bit",
+  "main": "index.js",
+  "scripts": {
+    "cy": "npx cypress open",
+    "report:delete": "rimraf cypress/results mochawesome-report || echo \"Failed to delete 'cypress/results' and 'mochawesome-report'\"",
+    "report:run": "cypress run --reporter mochawesome",
+    "report:merge": "mochawesome-merge cypress/results/*.json -o cypress/results/mochawesome_combined.json",
+    "report:generate": "marge cypress/results/mochawesome_combined.json -o mochawesome-report -f report.html",
+    "report:ci": "npm run report:delete && (npm run report:run || echo 'One of the tests failed but moving on to merging reports') && npm run report:merge && npm run report:generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^6.0.1",
+    "cypress-file-upload": "^4.0.7",
+    "gmail-tester": "^1.3.0",
+    "mochawesome": "^6.1.1",
+    "mochawesome-merge": "^4.1.0",
+    "rimraf": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.mvp.studio/bit/bit.cypress"
+  },
+  "dependencies": {
+    "js-cookie": "^2.2.1",
+    "mochawesome-report-generator": "^5.1.0"
+  }
+}

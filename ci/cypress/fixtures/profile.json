@@ -1,0 +1,19 @@
+[
+  {
+    "valid": true,
+    "data": {
+      "firstName": "first name",
+      "lastName": "last name",
+      "nickname": "nickname",
+      "phoneNumber": "0444444444",
+      "currentPassword": "newPassword",
+      "newPassword": "newPassword",
+      "confirmPassword": "newPassword",
+      "walletAddress": "1121312423wefrds",
+      "blogTitle": "mind title",
+      "introduction": "Mind introduction",
+      "promotedUrlName": "promoted name",
+      "promotedUrl": "promoted url"
+    }
+  }
+]
