@@ -1,0 +1,21 @@
+# install dev-certs via cmd ****This is for https
+# dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p password
+# dotnet dev-certs https --trust
+
+version: "3.7"
+
+services:
+  # bitdb:
+  #   image: bitnami/mongodb
+  #   ports:
+  #     - "27017:27017"
+  bit.web:
+    image: bit.web:latest
+    ports:
+      - "3002:3000"
+    environment:
+      - SKIP_PREFLIGHT_CHECK=true
+  bit.api:
+    image: mvpstudionz/bit.api
+    ports:
+      - "51701:80"
