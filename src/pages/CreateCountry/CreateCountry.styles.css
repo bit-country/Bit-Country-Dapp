@@ -93,3 +93,32 @@
   background: #c1c1c1;
   border-radius: 8px;
 }
+
+#create-country .theme-container .ant-list-items {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#create-country .theme-container .theme-item {
+  display: inline-block;
+  width: calc(25% - 32px);
+  margin: 0 16px;
+  border-bottom: none;
+}
+
+#create-country .theme-container .theme-item .ant-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#create-country .theme-container .theme-item .ant-card .ant-card-cover {
+  flex: 1;
+}
+
+#create-country .theme-container .theme-item .ant-card .ant-card-cover img {
+  height: 100%;
+  width: 100%;
+  object-fit: scale-down;
+  background-color: grey;
+}

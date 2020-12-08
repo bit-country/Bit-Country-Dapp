@@ -39,27 +39,38 @@ function AccountBar({ visible = false, drawerContent, user, sendLogout, children
             )}
           </div>
         </div>
-        <Row className="wrapper main">
-          <Col className="header-col-left" span={14} onClick={handleItemClick}>
-            <span className="bit-logo nav">
-              <Link to="/">
-                <img src={BCLogoImage} alt="Bit.Country" />
-              </Link>
-            </span>
-            {children}
-          </Col>
-          {/* <Col className="header-col-middle" span={16} onClick={handleItemClick}>
-            {children}
-          </Col> */}
-          <Col className="header-col-right" span={10}>
-            <Status
-              user={user}
-              sendLogout={handleLogout}
-              toggleDrawer={handleToggle}
-              drawerOpen={showDrawer}
-              notificationCount={notificationCount}
-              clearNotificationCount={clearNotificationCount}
-            />
+        <Row className="bar-container">
+          <Col 
+            xs={24} 
+            md={{ push: 1, span: 22 }} 
+            lg={{ push: 2, span: 20 }} 
+            xl={{ push: 3, span: 18 }}
+          >
+            <Row 
+              className="wrapper main"
+            >
+              <Col className="header-col-left" span={14} onClick={handleItemClick}>
+                <span className="bit-logo nav">
+                  <Link to="/">
+                    <img src={BCLogoImage} alt="Bit.Country" />
+                  </Link>
+                </span>
+                {children}
+              </Col>
+              {/* <Col className="header-col-middle" span={16} onClick={handleItemClick}>
+                {children}
+              </Col> */}
+              <Col className="header-col-right" span={10}>
+                <Status
+                  user={user}
+                  sendLogout={handleLogout}
+                  toggleDrawer={handleToggle}
+                  drawerOpen={showDrawer}
+                  notificationCount={notificationCount}
+                  clearNotificationCount={clearNotificationCount}
+                />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </header>

@@ -107,7 +107,15 @@ class AuthWrapper extends PureComponent {
       const response = await fetchAPI(ENDPOINTS.SIGN_UP, "POST", requestData);
 
       if (!response?.isSuccess) {
-        Notification.displayErrorMessage(<FormattedMessage id={response.message} />);
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        // TODO Add default error message
 
         return false;
       }
@@ -136,7 +144,15 @@ class AuthWrapper extends PureComponent {
       const response = await fetchAPI(ENDPOINTS.SIGN_IN, "POST", settingObj);
 
       if (!response?.isSuccess) {
-        Notification.displayErrorMessage(<FormattedMessage id={response.message} />);
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        // TODO Add default error message
 
         return false;
       }
@@ -173,7 +189,15 @@ class AuthWrapper extends PureComponent {
       );
 
       if (!response?.isSuccess) {
-        Notification.displayErrorMessage(<FormattedMessage id={response.message} />);
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        // TODO Add default error message
 
         return false;
       }

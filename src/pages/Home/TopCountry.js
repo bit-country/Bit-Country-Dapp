@@ -4,7 +4,7 @@ import ENDPOINTS from "../../config/endpoints";
 import { fetchAPI } from "../../utils/FetchUtil";
 import { FormattedMessage } from "react-intl";
 import { Button, Row, Col } from "antd";
-import { navigate } from "@reach/router";
+import { Link } from "@reach/router";
 import Logging from "../../utils/Logging";
 
 export default class TopCountry extends Component {
@@ -42,20 +42,20 @@ export default class TopCountry extends Component {
     return (
       <div className="top-countries">
         <Row>
-          <Col xs={0} md={1} lg={2} xl={3}></Col>
-          <Col xs={24} md={22} lg={20} xl={18}>
+          <Col xs={24} md={{ push: 1, span: 22 }} lg={{ push: 2, span: 20 }} xl={{ push: 3, span: 18 }}>
             <h2 className="center">
               <FormattedMessage id="home.topCountry.title" />
             </h2>
             <Row className="country-cards">{countries}</Row>
             <div className="center">
-              <Button
-                size="large"
-                ghost
-                onClick={() => navigate("/my-countries")}
-              >
-                <FormattedMessage id="home.topCountry.explore" />
-              </Button>
+              <Link to="/explore">
+                <Button
+                  size="large"
+                  ghost
+                >
+                  <FormattedMessage id="home.topCountry.explore" />
+                </Button>
+              </Link>
             </div>
           </Col>
         </Row>

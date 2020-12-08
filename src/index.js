@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import "./index.css";
 import "./css/App.css";
 import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
+//import registerServiceWorker from "./registerServiceWorker";
 import moment from "moment";
 import { IntlProvider } from "react-intl";
 import message_en from "./i18n/translations/en.json";
@@ -29,4 +29,5 @@ ReactDOM.render(<IntlProvider
   messages={messages[language]}>
   <App />
 </IntlProvider>, document.getElementById("root"));
-registerServiceWorker();
+
+//registerServiceWorker();

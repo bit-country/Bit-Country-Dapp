@@ -227,7 +227,21 @@ class Profile extends React.Component {
       );
 
       if (!response?.isSuccess) {
-        throw Error(response?.message);
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        Notification.displayErrorMessage(
+          <FormattedMessage
+            id="user.profile.notification.save.failure"
+          />
+        );
+
+        throw Error("Error while updating profile");
       }
 
       if (image) {
@@ -242,7 +256,21 @@ class Profile extends React.Component {
         );
 
         if (!imageResponse?.isSuccess) {
-          throw Error(imageResponse?.message);
+          if (imageResponse?.message || imageResponse?.json?.message) {
+            Notification.displayErrorMessage(
+              <FormattedMessage id={imageResponse.message || imageResponse.json.message} />
+            );
+    
+            throw Error(imageResponse.message || imageResponse.json.message);
+          }
+  
+          Notification.displayErrorMessage(
+            <FormattedMessage
+              id="user.profile.notification.save.failure"
+            />
+          );
+  
+          throw Error("Error while updating profile");
         }
 
         this.setState({
@@ -261,22 +289,6 @@ class Profile extends React.Component {
       }, this.props.reloadProfile);
     } catch (error) {
       Logging.Error(error);
-
-      if (error.message) {
-        Notification.displayErrorMessage(
-          <FormattedMessage
-            id={error.message}
-          />
-        );
-
-        return;
-      }
-
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id="user.profile.notification.save.failure"
-        />
-      );
     } finally {
       this.setState({
         loading: false,
@@ -749,9 +761,11 @@ class Profile extends React.Component {
                     loading={loading}
                     onClick={this.handleSave}
                   >
-                    <FormattedMessage
-                      id="user.profile.actions.save"
-                    />
+                    <span>
+                      <FormattedMessage
+                        id="user.profile.actions.save"
+                      />
+                    </span>
                   </Button>
                 </div>
               </Col>

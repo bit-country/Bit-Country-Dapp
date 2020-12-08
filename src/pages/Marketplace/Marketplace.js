@@ -8,6 +8,7 @@ import { fetchAPI } from "../../utils/FetchUtil";
 import endpoints from "../../config/endpoints";
 import Notification from "../../utils/Notification";
 import CategoryRow from "./CategoryRow";
+import { FormattedMessage } from "react-intl";
 
 
 const Marketplace = () => {
@@ -34,7 +35,9 @@ const Marketplace = () => {
             <Link
               to={`/marketplace/browse`}
             >
-              START EXPLORE
+              <FormattedMessage
+                id="marketplace.startExplore"
+              />
           </Link>
           </Button>
         &nbsp;
@@ -42,7 +45,9 @@ const Marketplace = () => {
             <Link
               to={`/asset/list`}
             >
-              START SELLING
+              <FormattedMessage
+                id="marketplace.startSelling"
+              />
           </Link>
           </Button>
         </Row>

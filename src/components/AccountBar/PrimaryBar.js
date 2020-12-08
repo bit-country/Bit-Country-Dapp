@@ -8,21 +8,25 @@ import { Dropdown, Icon, Menu } from "antd";
 
 export default function PrimaryBar({ promptAccount }) {
   const [ collapsed, setCollapsed ] = useState(false);
+  const [ collapsedWidth, setCollapsedWidth ] = useState(null);
   const containerRef = useRef();
 
   useEffect(() => {
     const resizeHandler = () => {
       const rect =
-        containerRef.current && containerRef.current.getBoundingClientRect();
+        containerRef.current && containerRef.current.getBoundingClientRect();        
+      const parentRect = containerRef.current.parentElement.getBoundingClientRect();
 
       if (!rect) {
         return;
       }
 
-      if (rect.width < 590) {
+      if (rect.width > parentRect.width) {
+        setCollapsedWidth(rect.width);
         setCollapsed(true);
-      } else {
+      } else if (collapsedWidth && parentRect.width > collapsedWidth) {
         setCollapsed(false);
+        setCollapsedWidth(null);
       }
     };
 
@@ -34,7 +38,7 @@ export default function PrimaryBar({ promptAccount }) {
     return () => {
       window.removeEventListener("resize", resizeHandler);
     };
-  }, [ setCollapsed, containerRef ]);
+  }, [ setCollapsed, collapsedWidth, containerRef ]);
 
   return (
     <AccountBar drawerContent={promptAccount ? <Login /> : <Menus />}>
@@ -53,11 +57,6 @@ export default function PrimaryBar({ promptAccount }) {
                 </Menu.Item>
                 <Menu.Item key="marketplace">
                   <Link to="/marketplace">
-                    <FormattedMessage id="app.marketplace" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link className="item" to="/marketplace">
                     <FormattedMessage id="app.marketplace" />
                   </Link>
                 </Menu.Item>
@@ -86,6 +85,11 @@ export default function PrimaryBar({ promptAccount }) {
                     <FormattedMessage id="app.myAssets" />
                   </Link>
                 </Menu.Item>
+                <Menu.Item>
+                  <a className="item" href="http://explorer.bit.country/">
+                    <FormattedMessage id="app.chainExplorer" />
+                  </a>
+                </Menu.Item>
               </Menu>
             }
           >
@@ -111,6 +115,9 @@ export default function PrimaryBar({ promptAccount }) {
             <Link className="item" to="/asset/list">
               <FormattedMessage id="app.myAssets" />
             </Link>
+            <a className="item" href="http://explorer.bit.country/" target="_black" rel="noopener noreferrer">
+              <FormattedMessage id="app.chainExplorer" />
+            </a>
           </>
         )}
       </div>

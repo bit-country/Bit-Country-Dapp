@@ -77,6 +77,7 @@
   display: flex;
   height: 100%;
   padding: 1em;
+  background-color: white;
 }
 
 #account-bar header .drawer .container .ant-row {
@@ -87,13 +88,22 @@
   height: 100%;
 }
 
-#account-bar header .main.ant-row.wrapper {
+#account-bar header .bar-container {
   background-color: #191D2F;
-  display: flex;
-  flex: 1;
   min-width: min-content;
   border-bottom: 1px solid #0a0a0a;
   padding: 12px 0;
+  height: var(--bar-height);
+}
+
+#account-bar header .bar-container > .ant-col,
+#account-bar header .bar-container > .ant-col > .ant-row {
+  height: 100%;
+}
+
+#account-bar header .main.wrapper.ant-row {
+  display: flex;
+  flex: 1;
 }
 
 #account-bar header .header-col-left {
@@ -143,6 +153,10 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+#account-bar header .header-col-left .primary-menu a {
+  white-space: nowrap;
 }
 
 #account-bar header .header-col-left .primary-menu.collapsed {

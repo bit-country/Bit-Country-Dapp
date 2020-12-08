@@ -180,19 +180,14 @@ const BrowseBody = () => {
         </Row>
         <Divider />
         <Row>
-          <div ref={infiniteRef}>
+          <div ref={infiniteRef} className="item-container">
             {items.length === 0 ? (
-              <Empty style={{ paddingTop: "10%" }} />
+              <Empty style={{ paddingTop: "10%", flex: 1 }} />
             ) : (
-                items.map(item => (
-                  <div key={item.id} style={{ display: "inline-flex" }}>
-                    <div style={{ width: "280px", margin: "15px" }}>
-                      {" "}
-                      <ItemCard item={item} />
-                    </div>
-                  </div>
-                ))
-              )}
+              items.map(item => (
+                <ItemCard key={item.id} item={item} />
+              ))
+            )}
           </div>
         </Row>
         <Row>

@@ -59,7 +59,10 @@ export async function fetchManual(endpoint, method = "get", body = null, headers
       } catch (error) {
         Logging.Error(new Error(`Error with request\nURL: ${url}\nOptions: ${JSON.stringify(options)}\nResponse: ${JSON.stringify(response)}\nResponse body: ${responseBody}`), url, options, response);
         
-        return;
+        return {
+          status: response.status,
+          json: null
+        };
       }
     }
     

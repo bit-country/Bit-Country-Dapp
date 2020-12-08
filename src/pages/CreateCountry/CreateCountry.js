@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { navigate } from "@reach/router";
 import { DAppConnect } from "../../components/HOC/DApp/DAppWrapper";
-import { Layout, Divider, Row, Col } from "antd";
+import { Layout, Divider } from "antd";
 import Notification from "../../utils/Notification";
 import { fetchAPI } from "../../utils/FetchUtil";
 import ENDPOINTS from "../../config/endpoints";
@@ -13,7 +13,6 @@ import CountrySection from "./CountrySection";
 import BlockSection from "./BlockSection";
 import CurrencySection from "./CurrencySection";
 import BlockchainSection from "./BlockchainSection";
-import Summary from "./Summary";
 import Logging from "../../utils/Logging";
 import { CHAINTYPES } from "../../config/chainTypes";
 import "./CreateCountry.styles.css";
@@ -106,7 +105,7 @@ class CreateCountry extends Component {
       currencySymbol,
       totalSupply,
       backingBCG,
-      createOnPolkadot,
+      createOnPolkadot
     } = this.state;
 
     if (
@@ -123,9 +122,9 @@ class CreateCountry extends Component {
       return false;
     }
 
-    if (countryDescription.length < 100) {
+    if (countryDescription.length < 30) {
       Notification.displayErrorMessage(
-        "Description needs to be longer than 100 characters"
+        "Description needs to be longer than 30 characters"
       );
 
       return false;
@@ -197,6 +196,14 @@ class CreateCountry extends Component {
       );
 
       if (!response?.isSuccess) {
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
         Notification.displayErrorMessage(
           <FormattedMessage id="createCountry.notification.failure" />
         );
@@ -208,7 +215,7 @@ class CreateCountry extends Component {
         "Creating country transaction is pending..."
       );
 
-      navigate(`/c/${response.country.id}/pending`);
+      navigate(`/c/${response.country.uniqueId}/pending`);
     } catch (error) {
       Logging.Error(error);
     } finally {
@@ -271,8 +278,12 @@ class CreateCountry extends Component {
   };
 
   handlePaymentCurrencyChange = value => {
-    // eslint-disable-next-line no-debugger
-    debugger;
+    this.setState({
+      paymentCurrency: value,
+    });
+  };
+
+  handlePaymentCurrencyChange = value => {
     this.setState({
       paymentCurrency: value,
     });
@@ -299,20 +310,41 @@ class CreateCountry extends Component {
   }
 
   handleUpdateNames = names => {
+    const selected = names.find(item => item.selected);
+
+    let selectedId = "";
+
+    if (selected) {
+      selectedId = selected.id;
+    }
+
     this.setState({
-      data: names
+      data: names,
+      countryUniqueId: selectedId
     });
   }
 
   handleNewUniqueName = name => {
-    const newNames = [
-      ...this.state.data,
-      name
-    ];
+    const {
+      data
+    } = this.state;
 
-    this.setState({
-      data: newNames
-    }, this.handleHideUniqueNameModal);
+    const newNames = data.map(x => {
+      if (x.selected) {
+        return { ...x, selected: false } ;
+      }
+
+      return x;
+    });
+  
+    newNames.push({
+      ...name,
+      selected: true
+    });
+
+    this.handleUpdateNames(newNames);
+
+    this.handleHideUniqueNameModal();
   }
 
   render() {
@@ -321,7 +353,6 @@ class CreateCountry extends Component {
       countryName,
       countryDescription,
       theme,
-      blockPrice,
       currencyName,
       currencySymbol,
       totalBlockNumber,
@@ -331,8 +362,6 @@ class CreateCountry extends Component {
       data,
       loadingNames,
       showUniqueNameModal,
-      paymentCurrency,
-      bcgToUsdRate,
     } = this.state;
 
     const {

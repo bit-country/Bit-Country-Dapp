@@ -113,7 +113,15 @@ function OrderBook(props) {
       const response = await fetchAPI(`${endpoints.ACCEPT_ORDER}`, "post", obj);
 
       if (!response?.isSuccess) {
-        throw Error(response.message);
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        // TODO Add default error message
       }
 
       Notification.displaySuccessMessage("Exchange successfully");
@@ -140,7 +148,15 @@ function OrderBook(props) {
       const response = await fetchAPI(endpoints.CLOSE_ORDER, "post", obj);
 
       if (!response?.isSuccess) {
-        throw Error(response.message);
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        // TODO Add default error message
       }
 
       Notification.displaySuccessMessage(

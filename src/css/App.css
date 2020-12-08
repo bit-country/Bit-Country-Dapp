@@ -1,3 +1,7 @@
 #root {
   height: 100%;
 }
+
+.max-content {
+  max-width: 1300px;
+}

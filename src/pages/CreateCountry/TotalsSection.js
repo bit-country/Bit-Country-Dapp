@@ -27,9 +27,11 @@ export default function TotalsSection({ getTotalCostIn, loading, onConfirm }) {
             loading={loading}
             onClick={onConfirm}
           >
-            <FormattedMessage
-              id="createCountry.payment.confirm"
-            />
+            <span>
+              <FormattedMessage
+                id="createCountry.payment.confirm"
+              />
+            </span>
           </Button>
         </Col>
       </Row>

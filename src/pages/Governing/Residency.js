@@ -7,8 +7,10 @@ import endpoints from "../../config/endpoints";
 import { CountryConnect } from "../../components/HOC/Country/CountryWrapper";
 import Notification from "../../utils/Notification";
 import Logging from "../../utils/Logging";
+import { AuthConnect } from "../../components/HOC/Auth/AuthContext";
+import { navigate } from "@reach/router";
 
-function Residency({ countryId }) {
+function Residency({ countryId, loggedIn }) {
   const [ applications, setApplications ] = useState([]);
   const [ loading, setLoading ] = useState(true);
   const [ processing, setProcessing ] = useState(false);
@@ -21,14 +23,20 @@ function Residency({ countryId }) {
         const response = await fetchAPI(`${endpoints.GET_COUNTRY_RESIDENCY_APPLICATIONS}?countryUid=${countryId}`);
 
         if (!response?.isSuccess) {
-          if (response?.message) {
+          if (response?.message || response?.json?.message) {
+            Notification.displayErrorMessage(
+              <FormattedMessage id={response.message || response.json.message} />
+            );
+    
+            throw Error(response.message || response.json.message);
+          } else if (response.status == 403) {
             Notification.displayErrorMessage(
               <FormattedMessage
-                id={response.message}
+                id="country.stake.residency.notifications.errorUnauthorised"
               />
             );
-  
-            throw Error(response.message);
+
+            throw Error("User isn't authorised to access residency applications");
           }
   
           Notification.displayErrorMessage(
@@ -159,21 +167,6 @@ function Residency({ countryId }) {
   }, {
     dataIndex: "applicant.nickName",
     className: "applicant",
-    // render: (text, record, index) => (
-    //   <div className="applicant">
-    //     <OptionalLink
-    //       to={`/m/${text?.mind}`}
-    //       enabled={text?.mind}
-    //     >
-    //       <Avatar
-    //         shape="circle"
-    //         src={text.profileImageUrl}
-    //         alt={text.nickName}
-    //       />
-    //       <span className="name">{text.nickName}</span>
-    //     </OptionalLink>
-    //   </div>
-    // ),
     title: (
       <FormattedMessage
         id="country.stake.residency.table.applicant"
@@ -190,27 +183,6 @@ function Residency({ countryId }) {
   }, {
     dataIndex: "referrer.nickName",
     className: "referrer",
-    // render: (text, record, index) => {
-    //   if (!text) {
-    //     return false;
-    //   }
-
-    //   return (
-    //     <div className="referrer">
-    //       <OptionalLink
-    //         to={`/m/${text?.mind}`}
-    //         enabled={text?.mind}
-    //       >
-    //         <Avatar
-    //           shape="circle"
-    //           src={text.profileImageUrl}
-    //           alt={text.nickName}
-    //         />
-    //         <span className="name">{text.nickName}</span>
-    //       </OptionalLink>
-    //     </div>
-    //   );
-    // },
     title: (
       <FormattedMessage
         id="country.stake.residency.table.referrer"
@@ -234,11 +206,15 @@ function Residency({ countryId }) {
           <Icon type="check" />
         </Button>
         <Button loading={processing} onClick={() => denyResidencyApplication(item.id)}>
-          <Icon type="cross" />
+          <Icon type="close" />
         </Button>
       </div>
     ),
-  }]), []);
+  }]), [ approveResidencyApplication, denyResidencyApplication, processing ]);
+
+  if (!loggedIn) {
+    navigate("../403");
+  }
 
   return (
     <Col
@@ -268,4 +244,4 @@ function Residency({ countryId }) {
   );
 }
 
-export default CountryConnect(Residency, true);
+export default AuthConnect(CountryConnect(Residency, true));

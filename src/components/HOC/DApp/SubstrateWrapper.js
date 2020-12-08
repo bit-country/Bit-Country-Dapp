@@ -148,7 +148,13 @@ export const SubstrateProvider = (props) => {
           start: "BlockNumber",
           end: "Option<BlockNumber>",
           price_per_block: "Balance"
-        }
+        },
+        CountryId: "u64",
+        CollectionId: "u64",
+        CurrencyId: "u32",
+        TokenId: "u64",
+        CurrencyIdOf: "CurrencyId",
+        BalanceIdOf: "Balance",
       }, rpc, metadata
     });
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form, Input, Modal } from "antd";
+import { Input, Modal } from "antd";
 import { fetchAPI } from "../../utils/FetchUtil";
 import endpoints from "../../config/endpoints";
 import Notification from "../../utils/Notification";
@@ -24,15 +24,14 @@ export default function UniqueNameModal({ visible, onCancel, onSuccess }) {
         );
   
         if (!response?.isSuccess) {
-          if (response?.json?.message) {
+          if (response?.message || response?.json?.message) {
             Notification.displayErrorMessage(
               <FormattedMessage
-                id={response.json.message}
-                defaultMessage="Error while creating name, please try again later"
+                id={response.message || response.json.message}
               />
             );
   
-            throw Error(response.json.message);
+            throw Error(response.message || response.json.message);
           }
   
           Notification.displayErrorMessage(

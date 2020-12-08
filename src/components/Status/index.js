@@ -22,16 +22,16 @@ import _ from "lodash";
 const { Option } = Select;
 
 export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, notificationCount, clearNotificationCount }) {
-  const [collapsed, setCollapsed] = useState(false);
-  const [collapsedWidth, setCollapsedWidth] = useState(null);
+  const [ collapsed, setCollapsed ] = useState(false);
+  const [ collapsedWidth, setCollapsedWidth ] = useState(null);
   const containerRef = useRef();
 
   const { api, keyring, dispatch, account } = useSubstrate();
   // const [substrate, setSubstrate] = useState(null);
   const { setAddress, state: { address } } = useMyAccount();
   // const [accountSelected, setAccountSelected] = useState(null);
-  const [accountOption, setAccountOption] = useState(null);
-  const [accountAddressSelected, setAccountAddressSelected] = useState("");
+  const [ accountOption, setAccountOption ] = useState(null);
+  const [ accountAddressSelected, setAccountAddressSelected ] = useState("");
   const currentAddress = useMyAddress();
   const savedAddress = readMyAddress();
 
@@ -78,7 +78,7 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
     return () => {
       window.removeEventListener("resize", resizeHandler);
     };
-  }, [collapsed, containerRef]);
+  }, [ collapsed, collapsedWidth, containerRef ]);
 
   useEffect(() => {
     if (savedAddress) {

@@ -1,6 +1,6 @@
 import { Row } from "antd";
 import React from "react";
-import CurrencyIcon from "../../assets/currency-icon/currency_dark.png";
+import CurrencyIcon from "../../assets/currency-icon/BCG_icon.png";
 import "./Currency.styles.css";
 
 const Currency = ({ price, icon }) => {

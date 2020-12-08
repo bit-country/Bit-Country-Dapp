@@ -8,7 +8,7 @@ import Currency from "../../components/CurrencyIcon";
 const ItemCard = ({ item }) => {
   if (!item) return null;
 
-  const { title, price, description, id, category } = item;
+  const { title, price, description, id, category, itemImage } = item;
 
   return (
     <Link className="CardLink" to={`/marketplace/item/${id}`}>
@@ -19,16 +19,19 @@ const ItemCard = ({ item }) => {
             "rgb(234, 234, 234) 0px 2px 12px, rgba(0, 0, 0, 0.22) 0px 10px 10px 0px",
           borderRadius: "5px",
           padding: "10px",
+          display: "flex",
+          flexDirection: "column"
         }}
       >
-        <div style={{ textAlign: "center", padding: "0 0 20px" }}>
+        <div style={{ textAlign: "center", padding: "0 0 20px", flex: 1 }}>
           <img
             style={{
               width: "100%",
+              height: "100%",
               objectFit: "scale-down",
               borderRadius: "5px",
             }}
-            src={category === "country" ? CountryBG : BlockBG}
+            src={category === "country" ? CountryBG : category === "asset" ? itemImage : BlockBG}
           />
         </div>
         <div

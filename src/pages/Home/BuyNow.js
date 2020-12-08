@@ -10,8 +10,7 @@ export default function BuyNow() {
       <video src={hero} autoPlay loop className="hero-background" />
       <div className="mask">
         <Row>
-          <Col xs={0} md={1} lg={2} xl={3}></Col>
-          <Col xs={24} md={22} lg={20} xl={18}>
+          <Col xs={24} md={{ push: 1, span: 22 }} lg={{ push: 2, span: 20 }} xl={{ push: 3, span: 18 }}>
             <h1 className="inverted">
               <FormattedMessage id="home.buyNow" />
             </h1>

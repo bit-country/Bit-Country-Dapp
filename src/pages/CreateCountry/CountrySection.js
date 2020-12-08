@@ -2,7 +2,60 @@ import React from "react";
 import { Input, List, Card, Modal, Tooltip, Icon } from "antd";
 import { FormattedMessage, injectIntl } from "react-intl";
 import DataDrivenTable from "../../components/DataDrivenTable";
+import Utils from "../../utils/Utils";
 const { TextArea } = Input;
+
+const themes = [
+  {
+    index: 1,
+    theme: "Blocks",
+    discription: "Connected blocks of the chain",
+    src:
+      Utils.getTheme("1"),
+  },
+  {
+    index: 2,
+    theme: "AI",
+    discription: "AI core",
+    src:
+      Utils.getTheme("2"),
+  },
+  {
+    index: 3,
+    theme: "AI2",
+    discription: "AI driven future",
+    src:
+      Utils.getTheme("3"),
+  },
+  {
+    index: 4,
+    theme: "Space",
+    discription: "A new frontier, landscape and skyscape",
+    src:
+      Utils.getTheme("4"),
+  },
+  {
+    index: 5,
+    theme: "Space2",
+    discription: "A new world, the future",
+    src:
+      Utils.getTheme("5"),
+  },
+  {
+    index: 6,
+    theme: "Hexagonal",
+    discription: "Hexagons and a wavey mesh",
+    src:
+      Utils.getTheme("6"),
+  },
+  {
+    index: 7,
+    theme: "Spiral",
+    discription: "A technical spiral with core",
+    src:
+      Utils.getTheme("7"),
+  },
+];
 
 function CountrySection({ 
   uniqueNames, 
@@ -15,7 +68,7 @@ function CountrySection({
   onInputChange, 
   onThemeChange, 
   intl }) {
-  const data = dummyData;
+  const data = themes;
 
   return (
     <>
@@ -46,10 +99,10 @@ function CountrySection({
               if (x.name == item.name) {
                 return { ...x, selected: true };
               } else if (x.selected) {
-                return { ...x, selected: false} ;
-              } else {
-                return x;
+                return { ...x, selected: false } ;
               }
+
+              return x;
             });
 
             const content = intl.formatMessage({ id: "createCountry.uniqueName.confirm", defaultMessage: "Are you sure you want to use this name?" });
@@ -59,7 +112,7 @@ function CountrySection({
               onOk: () => {
                 handleUpdateData(items);
 
-                onInputChange({ target: { name: "countryUniqueId", value: item.id }});
+                onInputChange({ target: { name: "countryUniqueId", value: item.id } });
               }
             });
           }}
@@ -119,18 +172,11 @@ function CountrySection({
           </Tooltip>
         </p>
         <List
-          grid={{
-            gutter: 16,
-            xs: 1,
-            sm: 2,
-            md: 3,
-            lg: 3,
-            xl: 6,
-            xxl: 6,
-          }}
           dataSource={data}
+          className="theme-container"
+          bordered={false}
           renderItem={item => (
-            <List.Item>
+            <List.Item className="theme-item">
               <Card
                 className={theme == item.index ? "selected" : ""}
                 cover={<img src={item.src} />}

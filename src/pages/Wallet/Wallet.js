@@ -131,6 +131,12 @@ function Wallet({ /*address,*/ user, intl }) {
     setAccountAddressSelected(value.key);
     setIsChooseAccountModal(false);
     dispatch({ type: "SET_ACCOUNT", payload: value });
+    Notification.displaySuccessMessage("Selected account successful");
+  };
+
+  const copyAddress = (address) => {
+    navigator.clipboard.writeText(address);
+    Notification.displaySuccessMessage("Copied address to clipboard");
   };
 
   return (
@@ -158,7 +164,7 @@ function Wallet({ /*address,*/ user, intl }) {
                 </div>
                 <div className="wallet-setting">
                   <div className="edit-section"><a onClick={() => setIsChooseAccountModal(true)}>Edit</a></div>
-                  <div className="copy-section"><a>Copy</a></div>
+                  <div className="copy-section"><a onClick={() => copyAddress(account.key)}>Copy</a></div>
                 </div>
               </Card>
             </Col>
@@ -190,7 +196,7 @@ function Wallet({ /*address,*/ user, intl }) {
                   </div>
                 </div>
                 <div className="align-center">
-                  <Button type="primary">Transfer</Button>
+                  <Button type="primary" disabled={true}>Transfer (comming soon)</Button>
                 </div>
               </Card>
             </Col>
@@ -212,7 +218,7 @@ function Wallet({ /*address,*/ user, intl }) {
                   </div>
                 </div>
                 <div className="align-center">
-                  <Button type="primary">Transfer</Button>
+                  <Button type="primary" disabled={true}>Transfer (comming soon)</Button>
                 </div>
               </Card>
             </Col>
@@ -234,7 +240,7 @@ function Wallet({ /*address,*/ user, intl }) {
                   </div>
                 </div>
                 <div className="align-center">
-                  <Button type="primary">Transfer</Button>
+                  <Button type="primary" disabled={true}>Transfer (comming soon)</Button>
                 </div>
               </Card>
             </Col>
