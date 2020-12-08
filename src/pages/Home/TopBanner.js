@@ -12,8 +12,7 @@ function TopBanner() {
     <div className="top-banner hero snap">
       <video src={background} muted={true} autoPlay loop className="hero-background" />
       <Row>
-        <Col xs={0} md={1} lg={2} xl={3}></Col>
-        <Col xs={24} md={22} lg={20} xl={18}>
+        <Col xs={24} md={{ push: 1, span: 22 }} lg={{ push: 2, span: 20 }} xl={{ push: 3, span: 18 }}>
           <div className="headline-slogan">
             <Row>
               <Col xs={24} sm={21} md={18} lg={15} xl={12}>

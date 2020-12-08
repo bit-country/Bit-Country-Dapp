@@ -9,8 +9,9 @@ import OptionalLink from "../../components/OptionalLink";
 import NotFound from "../Errors/NotFound";
 import MyStake from "./MyStake";
 import Residency from "./Residency";
+import { AuthConnect } from "../../components/HOC/Auth/AuthContext";
 
-export default function StakeContainer({ "*": selected }) {
+function GoverningContainer({ "*": selected, loggedIn }) {
   if (selected == "") {
     selected = "overview";
   }
@@ -38,15 +39,15 @@ export default function StakeContainer({ "*": selected }) {
               </OptionalLink>
             </Menu.Item>
             <Menu.Item key="mystake">
-              <OptionalLink enabled={true} to="./mystake">
+              <OptionalLink enabled={loggedIn} to="./mystake">
                 <FormattedMessage id="country.stake.menu.myStake" />
               </OptionalLink>
             </Menu.Item>
             <Menu.Item key="residency">
-              <OptionalLink enabled={true} to="./residency">
+              <OptionalLink enabled={loggedIn} to="./residency">
                 <FormattedMessage id="country.stake.menu.residency" />
               </OptionalLink>
-            </Menu.Item>
+            </Menu.Item>            
           </Menu>
         </Col>
         <Col xs={24} md={16} lg={18} xl={20} className="content">
@@ -65,3 +66,6 @@ export default function StakeContainer({ "*": selected }) {
     </div>
   );
 }
+
+
+export default AuthConnect(GoverningContainer);

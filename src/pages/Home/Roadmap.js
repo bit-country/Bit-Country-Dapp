@@ -7,8 +7,7 @@ export default class Roadmap extends Component {
     return (
       <div className="roadmap">
         <Row>
-          <Col xs={0} md={1} lg={2} xl={3}></Col>
-          <Col xs={24} md={22} lg={20} xl={18}>
+          <Col xs={24} md={{ push: 1, span: 22 }} lg={{ push: 2, span: 20 }} xl={{ push: 3, span: 18 }}>
             <h2 className="center">
               <FormattedMessage id="home.roadmap.title" />
             </h2>

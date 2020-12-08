@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 
 const Browse = () => {
   return (
-    <Layout.Content>
+    <Layout.Content id="browser">
       <h1 style={{ fontSize: "2em", textTransform: "capitalize" }}>
         <FormattedMessage
           id="marketplace.title"

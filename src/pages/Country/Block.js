@@ -99,11 +99,15 @@ export class Block extends Component {
       const response = await fetchAPI(ENDPOINTS.CREATE_TOPIC, "POST", topicObj);
 
       if (!response?.isSuccess) {
-        Notification.displayErrorMessage(
-          <FormattedMessage
-            id={response.message}
-          />
-        );
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        // TODO Add default error message
 
         this.setState({ confirmLoading: false });
         return;
@@ -177,7 +181,15 @@ export class Block extends Component {
       );
 
       if (!response?.isSuccess) {
-        Notification.displayErrorMessage(response.message);
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        // TODO Add default error message
 
         return;
       }

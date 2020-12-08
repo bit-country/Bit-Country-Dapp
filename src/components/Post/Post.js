@@ -73,7 +73,15 @@ class Post extends Component {
       );
 
       if (!response?.isSuccess) {
-        throw Error(response.message);
+        if (response?.message || response?.json?.message) {
+          Notification.displayErrorMessage(
+            <FormattedMessage id={response.message || response.json.message} />
+          );
+  
+          throw Error(response.message || response.json.message);
+        }
+
+        // TODO Add default error message
       }
     } catch (error) {
       Logging.Error(new Error("Error while adding view to post"), error.message);

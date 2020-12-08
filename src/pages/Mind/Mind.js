@@ -315,7 +315,10 @@ class Mind extends Component {
           )}
         />
 
-        <QuickSharer />
+        {!personal && (
+          <QuickSharer />
+        )}
+        
         <div id="mind" className={personal? "personal" : "public"}>
           <Row type="flex" style={{ flexWrap: "wrap-reverse", marginLeft: 0, marginRight: 0 }} gutter={[ 16, 0 ]}>
             <Col

@@ -13,11 +13,15 @@ export async function likePost(postId) {
     );
 
     if (!response?.isSuccess) {
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id={response.message}
-        />
-      );
+      if (response?.message || response?.json?.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage id={response.message || response.json.message} />
+        );
+
+        throw Error(response.message || response.json.message);
+      }
+
+      // TODO Add default error message
 
       return false;
     }
@@ -36,11 +40,15 @@ export async function unlikePost(postId) {
     );
 
     if (!response?.isSuccess) {
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id={response.message}
-        />
-      );
+      if (response?.message || response?.json?.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage id={response.message || response.json.message} />
+        );
+
+        throw Error(response.message || response.json.message);
+      }
+
+      // TODO Add default error message
 
       return false;
     }
@@ -59,11 +67,15 @@ export async function dislikePost(postId) {
     );
 
     if (!response?.isSuccess) {
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id={response.message}
-        />
-      );
+      if (response?.message || response?.json?.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage id={response.message || response.json.message} />
+        );
+
+        throw Error(response.message || response.json.message);
+      }
+
+      // TODO Add default error message
 
       return false;
     }
@@ -82,11 +94,15 @@ export async function undislikePost(postId) {
     );
 
     if (!response?.isSuccess) {
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id={response.message}
-        />
-      );
+      if (response?.message || response?.json?.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage id={response.message || response.json.message} />
+        );
+
+        throw Error(response.message || response.json.message);
+      }
+
+      // TODO Add default error message
 
       return false;
     }
@@ -137,11 +153,15 @@ export async function likeComment(postId, commentId) {
     );
 
     if (!response?.isSuccess) {
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id={response.message}
-        />
-      );
+      if (response?.message || response?.json?.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage id={response.message || response.json.message} />
+        );
+
+        throw Error(response.message || response.json.message);
+      }
+
+      // TODO Add default error message
 
       return false;
     }
@@ -160,11 +180,15 @@ export async function unlikeComment(postId, commentId) {
     );
     
     if (!response?.isSuccess) {
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id={response.message}
-        />
-      );
+      if (response?.message || response?.json?.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage id={response.message || response.json.message} />
+        );
+
+        throw Error(response.message || response.json.message);
+      }
+
+      // TODO Add default error message
 
       return false;
     }
@@ -183,11 +207,15 @@ export async function dislikeComment(postId, commentId) {
     );
     
     if (!response?.isSuccess) {
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id={response.message}
-        />
-      );
+      if (response?.message || response?.json?.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage id={response.message || response.json.message} />
+        );
+
+        throw Error(response.message || response.json.message);
+      }
+
+      // TODO Add default error message
 
       return false;
     }
@@ -206,11 +234,15 @@ export async function undislikeComment(postId, commentId) {
     );
     
     if (!response?.isSuccess) {
-      Notification.displayErrorMessage(
-        <FormattedMessage
-          id={response.message}
-        />
-      );
+      if (response?.message || response?.json?.message) {
+        Notification.displayErrorMessage(
+          <FormattedMessage id={response.message || response.json.message} />
+        );
+
+        throw Error(response.message || response.json.message);
+      }
+
+      // TODO Add default error message
 
       return false;
     }

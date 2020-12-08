@@ -11,8 +11,7 @@ export default function CountryFeature () {
     <div className="features">
       <div className="section" id="country">
         <Row>
-          <Col xs={1} lg={2}></Col>
-          <Col xs={22} lg={20}>
+          <Col xs={24} md={{ push: 1, span: 22 }} lg={{ push: 2, span: 20 }} xl={{ push: 3, span: 18 }}>
             <Row className="feature">
               <Col xs={24} lg = {12} className="logo center">
                 <img src={countryLogo} />
@@ -31,8 +30,7 @@ export default function CountryFeature () {
       </div>
       <div className="section" id="block">
         <Row>
-          <Col xs={1} lg={2}></Col>
-          <Col xs={22} lg={20}>
+          <Col xs={24} md={{ push: 1, span: 22 }} lg={{ push: 2, span: 20 }} xl={{ push: 3, span: 18 }}>
             <Row className="feature">
               <Col xs={0} lg = {12} className="text">
                 <h3>
@@ -59,8 +57,7 @@ export default function CountryFeature () {
       </div>
       <div className="section" id="economy">
         <Row>
-          <Col xs={1} lg={2}></Col>
-          <Col xs={22} lg={20}>
+          <Col xs={24} md={{ push: 1, span: 22 }} lg={{ push: 2, span: 20 }} xl={{ push: 3, span: 18 }}>
             <Row className="feature">
               <Col xs={24} lg = {12} className="logo center">
                 <img src={economyLogo} />
@@ -79,8 +76,7 @@ export default function CountryFeature () {
       </div>
       <div className="section" id="residents">
         <Row>
-          <Col xs={1} lg={2}></Col>
-          <Col xs={22} lg={20}>
+          <Col xs={24} md={{ push: 1, span: 22 }} lg={{ push: 2, span: 20 }} xl={{ push: 3, span: 18 }}>
             <Row className="feature">
               <Col xs={0} lg = {12} className="text">
                 <h3>

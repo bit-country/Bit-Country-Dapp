@@ -7,6 +7,8 @@ import { fetchAPI } from "../../utils/FetchUtil";
 import endpoints from "../../config/endpoints";
 import Notification from "../../utils/Notification";
 import { CountryConnect } from "../../components/HOC/Country/CountryWrapper";
+import { AuthConnect } from "../../components/HOC/Auth/AuthContext";
+import { navigate } from "@reach/router";
 
 const options = {
   stroke: {
@@ -20,7 +22,7 @@ const options = {
   ]
 };
 
-function MyStake({ intl, form, country }) {
+function MyStake({ intl, form, country, loggedIn }) {
   const { getFieldDecorator } = form;
   const [ stakeTransactions, setStakeTransactions ] = useState([]);
   const [ totalStake, setTotalStake ] = useState(0);
@@ -37,7 +39,15 @@ function MyStake({ intl, form, country }) {
         const response = await fetchAPI(`${endpoints.GET_COUNTRY_USER_STAKE_RECORDS}?countryId=${country.id}`);
 
         if (!response?.isSuccess) {
-          throw Error(response.message);
+          if (response?.message || response?.json?.message) {
+            Notification.displayErrorMessage(
+              <FormattedMessage id={response.message || response.json.message} />
+            );
+    
+            throw Error(response.message || response.json.message);
+          }
+  
+          // TODO Add default error message
         }
 
         let runningTotal = 0;
@@ -93,13 +103,15 @@ function MyStake({ intl, form, country }) {
         });
   
         if (!response?.isSuccess) {
-          Logging.Error(response.message);
-
-          Notification.displayErrorMessage(
-            <FormattedMessage
-              id={response.message}
-            />
-          );
+          if (response?.message || response?.json?.message) {
+            Notification.displayErrorMessage(
+              <FormattedMessage id={response.message || response.json.message} />
+            );
+    
+            throw Error(response.message || response.json.message);
+          }
+  
+          // TODO Add default error message
           
           return;
         }
@@ -134,6 +146,10 @@ function MyStake({ intl, form, country }) {
       }
     });
   }, [ country, totalStake, stakeTransactions ]);
+
+  if (!loggedIn) {
+    navigate("../403");
+  }
 
   return (
     <Col
@@ -208,4 +224,4 @@ function MyStake({ intl, form, country }) {
   );
 }
 
-export default injectIntl(CountryConnect(Form.create()(MyStake)));
+export default injectIntl(AuthConnect(CountryConnect(Form.create()(MyStake))));

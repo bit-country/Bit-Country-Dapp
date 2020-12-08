@@ -110,3 +110,21 @@
 .CardLink:hover {
   color: unset !important;
 }
+
+#marketplace .CardLink .CardBody {
+  height: 100%;
+}
+
+#browser .item-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#browser .item-container .CardLink {
+  width: 280px;
+  margin: 15px;
+}
+
+#browser .item-container .CardLink .CardBody {
+  height: 100%;
+}

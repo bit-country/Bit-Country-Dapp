@@ -51,7 +51,7 @@ const Marketplace = () => {
             </Button>
           </Row>}
       />
-      <Layout.Content>
+      <Layout.Content id="marketplace">
         <div>
           <h1 style={{ fontSize: "3em", margin: "0" }}> </h1>
           <h3
