@@ -1,1 +1,1 @@
-export const BackEnd = "http://localhost:51701"
+export const BackEnd = "http://uatapi.bit.country"

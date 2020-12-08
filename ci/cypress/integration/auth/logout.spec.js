@@ -10,12 +10,7 @@ describe("Logout Test:", () => {
     cy.login();
     cy.visit("/");
     // perform UI logout
-    cy.viewport(1400, 800);
-    cy.get(".ant-avatar").trigger("click");
-
-    cy.get(".ant-dropdown-menu > :nth-child(4)").then((email) => {
-      cy.contains("Logout").click();
-    });
+    cy.get("a.nav-btn > .anticon-logout").trigger("click");
 
     // // redirected back to login screen
     // cy.location("pathname").should("eq", "/login");

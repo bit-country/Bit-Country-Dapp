@@ -1,6 +1,6 @@
 {
     "chromeWebSecurity": false,
-    "baseUrl": "http://localhost:3002/",
+    "baseUrl": "http://uat.bit.country/",
     "reporter": "mochawesome",
     "reporterOptions": {
         "reportDir": "cypress/results",
