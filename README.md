@@ -106,88 +106,11 @@ Part-timers
 * https://bit.country (Project)
 * https://mvp.studio (Group) 
 
-### Team's experience
-
-Ray Lu
-* Has hand-on coding experience over a decade. He wrote the first line of code in Basic when he was 15 on IBM-8086.
-* Founded a Saas Startup from inception to growth. So far it has transacted USD$173,899,846 of bookings and serving 107,800 active users.
-* Founded a Tech Edu Startup from inception to growth that has 300 new enrollments every year with a customer base across 8 countries.
-* Bsc in Computer Science at Univerity of Auckland. (Top 1 in writing compiler subject)
-* Involved in Polkadot Ambassador Programme with one reputable Substrate development team in NZ to run local meetups (Temporarily Paused due to Covid-19)
-
-Justin Pham
-* Created blockchain job-ready programme for Industry Connect in 2018
-* A Substrate & Rust programmer, full-stack developer
-* Delivered https://industryconnect.io from inception and get involved in writing whitepaper of Thunder.Unversity
-* 8 years hands-on coding experience. 
-* Bsc Software Development(Machine Learning / AI) at Auckland University of Technology
-
-Shannon Christie
-* Led the development of Bit.Country to current stage with 100 active pilot users
-* An unreal engine game developer
-* Solid knowledge and experience with various programming language i.e. C, C++, C#, Rust, Java
-* Blockchain & Substrate enthusiast
-
-Daniel Choi
-* Led the development of a recruit tech. Turn ideas to actual product launch.
-* Full-stack developer
-* ReactJs Ninja
-* Bachelor of ICT at Western Sydney University
-
- Logan Liu
-* The key designer & UX for a Saas product which transacts $20m per annum
-* Sound experience with EDM, Poster, Fin-Tech.
-* Bachelor of Arts - Digital Communication and Media/Multimedia at Heilongjiang University
-
-Juanita Strydom
-* Solid experience in community management.
-* Managed the international tech edu for 7 years
-
-Kai Zhang (Technical Advisory)
-* CTO of a succesful startup Saas company
-* Led the team and created a billing solution processing $20m per year
-
-Alan Liang (Technical Advisory)
-* Senior developer
-* Front-end master
-* Led the team and delivered a robust fin-tech billing solution
-
-**Grants Received In The Past**
-* Callaghan Innovation R&D Growth Grant (Approved in 2019)
-* Callaghan Innovation R&D Loan Scheme Grant (Approved in 2019)
-* Callaghan Innovation R&D Experience Grant (Approved in 2019)
-* Education NZ Project Skills Sponsorship (Approved in 2017)
-* IMDA (Singapore) Tech Immersion and Placement Programme (Pending for approval in 2020)
-
-*Callaghan Innovation, a Crown entity of New Zealand, has the task of making New Zealand business more innovative. 
-
-### Team Code Repos
-
-* Bit Country https://github.com/bit-country
-* Ray Lu https://github.com/codemeit
-* Justin Pham https://github.com/justinphamnz
-* Shannon Christie https://github.com/shannon-christie
-* Daniel Choi https://github.com/DanielFromTAFE
-* Logan https://github.com/Logancountry
-
-### Team LinkedIn Profiles
-
-Key Profiles from the tech team
-* Ray Lu https://www.linkedin.com/in/codemeit/
-* Justin Pham https://www.linkedin.com/in/justinphamit/
-* Shannon Christie https://www.linkedin.com/in/shannonchristie/
-* Daniel Choi https://www.linkedin.com/in/dotnet-daniel-choi/
-* Logan Liu https://www.linkedin.com/in/logan-liu-5123a0130/
-* Juanita Strydom https://www.linkedin.com/in/juanita-strydom-5b79512b/
-* Kai Zhang https://www.linkedin.com/in/kai-zhang-02676a77/
-* Allan Liang https://www.linkedin.com/in/allan-liang-0a8555124/
-
-
 ## Development Roadmap :nut_and_bolt: 
 
 ### Short Summary
 
-We plan to build a full-fledged solution that is ready to bring 1400 internal users and 50K external users by Aug 2021. Our web app (dapp) requires a truckload of development and testing to ensure it is attractive to classic internet users. We will explore more and work with the Substrate Builders Programme team to build the solution.
+Our plan is to make it easy for classic internet users to get onboard and enjoy the platform while maintaining the benefits of decentralization.
 
 We believe Bit.Country will bring many people to the ecosystem.
 
@@ -196,4 +119,3 @@ You'll need to install Docker Desktop to be able to run this docker image. Run t
 ```
 docker run -p 3000:3000 mvpstudionz/bit.web
 ```
-[Docker](https://hub.docker.com/r/mvpstudionz/bit.web) 
