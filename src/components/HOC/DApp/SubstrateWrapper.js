@@ -4,9 +4,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
 import React, { useCallback, useEffect, useReducer, useContext, useState } from "react";
-import IncorrectNetwork from "../../../pages/Errors/IncorrectNetwork";
-import AccountLocked from "../../../pages/Errors/AccountLocked";
-import UnsupportedBrowser from "../../../pages/Errors/UnsupportedBrowser";
 import Spinner from "../../Spinner";
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";

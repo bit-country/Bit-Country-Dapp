@@ -12,7 +12,6 @@ import { FormattedMessage } from "react-intl";
 import CountrySection from "./CountrySection";
 import BlockSection from "./BlockSection";
 import CurrencySection from "./CurrencySection";
-import BlockchainSection from "./BlockchainSection";
 import Logging from "../../utils/Logging";
 import { CHAINTYPES } from "../../config/chainTypes";
 import "./CreateCountry.styles.css";
@@ -424,12 +423,6 @@ class CreateCountry extends Component {
             {" here "}
           </a>
           to see blockchain transactions and more.
-          <BlockchainSection
-            polkadotAvailable={polkadotAvailable}
-            polkadot={createOnPolkadot}
-            onPolkadotChange={this.handleHostPolkadot}
-            polkadotDotEstimation={0}
-          />
           <Divider />
           <TotalsSection
             getTotalCostIn={this.getTotalCostIn}
