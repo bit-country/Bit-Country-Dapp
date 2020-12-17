@@ -119,3 +119,8 @@ You'll need to install Docker Desktop to be able to run this docker image. Run t
 ```
 docker run -p 3000:3000 mvpstudionz/bit.web
 ```
+
+# How to Run
+1. Navigate into the Noa folder and run ```npm install```. 
+2. Run ```npm install``` in the root directory. 
+3. Start the whole project with ```npm start```.
