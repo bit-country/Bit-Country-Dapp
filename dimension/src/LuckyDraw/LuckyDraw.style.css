@@ -1,0 +1,56 @@
+.drawCard {
+  padding-top: 5%;
+  display: flex;
+}
+
+.drawCard {
+  color: #191d2f;
+  cursor: pointer;
+  width: 90%;
+  margin: auto;
+  padding: 5%;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 800;
+  letter-spacing: 1px;
+  display: block;
+  box-shadow: rgb(147 147 147) 0px 2px 12px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px 0px;
+}
+.selected-card {
+  color: #191d2f;
+  background: #d1d1d1;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+.selected-card > .draw-desc {
+  color: #d1d1d1;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+.draw-btn {
+  margin: auto;
+  width: 38%;
+  height: 42px;
+  font-size: 1.2em;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.drawCardsContainer {
+  margin: auto;
+  padding-top: 3%;
+}
+.draw-desc {
+  color: grey;
+  font-size: 0.5em;
+  font-weight: 500;
+}
+.drawCard:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.02);
+}
+#smartasset-iframe {
+  width: 100%;
+}

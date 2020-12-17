@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Icon, Col, Button, Layout, Row, Divider, Breadcrumb, Collapse, Affix, InputNumber, Modal, Spin } from 'antd';
 import "./Marketplace.styles.css";
 import DefaultImage from "../../assets/images/country.jpg";
-import CurrencyIcon from "../../assets/digital-asset-icon/BC-icon-circle.png";
+import CurrencyIcon from "../../assets/currency-icon/BCG_icon.png";
 import Ownership from "./Ownership";
 import Supporter from "./Supporter";
 import Insights from "./Insights";

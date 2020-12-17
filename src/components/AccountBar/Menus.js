@@ -34,14 +34,14 @@ function Menus() {
           selectable={false}
         >
           <Menu.ItemGroup title="Economy">
-                  <Menu.Item key="marketplace">
+            <Menu.Item key="marketplace">
               <Link to="/marketplace">
                 <FormattedMessage
                   id="app.marketplace"
                 />
               </Link>
             </Menu.Item>
-             <Menu.Item key="my-wallet">
+            <Menu.Item key="my-wallet">
               <Link to="/wallet/balance">
                 <FormattedMessage
                   id="app.myCurrencies"

@@ -1,0 +1,25 @@
+#hud-overlay {
+  opacity: 0.1;
+  transition: opacity 0.1s ease-out;
+}
+
+#hud-overlay:hover {
+  opacity: 1;
+}
+
+.ant-modal.smartasset-app-modal .ant-modal-content {
+  height: 80vh;
+}
+
+.ant-modal.smartasset-app-modal .ant-modal-content .ant-modal-body {
+  height: 100%;
+}
+
+#smartasset-app-root {
+  display: flex;
+  height: 100%;
+}
+
+#smartasset-app-root #smartasset-iframe {
+  flex: 1;
+}

@@ -39,11 +39,14 @@ const reducer = (state, action) => {
     case "RESET_SOCKET": {
       const endpoint = action.payload || state.endpoint;
 
+      Logging.Log(`Socket reset on endpoint ${endpoint}`);
+
       return { ...state, endpoint };
 
     }
     case "CONNECT": {
-      // log.info(`Connected to Substrate node ${state.endpoint?.toString()}`)
+      Logging.Log(`Connected to Substrate node ${state.endpoint?.toString()}`);
+
       return { ...state, api: action.payload, apiState: "CONNECTING" };
     }
     case "CONNECT_SUCCESS": {
@@ -56,33 +59,37 @@ const reducer = (state, action) => {
 
         tookTimeLog = `Took ${tookTime / 1000} seconds`;
 
-        // log.info(`✅ Substrate API is ready. ${tookTimeLog}`)
+        Logging.Log(`✅ Substrate API is ready. ${tookTimeLog}`);
       }
       return { ...state, apiState: "READY" };
     }
     case "CONNECT_ERROR": {
       const err = action.payload;
-      // log.error(`❌ Failed to connect to Substrate node ${state.endpoint?.toString()} . ${err}`)
+
+      Logging.Error(`❌ Failed to connect to Substrate node ${state.endpoint?.toString()} . ${err}`);
 
       return { ...state, apiState: "ERROR", apiError: err };
     }
     case "SET_KEYRING": {
-      // log.info(`✅ Loaded accounts with Keyring`)
       Logging.Log("SET_KEYRING", action.payload);
+
       return { ...state, keyring: action.payload, keyringState: "READY" };
     }
     case "SET_ACCOUNT": {
-      // log.info(`✅ Loaded accounts`)
       Logging.Log("SET_ACCOUNT", action.payload);
+
       return { ...state, account: action.payload };
     }
     case "KEYRING_ERROR": {
       const err = action.payload;
-      // log.error(`❌ Failed to load accounts with Keyring. ${err}`)
+
+      Logging.Error(`❌ Failed to load accounts with Keyring. ${err}`);
 
       return { ...state, keyring: undefined, keyringState: "ERROR", keyringError: err };
     }
     default: {
+      Logging.Error(`Unexpected type: ${action.type}`);
+
       throw new Error(`Unknown type of action: ${action.type}`);
     }
   }
@@ -193,13 +200,13 @@ export const SubstrateProvider = (props) => {
     if (keyringState || !api) return;
 
     try {
-      await web3Enable("Bit Country");
+      let extensions = await web3Enable("Bit Country");
       let allAccounts = await web3Accounts();
 
       allAccounts = allAccounts.map(({ address, meta }) =>
         ({ address, meta: { ...meta, name: `${meta.name} (${meta.source})` } }));
 
-      keyring.loadAll({ isDevelopment: true }, allAccounts);
+      keyring.loadAll({ isDevelopment: false }, allAccounts);
 
       dispatch({ type: "SET_KEYRING", payload: keyring });
     } catch (err) {
