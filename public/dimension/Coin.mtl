@@ -1,0 +1,13 @@
+# Blender MTL File: 'Coin2.blend'
+# Material Count: 1
+
+newmtl Material.001
+Ns 295.214805
+Ka 0.318182 0.318182 0.318182
+Kd 0.800000 0.800000 0.800000
+Ks 0.390909 0.390909 0.390909
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd dimension/Coin.png

@@ -6,9 +6,6 @@
 
 
 import React from "react";
-import IncorrectNetwork from "../../../pages/Errors/IncorrectNetwork";
-import AccountLocked from "../../../pages/Errors/AccountLocked";
-import UnsupportedBrowser from "../../../pages/Errors/UnsupportedBrowser";
 import Spinner from "../../Spinner";
 import { ApiPromise } from "@polkadot/api";
 import { WsProvider } from "@polkadot/rpc-provider";
@@ -55,15 +52,7 @@ const componentRenderer = (Component, requiresWallet, props, value) => {
     incorrectNetwork
   } = value;
 
-  return unsupportedBrowser ? (
-    <UnsupportedBrowser />
-  ) : accountLocked ? (
-    <AccountLocked />
-  ) : incorrectNetwork ? (
-    <IncorrectNetwork />
-  ) : (
-          <Component {...value} {...props} />
-        );
+  return <Component {...value} {...props} />;
 };
 
 // eslint-disable-next-line react/display-name

@@ -1,0 +1,31 @@
+.header {
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.message {
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 2em;
+}
+
+.container .item {
+  flex: 1;
+  margin: 1em;
+  border-radius: 0.3em;
+  box-shadow: 0 0.2em 0.5em 0.2em lightgrey;
+  cursor: pointer;
+}
+
+.container .item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0.7em 1.5em 0.1em lightgrey;
+  z-index: 10;
+}

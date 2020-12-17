@@ -61,11 +61,6 @@ export default function PrimaryBar({ promptAccount }) {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link className="item" to="/marketplace">
-                    <FormattedMessage id="app.marketplace" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item>
                   <Link className="item" to="/my-countries">
                     <FormattedMessage id="app.myCountries" />
                   </Link>

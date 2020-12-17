@@ -24,7 +24,6 @@ import NewsFeed from "./pages/NewsFeed/NewsFeed";
 import FAQ from "./pages/FAQ/FAQ";
 import PendingCountry from "./pages/PendingCountry/PendingCountry";
 import Profile from "./pages/Profile/Profile";
-import Processing from "./pages/Wallet/Processing";
 import MyPosts from "./pages/MyPosts/MyPosts";
 import Mind from "./pages/Mind/Mind";
 import PostDetail from "./pages/PostDetail/PostDetail";
@@ -70,7 +69,6 @@ function App() {
               <WelcomePage path="/c/:id/welcome/:userId" />
               <WalletContainer path="/wallet/*" />
               <AssetContainer path="/asset/*" />
-              <Processing path="/processing" />
               <CountryActivityRules path="/country-rules/edit" />
               <FAQ path="/faq" />
               <MyPosts path="/my-posts" />

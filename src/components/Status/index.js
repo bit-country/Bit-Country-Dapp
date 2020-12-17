@@ -43,13 +43,13 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
       alt={user.nickName}
     />
   ) : (
-      <Avatar
-        shape="square"
-        size="small"
-        icon="user"
-        alt="Default profile picture"
-      />
-    );
+    <Avatar
+      shape="square"
+      size="small"
+      icon="user"
+      alt="Default profile picture"
+    />
+  );
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -84,7 +84,7 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
     if (savedAddress) {
       setAccountAddressSelected(savedAddress);
     }
-  }, [currentAddress]);
+  }, [ currentAddress ]);
 
   useEffect(() => {
     async function connect() {
@@ -93,7 +93,7 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
       // ...
     }
     connect();
-  }, [api, keyring]);
+  }, [ api, keyring ]);
 
   const connectWallet = async () => {
     await initApi(api, keyring);
@@ -153,21 +153,21 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
               Connect to Wallet
             </a>
           ) : (
-              <>
-                <a className="connect-wallet">
-                  <BalanceAnnotation accountSelected={accountAddressSelected} style={{ marginRight: 5 }} />
-                  <Select style={{ width: 220 }} defaultValue={account.key} value={account.key}>
-                    {
-                      accountOption != null ? accountOption.map((account, index) =>
-                        (
-                          <Option onClick={() => onWalletChange(account)} key={index} value={account.key}><strong>{account.text.substr(0, 8)} </strong>- {account.key.substr(0, 8)}....{account.key.substr(account.key.length - 4)}</Option>
-                        )
-                      ) : null
-                    }
-                  </Select>
-                </a>
-              </>
-            )}
+            <>
+              <a className="connect-wallet">
+                <BalanceAnnotation accountSelected={accountAddressSelected} style={{ marginRight: 5 }} />
+                <Select style={{ width: 220 }} defaultValue={account.key} value={account.key}>
+                  {
+                    accountOption != null ? accountOption.map((account, index) =>
+                      (
+                        <Option onClick={() => onWalletChange(account)} key={index} value={account.key}><strong>{account.text.substr(0, 8)} </strong>- {account.key.substr(0, 8)}....{account.key.substr(account.key.length - 4)}</Option>
+                      )
+                    ) : null
+                  }
+                </Select>
+              </a>
+            </>
+          )}
           <Link
             to="/notifications"
             onClick={clearNotificationCount}
@@ -196,16 +196,16 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
           </Menu.Item>
         </>
       ) : (
-          <Link to="/login">
-            <Menu.Item key="Profile">
-              <span className="login">
-                <FormattedMessage id="app.login" />
-              </span>
-            </Menu.Item>
-          </Link>
-        )}
+        <Link to="/login">
+          <Menu.Item key="Profile">
+            <span className="login">
+              <FormattedMessage id="app.login" />
+            </span>
+          </Menu.Item>
+        </Link>
+      )}
     </Menu>
-  ), [user, notificationCount, connectWallet]);
+  ), [ user, notificationCount, connectWallet ]);
 
   return collapsed ? (
     <div className="navigation collapsed" ref={containerRef}>
@@ -214,7 +214,7 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
           <Badge dot count={notificationCount}>
             <Dropdown
               overlay={dropdownMenu}
-              trigger={["click"]}
+              trigger={[ "click" ]}
               placement="bottomRight"
               overlayClassName="status overlay-container"
             >
@@ -222,10 +222,10 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
             </Dropdown>
           </Badge>
         ) : (
-            <Link className="nav-btn nav-btn-login" to="/login" >
-              <Icon type="login" />
-            </Link>
-          )}
+          <Link className="nav-btn nav-btn-login" to="/login" >
+            <Icon type="login" />
+          </Link>
+        )}
       </div>
       <div className="separator" />
       <div className="nav-btn">
@@ -238,85 +238,87 @@ export default function Status({ user, sendLogout, drawerOpen, toggleDrawer, not
       </div>
     </div>
   ) : (
-      <div className="navigation" ref={containerRef} >
-        {user ? (
-          <>
-            {!account ? (
-              <a className="connect-wallet" onClick={connectWallet}>
-                <Icon type="plus" />
-              Connect to Wallet
-              </a>
-            ) : (
-                <>
-                  <a className="connect-wallet">
-                    <BalanceAnnotation accountSelected={account.key} style={{ marginRight: 5 }} />
-                    <Select style={{ width: 220 }} defaultValue={account.key} value={account.key}>
-                      {
-                        accountOption != null ? accountOption.map((account, index) =>
-                          (
-                            <Option onClick={() => onWalletChange(account)} key={index} value={account.key}><strong>{account.text.substr(0, 8)} </strong>- {account.key.substr(0, 8)}....{account.key.substr(account.key.length - 4)}</Option>
-                          )
-                        ) : null
-                      }
-                    </Select>
-                  </a>
-                </>
-              )}
-            <Link
-              to="/notifications"
-            >
-              <div className="notifications">
-                <Badge dot count={notificationCount}>
-                  <Icon type="bell" />
-                </Badge>
-              </div>
-            </Link>
-            <Link
-              to="/profile"
-            >
-              <div className="profile">
-                {userAvatar}
-                <span className="name">{user.nickName}</span>
-              </div>
-            </Link>
-            <a className="nav-btn" onClick={sendLogout}>
-              <Icon type="logout" />
+    <div className="navigation" ref={containerRef} >
+      {user ? (
+        <>
+          {!account ? (
+            <a className="connect-wallet" onClick={connectWallet}>
+              <Icon type="plus" />
+            Connect to Wallet
             </a>
-            {/* <a className="nav-btn nav-btn-friend is-active" href="#" /> */}
-            {/* <a
-            className="nav-btn nav-btn-notification is-active"
-            href="#"
-          /> */}
-          </>
-        ) : (
+          ) : (
             <>
-              <Link className="nav-btn nav-btn-login" to="/login" >
-                <Icon type="login" />
-              </Link>
+              <a className="connect-wallet">
+                <BalanceAnnotation accountSelected={account.key} style={{ marginRight: 5 }} />
+                <Select style={{ width: 220 }} defaultValue={account.key} value={account.key}>
+                  {
+                    accountOption != null ? accountOption.map((account, index) =>
+                      (
+                        <Option onClick={() => onWalletChange(account)} key={index} value={account.key}><strong>{account.text.substr(0, 8)} </strong>- {account.key.substr(0, 8)}....{account.key.substr(account.key.length - 4)}</Option>
+                      )
+                    ) : null
+                  }
+                </Select>
+              </a>
             </>
           )}
-        <div className="separator" />
-        <div className="nav-btn">
-          <a>
-            <Icon
-              type={drawerOpen ? "up" : "down"}
-              onClick={toggleDrawer}
-            />
+          <Link
+            to="/notifications"
+          >
+            <div className="notifications">
+              <Badge dot count={notificationCount}>
+                <Icon type="bell" />
+              </Badge>
+            </div>
+          </Link>
+          <Link
+            to="/profile"
+          >
+            <div className="profile">
+              {userAvatar}
+              <span className="name">{user.nickName}</span>
+            </div>
+          </Link>
+          <a className="nav-btn" onClick={sendLogout}>
+            <Icon type="logout" />
           </a>
-        </div>
+          {/* <a className="nav-btn nav-btn-friend is-active" href="#" /> */}
+          {/* <a
+          className="nav-btn nav-btn-notification is-active"
+          href="#"
+        /> */}
+        </>
+      ) : (
+        <>
+          <Link className="nav-btn nav-btn-login" to="/login" >
+            <Icon type="login" />
+          </Link>
+        </>
+      )}
+      <div className="separator" />
+      <div className="nav-btn">
+        <a>
+          <Icon
+            type={drawerOpen ? "up" : "down"}
+            onClick={toggleDrawer}
+          />
+        </a>
       </div>
-    );
+    </div>
+  );
 }
 
 
 function BalanceAnnotation(props) {
   const { accountSelected } = props;
   const { api } = useSubstrate();
-  const [accountBalance, setAccountBalance] = useState(0);
+  const [ accountBalance, setAccountBalance ] = useState(0);
+
+  debugger;
 
   // When account address changes, update subscriptions
   useEffect(() => {
-    let unsubscribe;
+    let unsubscribe = null;
 
     // If the user has selected an address, create a new subscription
     accountSelected &&
@@ -329,7 +331,7 @@ function BalanceAnnotation(props) {
         .catch(console.error);
 
     return () => unsubscribe && unsubscribe();
-  }, [accountSelected]);
+  }, [ accountSelected ]);
 
   return accountSelected ? (
     <span>

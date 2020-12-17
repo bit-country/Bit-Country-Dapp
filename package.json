@@ -1,38 +1,58 @@
 {
   "name": "bit",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babylonjs/core": "^4.0.3",
+    "@babylonjs/gui": "^4.0.3",
+    "@babylonjs/inspector": "^4.0.3",
+    "@babylonjs/loaders": "^4.0.3",
+    "@babylonjs/post-processes": "^4.0.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
     "@microsoft/applicationinsights-web": "^2.5.6",
+    "@polkadot/api": "^2.10.1",
+    "@polkadot/api-contract": "^2.10.1",
+    "@polkadot/extension-dapp": "^0.34.1",
+    "@polkadot/ui-keyring": "^0.59.1",
+    "@polkadot/ui-settings": "^0.59.1",
     "apexcharts": "^3.16.1",
+    "colyseus": "^0.13.7",
+    "colyseus.js": "^0.13.2",
+    "countdown": "^2.6.0",
     "js-md5": "^0.7.3",
+    "localforage": "^1.9.0",
+    "lodash": "^4.17.19",
+    "noa-engine": "file:./Noa",
+    "query-string": "^6.13.7",
     "react": "^16.11.0",
     "react-apexcharts": "^1.3.6",
     "react-dom": "^16.11.0",
     "react-draft-wysiwyg": "^1.13.2",
+    "react-infinite-scroll-component": "^5.1.0",
+    "react-infinite-scroll-hook": "^3.0.0",
     "react-intl-translations-manager": "^5.0.3",
-    "react-js-pagination": "^3.0.2",
     "react-render-html": "^0.6.0",
     "react-router-dom": "^5.1.2",
-    "react-toastify": "^5.4.0"
+    "react-toastify": "^5.4.0",
+    "store": "^2.0.12"
   },
   "scripts": {
     "start": "react-app-rewired start --env=development",
     "build": "react-app-rewired build",
+    "build-windows": "node --max-old-space-size=8192 \".\node_modules\\react-app-rewired\\scripts\\build.js\"",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
     "i18n:extract": "MESSAGE_DIR='./.messages' react-scripts build",
     "i18n:manageTranslations": "node ./translationRunner.js",
-    "lint": "eslint ."
+    "lint": "eslint . --quiet"
   },
   "devDependencies": {
     "@reach/router": "^1.2.1",
     "antd": "^3.24.3",
     "axios": "^0.20.0",
-    "babel-eslint": "10.1.0",
+    "babel-eslint": "10.0.3",
     "babel-plugin-import": "^1.12.2",
     "customize-cra": "^1.0.0",
     "eslint": "^6.8.0",
@@ -45,7 +65,11 @@
     "react-intl": "^3.6.2",
     "react-intl.macro": "^0.3.7",
     "react-quill": "^1.3.3",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.0",
+    "react-share": "^4.3.1",
+    "voxel-crunch": "^0.2.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^1.7.2"
   },
   "browserslist": {
     "production": [
@@ -62,6 +86,132 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
+    }
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true,
+      "browser": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 11,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react"
+    ],
+    "ignorePatterns": [
+      "node_modules/*",
+      ".vscode/*",
+      "build/*",
+      "public/*",
+      "src/js/*",
+      "server/*",
+      "server-build/*",
+      "webpack.server.js",
+      "Noa/*",
+      "dimension/*"
+    ],
+    "rules": {
+      "strict": "off",
+      "indent": [
+        "warn",
+        2
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-console": "error",
+      "no-template-curly-in-string": "error",
+      "require-atomic-updates": "error",
+      "array-callback-return": "error",
+      "no-else-return": "error",
+      "no-return-await": "error",
+      "init-declarations": "warn",
+      "array-bracket-newline": [
+        "error",
+        "consistent"
+      ],
+      "array-bracket-spacing": [
+        "warn",
+        "always"
+      ],
+      "block-spacing": [
+        "error",
+        "always"
+      ],
+      "no-unneeded-ternary": "error",
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "padding-line-between-statements": [
+        "error",
+        {
+          "blankLine": "always",
+          "prev": [
+            "const",
+            "let",
+            "var"
+          ],
+          "next": "*"
+        },
+        {
+          "blankLine": "any",
+          "prev": [
+            "const",
+            "let",
+            "var"
+          ],
+          "next": [
+            "const",
+            "let",
+            "var"
+          ]
+        }
+      ],
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "react/prop-types": "off",
+      "react/destructuring-assignment": [
+        "warn",
+        "always"
+      ],
+      "react/no-access-state-in-setstate": "error",
+      "react/no-direct-mutation-state": "error",
+      "react/prefer-stateless-function": "warn",
+      "react/jsx-indent": [
+        "warn",
+        2,
+        {
+          "checkAttributes": true,
+          "indentLogicalExpressions": true
+        }
+      ],
+      "react/jsx-indent-props": [
+        "error",
+        2
+      ],
+      "react/jsx-first-prop-new-line": [
+        "error",
+        "multiline"
+      ]
     }
   }
 }

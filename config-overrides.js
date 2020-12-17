@@ -1,5 +1,4 @@
-/* global require module */
-const { override, fixBabelImports, addLessLoader, useEslintRc } = require("customize-cra");
+const { override, fixBabelImports, addLessLoader } = require("customize-cra");
 
 module.exports = override(
   fixBabelImports("import", {
@@ -12,6 +11,5 @@ module.exports = override(
       javascriptEnabled: true,
       modifyVars: { "@primary-color": "#40e0d0" },
     },
-  }),
-  useEslintRc(),
+  })
 );

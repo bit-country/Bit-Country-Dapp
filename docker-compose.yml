@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  sample:
+    image: 80d0e13f0228
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    stdin_open: true

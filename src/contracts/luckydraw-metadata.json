@@ -1,0 +1,583 @@
+{
+  "metadataVersion": "0.1.0",
+  "source": {
+    "hash": "0x1f6dab628825baa1285db18a31e4bca7ed1f4f9f1ae305d8e76ab82909bda4f9",
+    "language": "ink! 3.0.0-rc2",
+    "compiler": "rustc 1.49.0-nightly"
+  },
+  "contract": {
+    "name": "luckydraw",
+    "version": "0.1.0",
+    "authors": [
+      "Justin - Bit.Country"
+    ]
+  },
+  "spec": {
+    "constructors": [
+      {
+        "args": [],
+        "docs": [
+          " Creates a new luckydraw smart contract initialized."
+        ],
+        "name": [
+          "default"
+        ],
+        "selector": "0x6a3712e2"
+      }
+    ],
+    "docs": [],
+    "events": [
+      {
+        "args": [
+          {
+            "docs": [
+              " The winner account"
+            ],
+            "indexed": true,
+            "name": "winner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "winning_number",
+            "type": {
+              "displayName": [
+                "u8"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " A winner has been picked"
+        ],
+        "name": "WinnerPicked"
+      },
+      {
+        "args": [
+          {
+            "docs": [
+              " The winner account"
+            ],
+            "indexed": true,
+            "name": "caller",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "winning_number",
+            "type": {
+              "displayName": [
+                "u8"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " A winner has been picked"
+        ],
+        "name": "WinnerFail"
+      }
+    ],
+    "messages": [
+      {
+        "args": [
+          {
+            "name": "number",
+            "type": {
+              "displayName": [
+                "u8"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " Generate random winning number.",
+          " Later will accept the user number then compare the winning number"
+        ],
+        "mutates": true,
+        "name": [
+          "open_lucky_draw"
+        ],
+        "payable": true,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 12
+        },
+        "selector": "0x90ae1d9c"
+      },
+      {
+        "args": [],
+        "docs": [
+          " Returns the current value of the luckydraw's bool."
+        ],
+        "mutates": false,
+        "name": [
+          "get_total_pot"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Balance"
+          ],
+          "type": 1
+        },
+        "selector": "0xc816f5b3"
+      },
+      {
+        "args": [],
+        "docs": [],
+        "mutates": true,
+        "name": [
+          "add_more_fund"
+        ],
+        "payable": true,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 12
+        },
+        "selector": "0x6fbc9042"
+      }
+    ]
+  },
+  "storage": {
+    "struct": {
+      "fields": [
+        {
+          "layout": {
+            "cell": {
+              "key": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "ty": 1
+            }
+          },
+          "name": "total_balance"
+        },
+        {
+          "layout": {
+            "cell": {
+              "key": "0x0100000000000000000000000000000000000000000000000000000000000000",
+              "ty": 2
+            }
+          },
+          "name": "pot_owner"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0200000000000000000000000000000000000000000000000000000000000000",
+                              "ty": 5
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0300000000000000000000000000000000000000000000000000000000000000",
+                                      "ty": 6
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0300000001000000000000000000000000000000000000000000000000000000",
+                                          "ty": 7
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0400000000000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0400000001000000000000000000000000000000000000000000000000000000",
+                          "ty": 9
+                        }
+                      },
+                      "offset": "0x0300000001000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "player_status"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0400000001000000000000000000000000000000000000000000000000000000",
+                              "ty": 5
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0500000001000000000000000000000000000000000000000000000000000000",
+                                      "ty": 6
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0500000002000000000000000000000000000000000000000000000000000000",
+                                          "ty": 7
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0600000001000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0600000002000000000000000000000000000000000000000000000000000000",
+                          "ty": 11
+                        }
+                      },
+                      "offset": "0x0500000002000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "player_winning_numer"
+        }
+      ]
+    }
+  },
+  "types": [
+    {
+      "def": {
+        "primitive": "u128"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "type": 3
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_env",
+        "types",
+        "AccountId"
+      ]
+    },
+    {
+      "def": {
+        "array": {
+          "len": 32,
+          "type": 4
+        }
+      }
+    },
+    {
+      "def": {
+        "primitive": "u8"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "last_vacant",
+              "type": 6
+            },
+            {
+              "name": "len",
+              "type": 6
+            },
+            {
+              "name": "len_entries",
+              "type": 6
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Header"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "u32"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 8
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 2
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        2
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "next",
+              "type": 6
+            },
+            {
+              "name": "prev",
+              "type": 6
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "VacantEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 10
+            },
+            {
+              "name": "key_index",
+              "type": 6
+            }
+          ]
+        }
+      },
+      "params": [
+        10
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "bool"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 4
+            },
+            {
+              "name": "key_index",
+              "type": 6
+            }
+          ]
+        }
+      },
+      "params": [
+        4
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 13
+                }
+              ],
+              "name": "Ok"
+            },
+            {
+              "fields": [
+                {
+                  "type": 14
+                }
+              ],
+              "name": "Err"
+            }
+          ]
+        }
+      },
+      "params": [
+        13,
+        14
+      ],
+      "path": [
+        "Result"
+      ]
+    },
+    {
+      "def": {
+        "tuple": []
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "TransferFailed"
+            },
+            {
+              "discriminant": 1,
+              "name": "InvalidOwner"
+            },
+            {
+              "discriminant": 2,
+              "name": "BelowSubsistenceThreshold"
+            }
+          ]
+        }
+      },
+      "path": [
+        "luckydraw",
+        "luckydraw",
+        "Error"
+      ]
+    }
+  ]
+}
