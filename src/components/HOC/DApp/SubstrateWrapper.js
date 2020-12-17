@@ -1,17 +1,29 @@
-
 /* eslint-disable no-debugger */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useCallback, useEffect, useReducer, useContext, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useReducer,
+  useContext,
+  useState,
+} from "react";
 import Spinner from "../../Spinner";
 import { ApiPromise, WsProvider } from "@polkadot/api";
-import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";
+import {
+  isWeb3Injected,
+  web3Accounts,
+  web3Enable,
+} from "@polkadot/extension-dapp";
 import jsonrpc from "@polkadot/types/interfaces/jsonrpc";
 import { DefinitionRpcExt, RegistryTypes } from "@polkadot/types/types";
 import keyring, { Keyring } from "@polkadot/ui-keyring";
 import { formatBalance } from "@polkadot/util";
-import { cacheSubstrateMetadata, getSubstrateMetadataRecord as getCachedSubstrateMetadata } from "../../../config/storage/metadata";
+import {
+  cacheSubstrateMetadata,
+  getSubstrateMetadataRecord as getCachedSubstrateMetadata,
+} from "../../../config/storage/metadata";
 import Logging from "../../../utils/Logging";
 
 const defaultState = {
@@ -24,7 +36,7 @@ const defaultState = {
   polkadotApi: null,
   endpoint: "wss://whenua.bit.country",
   rpc: { ...jsonrpc },
-  account: ""
+  account: "",
 };
 
 let _api;
@@ -39,7 +51,6 @@ const reducer = (state, action) => {
       Logging.Log(`Socket reset on endpoint ${endpoint}`);
 
       return { ...state, endpoint };
-
     }
     case "CONNECT": {
       Logging.Log(`Connected to Substrate node ${state.endpoint?.toString()}`);
@@ -63,7 +74,9 @@ const reducer = (state, action) => {
     case "CONNECT_ERROR": {
       const err = action.payload;
 
-      Logging.Error(`❌ Failed to connect to Substrate node ${state.endpoint?.toString()} . ${err}`);
+      Logging.Error(
+        `❌ Failed to connect to Substrate node ${state.endpoint?.toString()} . ${err}`
+      );
 
       return { ...state, apiState: "ERROR", apiError: err };
     }
@@ -82,7 +95,12 @@ const reducer = (state, action) => {
 
       Logging.Error(`❌ Failed to load accounts with Keyring. ${err}`);
 
-      return { ...state, keyring: undefined, keyringState: "ERROR", keyringError: err };
+      return {
+        ...state,
+        keyring: undefined,
+        keyringState: "ERROR",
+        keyringError: err,
+      };
     }
     default: {
       Logging.Error(`Unexpected type: ${action.type}`);
@@ -95,7 +113,6 @@ const reducer = (state, action) => {
 export const SubstrateContext = React.createContext();
 
 export const SubstrateProvider = (props) => {
-
   const [state, dispatch] = useReducer(reducer, defaultState);
 
   const { api, endpoint, rpc } = state;
@@ -113,9 +130,9 @@ export const SubstrateProvider = (props) => {
 
     // console.log(`>>> METADATA key: ${Object.keys(metadata || {})}`)
 
-
     _api = new ApiPromise({
-      provider, types: {
+      provider,
+      types: {
         // mapping the actual specified address format
         Address: "AccountId",
         // mapping the lookup
@@ -124,13 +141,13 @@ export const SubstrateProvider = (props) => {
         AssetId: "u64",
         AssetInfo: {
           owner: "AccountId",
-          data: "AssetData"
+          data: "AssetData",
         },
         AssetData: {
           name: "Text",
           description: "Text",
           properties: "Text",
-          supporters: "Vec<AccountId>"
+          supporters: "Vec<AccountId>",
         },
         AuctionId: "u64",
         AuctionItem: {
@@ -139,19 +156,19 @@ export const SubstrateProvider = (props) => {
           initial_amount: "Balance",
           amount: "Balance",
           start_time: "u32",
-          end_time: "u32"
+          end_time: "u32",
         },
         AuctionInfo: {
           bid: "Option<(AccountId,Balance)>",
           start: "BlockNumber",
-          end: "Option<BlockNumber>"
+          end: "Option<BlockNumber>",
         },
         RentId: "u64",
         RentalInfo: {
           owner: "AccountId",
           start: "BlockNumber",
           end: "Option<BlockNumber>",
-          price_per_block: "Balance"
+          price_per_block: "Balance",
         },
         CountryId: "u64",
         CollectionId: "u64",
@@ -159,7 +176,9 @@ export const SubstrateProvider = (props) => {
         TokenId: "u64",
         CurrencyIdOf: "CurrencyId",
         BalanceIdOf: "Balance",
-      }, rpc, metadata
+      },
+      rpc,
+      metadata,
     });
 
     const onConnectSuccess = async () => {
@@ -183,34 +202,46 @@ export const SubstrateProvider = (props) => {
 
     _api.on("connected", onConnect);
     _api.on("ready", onReady);
-    _api.on("error", err => dispatch({ type: "CONNECT_ERROR", payload: err }));
+    _api.on("error", (err) =>
+      dispatch({ type: "CONNECT_ERROR", payload: err })
+    );
     _api.on("disconnected", () => console.log("Disconnected"));
 
     return () => _api?.disconnect();
   }, [api, endpoint, rpc, dispatch]);
 
-
   // hook to get injected accounts
   const { keyringState } = state;
-  const loadAccounts = useCallback(async (api) => {
-    // Ensure the method only run once.
-    if (keyringState || !api) return;
+  const loadAccounts = useCallback(
+    async (api) => {
+      // Ensure the method only run once.
+      if (keyringState || !api) return;
 
-    try {
-      let extensions = await web3Enable("Bit Country");
-      let allAccounts = await web3Accounts();
+      try {
+        if (isWeb3Injected) {
+          let extensions = await web3Enable("Bit Country");
+          let allAccounts = await web3Accounts();
 
-      allAccounts = allAccounts.map(({ address, meta }) =>
-        ({ address, meta: { ...meta, name: `${meta.name} (${meta.source})` } }));
+          allAccounts = allAccounts.map(({ address, meta }) => ({
+            address,
+            meta: { ...meta, name: `${meta.name} (${meta.source})` },
+          }));
 
-      keyring.loadAll({ isDevelopment: false }, allAccounts);
+          console.log("allAccounts", allAccounts);
 
-      dispatch({ type: "SET_KEYRING", payload: keyring });
-    } catch (err) {
-      // log.error(`Keyring failed to load accounts. ${err}`);
-      dispatch({ type: "KEYRING_ERROR", payload: err });
-    }
-  }, [keyringState, dispatch]);
+          keyring.loadAll(
+            { isDevelopment: false, ss58Format: 42, type: "sr25519" },
+            allAccounts
+          );
+          dispatch({ type: "SET_KEYRING", payload: keyring });
+        }
+      } catch (err) {
+        // log.error(`Keyring failed to load accounts. ${err}`);
+        dispatch({ type: "KEYRING_ERROR", payload: err });
+      }
+    },
+    [keyringState, dispatch]
+  );
 
   useEffect(() => {
     connect();
@@ -219,8 +250,7 @@ export const SubstrateProvider = (props) => {
   useEffect(() => {
     if (!api) return;
 
-    api.isReady
-      .then(api => loadAccounts(api));
+    api.isReady.then((api) => loadAccounts(api));
   }, [loadAccounts, api]);
 
   return (
@@ -231,4 +261,3 @@ export const SubstrateProvider = (props) => {
 };
 
 export const useSubstrateContext = () => useContext(SubstrateContext)[0];
-
