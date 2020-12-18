@@ -117,7 +117,7 @@ We believe Bit.Country will bring many people to the ecosystem.
 # Docker Image
 You'll need to install Docker Desktop to be able to run this docker image. Run the command below to pull and start a new container with our docker image. It'll be available at localhost:3000 if you are using Docker Desktop and not the toolbox. 
 ```
-docker run -p 3000:3000 mvpstudionz/bit.web
+docker run -p 3000:3000 mvpstudionz/bit.web:17 
 ```
 
 # How to Run
